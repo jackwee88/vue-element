@@ -39,7 +39,8 @@ const whiteList = [
   '/example/back-to-top',
   '/example/drag-dialog',
   '/401',
-  '/video'
+  '/video',
+  '/resetpassword'
 
 ]// no redirect whitelist
 

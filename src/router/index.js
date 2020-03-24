@@ -51,7 +51,7 @@ export const constantRouterMap = [
         path: 'user',
         component: resolve => require(['@/views/user'], resolve),
         name: 'user',
-        meta: { title: '彩票做号', icon: 'cir', noCache: true }
+        meta: { title: '彩票做号', icon: 'cir', noCache: true ,keepAlive:true}
 
       },
       // {path: 'caipiaozh', component: resolve => require(['@/views/charts/caipiaozh'], resolve), name: 'caipiaozh', meta: { title: '彩票做号',  icon: 'user',noCache: true }},

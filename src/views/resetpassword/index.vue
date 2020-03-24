@@ -223,7 +223,7 @@ export default {
             // that.legal = res.data.data.value;
             // that.title = res.data.data.desc;
             // that.centerDialogVisible = true;
-            // this.$router.push('/login');
+            this.$router.push('/login');
           });
         } else {
           return false;
