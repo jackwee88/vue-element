@@ -378,6 +378,6 @@ export default {
 .reset{
 float: left;
 color: #ffffff;
-text-decoration: underline;
+// text-decoration: underline;
 }
 </style>

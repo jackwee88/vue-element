@@ -28,7 +28,7 @@ password 第一次输入的密码
           placeholder="请输入手机号"
         />
       </el-form-item>
-      <el-form-item prop="account">
+      <el-form-item prop="account" class="yanzheng">
         <span class="svg-container svg-container_login">
           <svg-icon icon-class="user" />
         </span>
@@ -38,7 +38,7 @@ password 第一次输入的密码
           v-model="loginForm.code"
           autocomplete="on"
           placeholder="请输入验证码"
-          style="width:60%"
+          style="width:50%"
         ></el-input>
 
         <el-button @click.native.prevent="submitYzm" v-if="second==''" class="yzm">验证码</el-button>
@@ -204,7 +204,8 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (this.loginForm.password !== this.loginForm.repassword) {
           this.$notify({
-            message: "您输入的两次密码不一致"
+            title:'您输入的两次密码不一致'
+            // message: ""
           });
         } else if (valid) {
           this.$axios({
@@ -217,13 +218,22 @@ export default {
               newPassword: this.loginForm.repassword
             }
           }).then(res => {
-            console.log(res);
+            console.log(res.data.code);
             localStorage.setItem("BCUSER", this.loginForm.account);
             localStorage.setItem("BCPASSWORD", this.loginForm.password);
             // that.legal = res.data.data.value;
             // that.title = res.data.data.desc;
             // that.centerDialogVisible = true;
-            this.$router.push('/login');
+            if(res.data.code == 1){
+              setTimeout(() => {
+                this.$router.push('/login');
+              }, 2000);
+            }
+            // alert(res.data.msg)
+            this.$notify({
+            title: res.data.msg
+          });
+            
           });
         } else {
           return false;
@@ -359,8 +369,11 @@ export default {
   }
 }
 .yzm {
-  width: 30%;
+float: right;
+height: 52px;
+width: 30%;
 }
+
 @bg: #2d3a4b;
 @dark_gray: #889aa4;
 @light_gray: #eee;
@@ -437,13 +450,7 @@ export default {
   }
 }
 
-.gotoReg {
-  float: right;
-  color: #fff;
-}
-.reset {
-  float: left;
-  color: #ffffff;
-  text-decoration: underline;
+.yanzheng{
+
 }
 </style>
