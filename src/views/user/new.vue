@@ -238,7 +238,7 @@
             号码
             <span v-if="totalShow" style="color:red;margin-left:12px;">共 {{total}} 注</span>
           </span>
-          <span @click="copy" class="copy-todata">复制到智能数据</span>
+          <span @click="copy" class="copy-todata">复制</span>
         </p>
         <div style="text-align:center;display:flex;">
           <textarea name id="textValue" rows="10" v-model="returnArr"></textarea>
