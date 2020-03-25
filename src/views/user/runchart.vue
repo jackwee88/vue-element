@@ -769,21 +769,78 @@ export default {
         // sessionStorage.setItem("no1", 1);
       }
       if (this.big) {
-        console.log("big", this.big);
-        sessionStorage.setItem("big", this.big);
-        obj.big = this.big;
-        sessionStorage.setItem("big", JSON.stringify(this.big));
+        // sessionStorage.setItem("big", this.big);
+        let arr = [];
+        for (let i = 0; i < this.big.length; i++) {
+          const element = this.big[i];
+          let el = "";
+          if (element == "0:5") {
+            el = "5";
+          } else if (element == "1:4") {
+            el = "4";
+          } else if (element == "2:3") {
+            el = "3";
+          } else if (element == "3:2") {
+            el = "2";
+          } else if (element == "5:0") {
+            el = "0";
+          } else if (element == "4:1") {
+            el = "1";
+          }
+          arr.push(el);
+        }
+        obj.big = arr;
+        // sessionStorage.setItem("big", JSON.stringify(this.big));
       }
       if (this.he) {
-        sessionStorage.setItem("he", this.he);
-        obj.big = this.he;
-        sessionStorage.setItem("he", JSON.stringify(this.he));
+        // sessionStorage.setItem("he", this.he);
+        let arr = [];
+        for (let i = 0; i < this.he.length; i++) {
+          const element = this.he[i];
+          let el = "";
+          if (element == "0:5") {
+            el = "5";
+          } else if (element == "1:4") {
+            el = "4";
+          } else if (element == "2:3") {
+            el = "3";
+          } else if (element == "3:2") {
+            el = "2";
+          } else if (element == "5:0") {
+            el = "0";
+          } else if (element == "4:1") {
+            el = "1";
+          }
+          arr.push(el);
+        }
+        obj.he = arr;
+        // sessionStorage.setItem("he", JSON.stringify(this.he));
       }
       if (this.even) {
-        sessionStorage.setItem("even", this.even);
-        obj.big = this.even;
-        sessionStorage.setItem("even", JSON.stringify(this.even));
+        let arr = [];
+        for (let i = 0; i < this.even.length; i++) {
+          const element = this.even[i];
+          let el = "";
+          if (element == "0:5") {
+            el = "5";
+          } else if (element == "1:4") {
+            el = "4";
+          } else if (element == "2:3") {
+            el = "3";
+          } else if (element == "3:2") {
+            el = "2";
+          } else if (element == "5:0") {
+            el = "0";
+          } else if (element == "4:1") {
+            el = "1";
+          }
+          arr.push(el);
+        }
+        obj.even = arr;
+        // sessionStorage.setItem("even", this.even);
+        // sessionStorage.setItem("even", JSON.stringify(this.even));
       }
+      console.log(obj);
       this.updateAllData({
         data: obj
       });

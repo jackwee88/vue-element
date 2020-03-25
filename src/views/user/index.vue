@@ -54,17 +54,6 @@
               :checked="checkedDansShow1.indexOf(city)>=0"
             >{{city}}</el-checkbox>
           </el-checkbox-group>
-          <!-- <div class="block">
-            <label
-              :style="city.tivk?'color:#409eff':''"
-              for="label"
-              @click.stop="clickMe(city.name,'dan1')"
-              v-for="(city,index) in dansShow1"
-            >
-              <input type="checkbox" id="label" v-bind:checked="city.tivk" />
-              {{city.name}}
-            </label>
-          </div>-->
           <span class="clears" @click="clearAll(1)">清</span>
         </div>
       </div>
@@ -164,17 +153,6 @@
               :checked="checkedEven.indexOf(city)>=0"
             >{{city}}</el-checkbox>
           </el-checkbox-group>
-          <!-- <div class="block">
-            <label
-              :style="city.tivk?'color:#409eff':''"
-              for="label"
-              @click.stop="clickMe(city.name,'even')"
-              v-for="(city,index) in evens"
-            >
-              <input type="checkbox" id="label" v-bind:checked="city.tivk" />
-              {{city.name}}
-            </label>
-          </div>-->
         </div>
         <div class="type show-num">
           <span class="type-title" style="margin-bottom:8px;">合数个数</span>
@@ -186,17 +164,6 @@
               :checked="checkedOdd.indexOf(city)>=0"
             >{{city}}</el-checkbox>
           </el-checkbox-group>
-          <!-- <div class="block">
-            <label
-              :style="city.tivk?'color:#409eff':''"
-              for="label"
-              @click.stop="clickMe(city.name,'odd')"
-              v-for="(city,index) in odds"
-            >
-              <input type="checkbox" id="label" v-bind:checked="city.tivk" />
-              {{city.name}}
-            </label>
-          </div>-->
         </div>
         <div class="type show-num">
           <span class="type-title" style="margin-bottom:8px;">小数个数</span>
@@ -208,17 +175,6 @@
               :checked="checkedSmall.indexOf(city)>=0"
             >{{city}}</el-checkbox>
           </el-checkbox-group>
-          <!-- <div class="block">
-            <label
-              :style="city.tivk?'color:#409eff':''"
-              for="label"
-              @click.stop="clickMe(city.name,'big')"
-              v-for="(city,index) in smalls"
-            >
-              <input type="checkbox" id="label" v-bind:checked="city.tivk" />
-              {{city.name}}
-            </label>
-          </div>-->
         </div>
         <div class="type show-num" style="margin-bottom:0px;">
           <span class="type-title">连数个数</span>
@@ -275,39 +231,6 @@ const dan1S = [
   { name: "01", tivk: false },
   { name: "11", tivk: false }
 ];
-
-// const even = [
-//   { name: "0", tivk: false },
-//   { name: "1", tivk: false },
-//   { name: "2", tivk: false },
-//   { name: "3", tivk: false },
-//   { name: "4", tivk: false },
-//   { name: "5", tivk: false }
-// ];
-// const small = [
-//   { name: "0", tivk: false },
-//   { name: "1", tivk: false },
-//   { name: "2", tivk: false },
-//   { name: "3", tivk: false },
-//   { name: "4", tivk: false },
-//   { name: "5", tivk: false }
-// ];
-// const odd = [
-//   { name: "0", tivk: false },
-//   { name: "1", tivk: false },
-//   { name: "2", tivk: false },
-//   { name: "3", tivk: false },
-//   { name: "4", tivk: false },
-//   { name: "5", tivk: false }
-// ];
-// const danshow1 = [
-//   { name: "0", tivk: false },
-//   { name: "1", tivk: false },
-//   { name: "2", tivk: false },
-//   { name: "3", tivk: false },
-//   { name: "4", tivk: false },
-//   { name: "5", tivk: false }
-// ];
 const dan1 = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11"];
 const dan2 = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11"];
 const dan3 = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11"];
@@ -382,69 +305,10 @@ export default {
     };
   },
   mounted() {
-    console.log("allData", this.allData);
     this.init();
-    if (sessionStorage.getItem("big")) {
-      var big = JSON.parse(sessionStorage.getItem("big")); // 胆一
-      for (var i = 0; i < big.length; i++) {
-        if (big[i] == "0:5") {
-          this.smallS = "5";
-        } else if (big[i] == "1:4") {
-          this.smallS = "4";
-        } else if (big[i] == "2:3") {
-          this.smallS = "3";
-        } else if (big[i] == "3:2") {
-          this.smallS = "2";
-        } else if (big[i] == "5:0") {
-          this.smallS = "0";
-        } else if (big[i] == "4:1") {
-          this.smallS = "1";
-        }
-        this.checkedSmall.push(this.smallS);
-      }
-    }
-    if (sessionStorage.getItem("even")) {
-      var evenn = JSON.parse(sessionStorage.getItem("even")); // 胆一
-      for (var i = 0; i < evenn.length; i++) {
-        if (evenn[i] == "0:5") {
-          this.evenS = "5";
-        } else if (evenn[i] == "1:4") {
-          this.evenS = "4";
-        } else if (evenn[i] == "2:3") {
-          this.evenS = "3";
-        } else if (evenn[i] == "3:2") {
-          this.evenS = "2";
-        } else if (evenn[i] == "5:0") {
-          this.evenS = "0";
-        } else if (evenn[i] == "4:1") {
-          this.evenS = "1";
-        }
-        this.checkedEven.push(this.evenS);
-      }
-    }
-    if (sessionStorage.getItem("he")) {
-      var oddd = JSON.parse(sessionStorage.getItem("he")); // 胆一
-      for (var i = 0; i < oddd.length; i++) {
-        if (oddd[i] == "0:5") {
-          this.oddS = "5";
-        } else if (oddd[i] == "1:4") {
-          this.oddS = "4";
-        } else if (oddd[i] == "2:3") {
-          this.oddS = "3";
-        } else if (oddd[i] == "3:2") {
-          this.oddS = "2";
-        } else if (oddd[i] == "5:0") {
-          this.oddS = "0";
-        } else if (oddd[i] == "4:1") {
-          this.oddS = "1";
-        }
-        this.checkedOdd.push(this.oddS);
-        console.log(this.checkedOdd, "fddg");
-      }
-    }
   },
   created() {
-    this.vip();
+    // this.vip();
   },
 
   watch: {
@@ -490,172 +354,8 @@ export default {
         (this.returnArrO = ""), // 做号的结果,用于由逗号切换为空格
         (this.totalShow = false),
         (this.total = 0);
-      // if (selectArr == undefined) {
-      //   this.flag1 = 0;
-      // }
       this.init();
-
-      if (sessionStorage.getItem("big")) {
-        var big = JSON.parse(sessionStorage.getItem("big")); // 胆一
-        for (var i = 0; i < big.length; i++) {
-          if (big[i] == "0:5") {
-            this.smallS = "5";
-          } else if (big[i] == "1:4") {
-            this.smallS = "4";
-          } else if (big[i] == "2:3") {
-            this.smallS = "3";
-          } else if (big[i] == "3:2") {
-            this.smallS = "2";
-          } else if (big[i] == "5:0") {
-            this.smallS = "0";
-          } else if (big[i] == "4:1") {
-            this.smallS = "1";
-          }
-          this.checkedSmall.push(this.smallS);
-        }
-      }
-      if (sessionStorage.getItem("even")) {
-        var evenn = JSON.parse(sessionStorage.getItem("even")); // 胆一
-        for (var i = 0; i < evenn.length; i++) {
-          if (evenn[i] == "0:5") {
-            this.evenS = "5";
-          } else if (evenn[i] == "1:4") {
-            this.evenS = "4";
-          } else if (evenn[i] == "2:3") {
-            this.evenS = "3";
-          } else if (evenn[i] == "3:2") {
-            this.evenS = "2";
-          } else if (evenn[i] == "5:0") {
-            this.evenS = "0";
-          } else if (evenn[i] == "4:1") {
-            this.evenS = "1";
-          }
-          this.checkedEven.push(this.evenS);
-        }
-      }
-      if (sessionStorage.getItem("he")) {
-        var oddd = JSON.parse(sessionStorage.getItem("he")); // 胆一
-        for (var i = 0; i < oddd.length; i++) {
-          if (oddd[i] == "0:5") {
-            this.oddS = "5";
-          } else if (oddd[i] == "1:4") {
-            this.oddS = "4";
-          } else if (oddd[i] == "2:3") {
-            this.oddS = "3";
-          } else if (oddd[i] == "3:2") {
-            this.oddS = "2";
-          } else if (oddd[i] == "5:0") {
-            this.oddS = "0";
-          } else if (oddd[i] == "4:1") {
-            this.oddS = "1";
-          }
-          this.checkedOdd.push(this.oddS);
-          console.log(this.checkedOdd, "fddg");
-        }
-        // this.checkedSmall = big; //从综合走势获取到的值
-      }
     }
-    // if (sessionStorage.getItem("big")) {
-    //   console.log("big");
-    //   this.smalls = [
-    //     { name: "0", tivk: false },
-    //     { name: "1", tivk: false },
-    //     { name: "2", tivk: false },
-    //     { name: "3", tivk: false },
-    //     { name: "4", tivk: false },
-    //     { name: "5", tivk: false }
-    //   ];
-    //   var big = sessionStorage.getItem("big"); //胆一
-    //   if (big == "0:5") {
-    //     this.smallS = 5;
-    //   } else if (big == "1:4") {
-    //     this.smallS = 4;
-    //   } else if (big == "2:3") {
-    //     this.smallS = 3;
-    //   } else if (big == "3:2") {
-    //     this.smallS = 2;
-    //   } else if (big == "5:0") {
-    //     this.smallS = 0;
-    //   } else if (big == "4:1") {
-    //     this.smallS = 1;
-    //   }
-    //   for (var i = 0; i < this.evens.length; i++) {
-    //     if (this.smalls[i].name == this.smallS) {
-    //       this.smalls[i].tivk = true;
-    //     }
-    //   }
-    //   this.checkedSmall.push(this.smallS);
-    //   console.log(this.checkedSmall, "vvv");
-    // }
-    // if (sessionStorage.getItem("even")) {
-    //   // alert("even");
-    //   console.log(this.evens);
-    //   this.evens = [
-    //     { name: "0", tivk: false },
-    //     { name: "1", tivk: false },
-    //     { name: "2", tivk: false },
-    //     { name: "3", tivk: false },
-    //     { name: "4", tivk: false },
-    //     { name: "5", tivk: false }
-    //   ];
-    //   console.log("even", sessionStorage.getItem("even"));
-    //   var evenSelect = sessionStorage.getItem("even"); //胆一
-    //   if (evenSelect == "0:5") {
-    //     this.evenS = 5;
-    //   } else if (evenSelect == "1:4") {
-    //     this.evenS = 4;
-    //   } else if (evenSelect == "2:3") {
-    //     this.evenS = 3;
-    //   } else if (evenSelect == "4:1") {
-    //     this.evenS = 1;
-    //   } else if (evenSelect == "3:2") {
-    //     this.evenS = 2;
-    //   } else if (evenSelect == "5:0") {
-    //     console.log("5:0");
-    //     this.evenS = 0;
-    //   }
-    //   for (var i = 0; i < this.evens.length; i++) {
-    //     if (this.evens[i].name == this.evenS) {
-    //       this.evens[i].tivk = true;
-    //     }
-    //   }
-    //   this.checkedEven.push(this.evenS);
-    //   console.log(this.evens, "kkkkk");
-    // }
-
-    // if (sessionStorage.getItem("he")) {
-    //   console.log("he");
-    //   this.odds = [
-    //     { name: "0", tivk: false },
-    //     { name: "1", tivk: false },
-    //     { name: "2", tivk: false },
-    //     { name: "3", tivk: false },
-    //     { name: "4", tivk: false },
-    //     { name: "5", tivk: false }
-    //   ];
-    //   var he = sessionStorage.getItem("he"); //胆一
-    //   if (he == "0:5") {
-    //     this.oddS = 5;
-    //   } else if (he == "1:4") {
-    //     this.oddS = 4;
-    //   } else if (he == "2:3") {
-    //     this.oddS = 3;
-    //   } else if (he == "3:2") {
-    //     this.oddS = 2;
-    //   } else if (he == "5:0") {
-    //     this.oddS = 0;
-    //   } else if (he == "4:1") {
-    //     this.oddS = 1;
-    //   }
-    //   for (var i = 0; i < this.evens.length; i++) {
-    //     if (this.odds[i].name == this.oddS) {
-    //       this.odds[i].tivk = true;
-    //     }
-    //   }
-    //   this.checkedOdd.push(this.oddS);
-
-    //   console.log(this.checkedOdd, "jjjj");
-    // }
   },
   computed: {
     ...mapGetters(["allData"])
@@ -682,202 +382,187 @@ export default {
         "4:1": 1,
         "5:0": 0
       };
-      // for (let i = 0; i < types.length; i++) {
-      //   const element = this.allData[types[i]];
-      //   for (let j = 0; j < element.length; j++) {
-      //     const typesin = element[j];
-      //     if (types[i] == "big") {
-      //       this.smallS = scores[typesin];
-      //       this.checkedSmall.push(this.smallS);
-      //     } else if (types[i] == "even") {
-      //       this.evenS = scores[typesin];
-      //       this.checkedEven.push(this.evenS);
-      //     } else if (types[i] == "he") {
-      //       this.oddS = scores[typesin];
-      //       this.checkedOdd.push(this.oddS);
-      //     }
-      //   }
-      // }
+
+      if (this.allData.big) {
+        var big = this.allData.big; // 胆一
+        for (var i = 0; i < big.length; i++) {
+          // if (big[i] == "0:5") {
+          //   this.smallS = "5";
+          // } else if (big[i] == "1:4") {
+          //   this.smallS = "4";
+          // } else if (big[i] == "2:3") {
+          //   this.smallS = "3";
+          // } else if (big[i] == "3:2") {
+          //   this.smallS = "2";
+          // } else if (big[i] == "5:0") {
+          //   this.smallS = "0";
+          // } else if (big[i] == "4:1") {
+          //   this.smallS = "1";
+          // }
+          this.checkedSmall.push(big[i]);
+        }
+      }
+      if (this.allData.even) {
+        var even = this.allData.even; // 胆一
+        for (var i = 0; i < even.length; i++) {
+          // if (evenn[i] == "0:5") {
+          //   this.evenS = "5";
+          // } else if (evenn[i] == "1:4") {
+          //   this.evenS = "4";
+          // } else if (evenn[i] == "2:3") {
+          //   this.evenS = "3";
+          // } else if (evenn[i] == "3:2") {
+          //   this.evenS = "2";
+          // } else if (evenn[i] == "5:0") {
+          //   this.evenS = "0";
+          // } else if (evenn[i] == "4:1") {
+          //   this.evenS = "1";
+          // }
+          this.checkedEven.push(even[i]);
+        }
+      }
+      if (this.allData.he) {
+        var oddd = this.allData.he; // 胆一
+        for (var i = 0; i < oddd.length; i++) {
+          // if (oddd[i] == "0:5") {
+          //   this.oddS = "5";
+          // } else if (oddd[i] == "1:4") {
+          //   this.oddS = "4";
+          // } else if (oddd[i] == "2:3") {
+          //   this.oddS = "3";
+          // } else if (oddd[i] == "3:2") {
+          //   this.oddS = "2";
+          // } else if (oddd[i] == "5:0") {
+          //   this.oddS = "0";
+          // } else if (oddd[i] == "4:1") {
+          //   this.oddS = "1";
+          // }
+          this.checkedOdd.push(oddd[i]);
+        }
+      }
+      this.sure();
     },
-    // clickMe(v, t) {
-    //   // console.log('0123456')
-    //   v = parseInt(v);
-    //   if (t == "big") {
-    //     // this.checkedSmall
-    //     if (this.checkedSmall.length > 0) {
-    //       if (this.checkedSmall.indexOf(v) >= 0) {
-    //         this.smallS = -1;
-    //         for (var i = 0; i < this.smalls.length; i++) {
-    //           if (this.smalls[i].name == v) {
-    //             this.smalls[i].tivk = false;
-    //           }
-    //         }
-    //         var i = this.checkedSmall.indexOf(v);
-    //         this.checkedSmall.splice(i, 1);
-    //       } else {
-    //         for (var i = 0; i < this.smalls.length; i++) {
-    //           if (this.smalls[i].name == v) {
-    //             this.smalls[i].tivk = true;
-    //           }
-    //         }
-    //         this.checkedSmall.push(v);
-    //       }
-    //     } else {
-    //       for (var i = 0; i < this.smalls.length; i++) {
-    //         if (this.smalls[i].name == v) {
-    //           this.smalls[i].tivk = true;
-    //         }
-    //       }
-    //       this.checkedSmall.push(v);
-    //     }
-    //   }
-    //   if (t == "odd") {
-    //     // this.checkedSmall
-    //     if (this.checkedOdd.length > 0) {
-    //       if (this.checkedOdd.indexOf(v) >= 0) {
-    //         this.oddS = -1;
-    //         for (var i = 0; i < this.evens.length; i++) {
-    //           if (this.odds[i].name == v) {
-    //             this.odds[i].tivk = false;
-    //           }
-    //         }
-    //         var i = this.checkedOdd.indexOf(v);
-    //         this.checkedOdd.splice(i, 1);
-    //       } else {
-    //         for (var i = 0; i < this.evens.length; i++) {
-    //           if (this.odds[i].name == v) {
-    //             this.odds[i].tivk = true;
-    //           }
-    //         }
-    //         this.checkedOdd.push(v);
-    //       }
-    //     } else {
-    //       for (var i = 0; i < this.evens.length; i++) {
-    //         if (this.odds[i].name == v) {
-    //           this.odds[i].tivk = true;
-    //         }
-    //       }
-    //       this.checkedOdd.push(v);
-    //     }
-    //   }
-    //   if (t == "even") {
-    //     // this.checkedSmall
 
-    //     console.log(this.checkedEven);
-    //     console.log(this.checkedEven.length);
-    //     console.log("vvvvvvvvvvvvvvvvvvvv" + v);
-    //     console.log(this.checkedEven.indexOf(v));
-
-    //     if (this.checkedEven.length > 0) {
-    //       if (this.checkedEven.indexOf(v) >= 0) {
-    //         this.evenS = -1;
-    //         var i = this.checkedEven.indexOf(v);
-    //         this.checkedEven.splice(i, 1);
-    //         for (var i = 0; i < this.evens.length; i++) {
-    //           if (this.evens[i].name == v) {
-    //             this.evens[i].tivk = false;
-    //           }
-    //         }
-    //       } else {
-    //         for (var i = 0; i < this.evens.length; i++) {
-    //           if (this.evens[i].name == v) {
-    //             console.log(this.evens[i].name == v);
-    //             this.evens[i].tivk = true;
-    //           }
-    //         }
-    //         this.checkedEven.push(v);
-    //       }
-    //     } else {
-    //       for (var i = 0; i < this.evens.length; i++) {
-    //         if (this.evens[i].name == v) {
-    //           console.log(this.evens[i].name == v);
-    //           this.evens[i].tivk = true;
-    //         }
-    //       }
-    //       this.checkedEven.push(v);
-    //     }
-    //     console.log(this.evens, "nnnnnnnn");
-    //   }
-    //   if (t == "dan1") {
-    //     // this.checkedSmall
-    //     if (this.checkedDansShow1.length > 0) {
-    //       if (this.checkedDansShow1.indexOf(v) >= 0) {
-    //         var i = this.checkedEven.indexOf(v);
-    //         for (var i = 0; i < this.dansShow1.length; i++) {
-    //           if (this.dansShow1[i].name == v) {
-    //             this.dansShow1[i].tivk = false;
-    //           }
-    //         }
-    //         this.checkedDansShow1.splice(i, 1);
-    //       } else {
-    //         for (var i = 0; i < this.dansShow1.length; i++) {
-    //           if (this.dansShow1[i].name == v) {
-    //             this.dansShow1[i].tivk = true;
-    //           }
-    //         }
-    //         this.checkedDansShow1.push(v);
-    //       }
-    //     } else {
-    //       for (var i = 0; i < this.dansShow1.length; i++) {
-    //         if (this.dansShow1[i].name == v) {
-    //           this.dansShow1[i].tivk = true;
-    //         }
-    //       }
-    //       this.checkedDansShow1.push(v);
-    //     }
-    //   }
-    //   // console.log(this.checkedDansShow1, "nnn");
-    // },
     // 胆1-胆5全选
     handleCheckAllChange1(val) {
       this.checkedDans1 = val ? dan1 : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan1 = this.checkedDans1;
+      this.updateAllData({
+        data: obj
+      });
     },
     handleCheckAllChange2(val) {
       this.checkedDans2 = val ? dan2 : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan2 = this.checkedDans2;
+      this.updateAllData({
+        data: obj
+      });
     },
     handleCheckAllChange3(val) {
       this.checkedDans3 = val ? dan3 : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan3 = this.checkedDans3;
+      this.updateAllData({
+        data: obj
+      });
     },
     handleCheckAllChange4(val) {
       this.checkedDans4 = val ? dan4 : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan4 = this.checkedDans4;
+      this.updateAllData({
+        data: obj
+      });
     },
     handleCheckAllChange5(val) {
       this.checkedDans5 = val ? dan5 : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan5 = this.checkedDans5;
+      this.updateAllData({
+        data: obj
+      });
     },
     // 胆1到胆5的每个复选值
     handleCheckedCitiesChange1(value) {
-      console.log(value);
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan1 = value;
+      this.updateAllData({
+        data: obj
+      });
+      let newArr = [];
+      for (let j = 0; j < value.length; j++) {
+        newArr.push(j + 1 + "");
+      }
+      this.checkedDansShow1 = newArr;
       this.checkedDans1 = value || [];
       let checkedCount = value.length;
       this.checkAll1 = checkedCount === this.dans1.length;
     },
     handleCheckedCitiesChange2(value) {
-      console.log(value);
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan2 = value;
+      this.updateAllData({
+        data: obj
+      });
+      let newArr = [];
+      for (let j = 0; j < value.length; j++) {
+        newArr.push(j + 1 + "");
+      }
+      this.checkedDansShow2 = newArr;
       this.checkedDans2 = value || [];
       let checkedCount = value.length;
       this.checkAll2 = checkedCount === this.dans2.length;
     },
     handleCheckedCitiesChange3(value) {
-      console.log(value);
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan3 = value;
+      this.updateAllData({
+        data: obj
+      });
+      let newArr = [];
+      for (let j = 0; j < value.length; j++) {
+        newArr.push(j + 1 + "");
+      }
+      this.checkedDansShow3 = newArr;
       this.checkedDans3 = value || [];
       let checkedCount = value.length;
       this.checkAll3 = checkedCount === this.dans3.length;
     },
     handleCheckedCitiesChange4(value) {
-      console.log(value);
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan4 = value;
+      this.updateAllData({
+        data: obj
+      });
+      let newArr = [];
+      for (let j = 0; j < value.length; j++) {
+        newArr.push(j + 1 + "");
+      }
+      this.checkedDansShow4 = newArr;
       this.checkedDans4 = value || [];
       let checkedCount = value.length;
       this.checkAll4 = checkedCount === this.dans4.length;
     },
     handleCheckedCitiesChange5(value) {
-      console.log(value);
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan5 = value;
+      this.updateAllData({
+        data: obj
+      });
+      let newArr = [];
+      for (let j = 0; j < value.length; j++) {
+        newArr.push(j + 1 + "");
+      }
+      this.checkedDansShow5 = newArr;
       this.checkedDans5 = value || [];
       let checkedCount = value.length;
       this.checkAll5 = checkedCount === this.dans5.length;
     },
     // 胆1到胆5的每个复选值出现次数
     handleCheckedCitiesShow1(value) {
-      console.log(value, "bbbbbbbbb");
+      console.log(value);
       this.checkedDansShow1 = value || [];
     },
     handleCheckedCitiesShow2(value) {
@@ -898,14 +583,30 @@ export default {
     },
     // 偶数
     handleEven(value) {
+      console.log(value);
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.even = value;
+      this.updateAllData({
+        data: obj
+      });
       this.checkedEven = value || [];
     },
     // 合数
     handleOdd(value) {
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.he = value;
+      this.updateAllData({
+        data: obj
+      });
       this.checkedOdd = value || [];
     },
     // 小数
     handleSmall(value) {
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.big = value;
+      this.updateAllData({
+        data: obj
+      });
       this.checkedSmall = value || [];
     },
     // 连数
@@ -931,6 +632,14 @@ export default {
         this.checkedOdd = [];
         this.checkedSmall = [];
         this.checkedHyphen = [];
+        let obj = JSON.parse(JSON.stringify(this.allData));
+        obj.big = [];
+        obj.he = [];
+        obj.even = [];
+        this.updateAllData({
+          data: obj
+        });
+        this.init();
       }
     },
     // 生成号码
@@ -971,7 +680,6 @@ export default {
       }
 
       if (this.checkedSmall.length > 0) {
-        console.log(this.checkedSmall, "bbbb");
         pramp.decimal = this.checkedSmall;
       }
       if (this.checkedEven.length > 0) {
