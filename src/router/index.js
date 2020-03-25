@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import axios from 'axios'
 import Layout from '@/views/layout/Layout'
+import { Form } from 'element-ui'
 
 // Vue.prototype.$http = axios
 Vue.use(Router)
@@ -113,7 +114,20 @@ export const constantRouterMap = [
 const $router = new Router({
   mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
-  routes: constantRouterMap
+  routes: constantRouterMap,
+  // scrollBehavior(to,from,savePosition){
+  //   if(savePosition){
+  //     return savePosition
+  //   }else{
+  //     if(from.meta.keepAlive){
+  //       from.meta.savePosition = Number(localStorage.scrollTop);
+  //     }
+  //     return {
+  //       x:0,
+  //       y:to.meta.savePosition || 0
+  //     }
+  //   }
+  // }
 })
 
 // 解决Loading chunk (\d)+ failed问题

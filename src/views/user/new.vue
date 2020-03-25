@@ -381,11 +381,29 @@ export default {
       new_num: []
     };
   },
+//   brforeRouteLeave(to,from,next){
+// let position=$(window).scrollTop();
+// localStorage.setItem("scrollTop",position);
+// if(to.path== "/runchart"){
+// if(!from.mata.keepAlive){
+//   from.meta.keepAlive = true;
+// }
+// next();
+// }else{
+//   from.meta.keepAlive = false;
+//   to.meta.keepAlive = false;
+//   next();
+//   window.location.reload()
+// }
+//   },
   mounted() {
+    console.log('大傻逼')
+
+    var a =sessionStorage.getItem("one")
     if (sessionStorage.getItem("selectarr")) {
+      
       var selectArr = JSON.parse(sessionStorage.getItem("selectarr")); //胆一
       // 判断已选中的胆
-
       if (
         sessionStorage.getItem("numArr") &&
         JSON.parse(sessionStorage.getItem("numArr").length > 0)
@@ -1147,11 +1165,13 @@ export default {
     handleCheckedCitiesChange1(value) {
       console.log(value);
       this.checkedDans1 = value ? value : [];
-      // sessionStorage.setItem('one',JSON.stringify(this.checkedDans1))
+      sessionStorage.setItem('one',JSON.stringify(this.checkedDans1))
       //  var num = JSON.parse(sessionStorage.getItem("numArr"));
+      //  console.log(num)
       //  if(value){
       //    if(num.indexOf("1")==-1||num.indexOf(1)==-1){
       //      num.push(1)
+      //      console.log('123')
       //    };
 
       //  }else{
@@ -1184,7 +1204,7 @@ export default {
       //     }
       //   }
       //  }
-      //  sessionStorage.setItem('numArr',JSON.stringify(num))
+       sessionStorage.setItem('numArr',JSON.stringify(this.checkedDans2))
       let checkedCount = value.length;
       this.checkAll2 = checkedCount === this.dans2.length;
     },
@@ -1205,7 +1225,7 @@ export default {
       //     }
       //   }
       //  }
-      //   sessionStorage.setItem('numArr',JSON.stringify(num))
+        sessionStorage.setItem('numArr',JSON.stringify(this.checkedDans3))
       let checkedCount = value.length;
       this.checkAll3 = checkedCount === this.dans3.length;
     },
