@@ -408,6 +408,13 @@ export default {
   created() {
     this.vip();
     this.cate();
+    if (localStorage.getItem("type")) {
+      this.loginForm.type = localStorage.getItem("type");
+      let arr = this.options1.filter(item => {
+        return item.value == localStorage.getItem("type");
+      });
+      this.value1 = arr[0].label;
+    }
   },
   methods: {
     backTop() {
@@ -428,8 +435,16 @@ export default {
         params: { token: localStorage.getItem("token") }
       }).then(res => {
         that.options = res.data.data;
-        that.value = res.data.data[0].name;
-        that.loginForm.caipiaoid = res.data.data[0].id;
+        if (localStorage.getItem("caipiaoid")) {
+          var arr = that.options.filter(item => {
+            return item.id == localStorage.getItem("caipiaoid");
+          });
+          that.value = arr[0].name;
+          this.loginForm.caipiaoid = localStorage.getItem("caipiaoid");
+        } else {
+          that.value = res.data.data[0].name;
+          that.loginForm.caipiaoid = res.data.data[0].id;
+        }
         that.getData();
       });
     },
@@ -459,16 +474,16 @@ export default {
       // 点击图表小图标后重新加载图表模板
       this.timer = new Date().getTime();
     },
-    // 切换任选5等
+    // 切换福建等城市
     caipiaoidChange(v) {
       this.loginForm.caipiaoid = v;
-      sessionStorage.setItem("caipiaoid", v);
+      localStorage.setItem("caipiaoid", v);
       this.getData();
     },
-    // 切换福建等城市
+    // 切换任选5等
     TypeChange(v) {
       this.loginForm.type = v;
-      sessionStorage.setItem("type", v);
+      localStorage.setItem("type", v);
       this.getData();
     },
     // 刷新当前页面
