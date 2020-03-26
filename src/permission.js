@@ -38,7 +38,7 @@ const whiteList = [
   '/example/tab',
   '/example/back-to-top',
   '/example/drag-dialog',
-  '/401',
+  // '/401',
   '/video',
   '/resetpassword'
 

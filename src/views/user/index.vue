@@ -194,7 +194,7 @@
             号码
             <span v-if="totalShow" style="color:red;margin-left:12px;">共 {{total}} 注</span>
           </span>
-          <span @click="copy" class="copy-todata">复制到智能数据</span>
+          <span @click="copy" class="copy-todata">复制</span>
         </p>
         <div style="text-align:center;display:flex;">
           <textarea name id="textValue" rows="10" v-model="returnArr"></textarea>
@@ -491,11 +491,11 @@ export default {
       this.updateAllData({
         data: obj
       });
-      let newArr = [];
-      for (let j = 0; j < value.length; j++) {
-        newArr.push(j + 1 + "");
-      }
-      this.checkedDansShow1 = newArr;
+      // let newArr = [];
+      // for (let j = 0; j < value.length; j++) {
+      //   newArr.push(j + 1 + "");
+      // }
+      // this.checkedDansShow1 = newArr;
       this.checkedDans1 = value || [];
       let checkedCount = value.length;
       this.checkAll1 = checkedCount === this.dans1.length;
@@ -506,11 +506,11 @@ export default {
       this.updateAllData({
         data: obj
       });
-      let newArr = [];
-      for (let j = 0; j < value.length; j++) {
-        newArr.push(j + 1 + "");
-      }
-      this.checkedDansShow2 = newArr;
+      // let newArr = [];
+      // for (let j = 0; j < value.length; j++) {
+      //   newArr.push(j + 1 + "");
+      // }
+      // this.checkedDansShow2 = newArr;
       this.checkedDans2 = value || [];
       let checkedCount = value.length;
       this.checkAll2 = checkedCount === this.dans2.length;
@@ -521,11 +521,11 @@ export default {
       this.updateAllData({
         data: obj
       });
-      let newArr = [];
-      for (let j = 0; j < value.length; j++) {
-        newArr.push(j + 1 + "");
-      }
-      this.checkedDansShow3 = newArr;
+      // let newArr = [];
+      // for (let j = 0; j < value.length; j++) {
+      //   newArr.push(j + 1 + "");
+      // }
+      // this.checkedDansShow3 = newArr;
       this.checkedDans3 = value || [];
       let checkedCount = value.length;
       this.checkAll3 = checkedCount === this.dans3.length;
@@ -536,11 +536,11 @@ export default {
       this.updateAllData({
         data: obj
       });
-      let newArr = [];
-      for (let j = 0; j < value.length; j++) {
-        newArr.push(j + 1 + "");
-      }
-      this.checkedDansShow4 = newArr;
+      // let newArr = [];
+      // for (let j = 0; j < value.length; j++) {
+      //   newArr.push(j + 1 + "");
+      // }
+      // this.checkedDansShow4 = newArr;
       this.checkedDans4 = value || [];
       let checkedCount = value.length;
       this.checkAll4 = checkedCount === this.dans4.length;
@@ -548,14 +548,15 @@ export default {
     handleCheckedCitiesChange5(value) {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.dan5 = value;
+      console.log(value)
       this.updateAllData({
         data: obj
       });
-      let newArr = [];
-      for (let j = 0; j < value.length; j++) {
-        newArr.push(j + 1 + "");
-      }
-      this.checkedDansShow5 = newArr;
+      // let newArr = [];
+      // for (let j = 0; j < value.length; j++) {
+      //   newArr.push(j + 1 + "");
+      // }
+      // this.checkedDansShow5 = newArr;
       this.checkedDans5 = value || [];
       let checkedCount = value.length;
       this.checkAll5 = checkedCount === this.dans5.length;
