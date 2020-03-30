@@ -375,14 +375,18 @@ export default {
       }
       if (this.allData.checkedDansShow1) {
         this.checkedDansShow1 = this.allData.checkedDansShow1;
-      } else if (this.allData.checkedDansShow2) {
-        this.checkedDansShow1 = this.allData.checkedDansShow2;
-      } else if (this.allData.checkedDansShow3) {
-        this.checkedDansShow1 = this.allData.checkedDansShow3;
-      } else if (this.allData.checkedDansShow4) {
-        this.checkedDansShow1 = this.allData.checkedDansShow4;
-      } else if (this.allData.checkedDansShow5) {
-        this.checkedDansShow1 = this.allData.checkedDansShow5;
+      }
+      if (this.allData.checkedDansShow2) {
+        this.checkedDansShow2 = this.allData.checkedDansShow2;
+      }
+      if (this.allData.checkedDansShow3) {
+        this.checkedDansShow3 = this.allData.checkedDansShow3;
+      }
+      if (this.allData.checkedDansShow4) {
+        this.checkedDansShow4 = this.allData.checkedDansShow4;
+      }
+      if (this.allData.checkedDansShow5) {
+        this.checkedDansShow5 = this.allData.checkedDansShow5;
       }
       let types = ["big", "even", "he"];
       let scores = {
