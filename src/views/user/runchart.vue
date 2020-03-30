@@ -746,8 +746,6 @@ export default {
       }
     },
     sub() {
-      console.log(this.selectArr);
-      console.log(this.allData);
       // return false;
       let obj = JSON.parse(JSON.stringify(this.allData));
       if (this.selectArr.length > 0) {
