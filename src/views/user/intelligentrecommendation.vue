@@ -485,6 +485,7 @@ export default {
       this.loginForm.type = v;
       localStorage.setItem("type", v);
       this.getData();
+      sessionStorage.setItem("type",v)
     },
     // 刷新当前页面
     reload() {

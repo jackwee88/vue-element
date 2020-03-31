@@ -51,7 +51,8 @@ export default {
       var data = sessionStorage.getItem("missed");
       var obj = {
         token: localStorage.getItem("token"),
-        array: [data]
+        array: [data],
+        type:localStorage.getItem("type")
       };
       if (sessionStorage.getItem("caipiaoid")) {
         obj.caipiaoid = sessionStorage.getItem("caipiaoid");
