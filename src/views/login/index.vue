@@ -67,7 +67,7 @@
       style=";max-height: 90vh;overflow: auto;"
       center
     >
-      <span>{{legal}}</span>
+      <div v-html ="legal">{{legal}}</div>
       <p>
         <el-checkbox v-model="checked" @change="agren">我同意并遵守本法律声明</el-checkbox>
       </p>
@@ -148,6 +148,7 @@ export default {
             url: this.url + "user/getLegal",
             params: {}
           }).then(res => {
+            console.log(res.data.data.value)
             localStorage.setItem("BCUSER", this.loginForm.account);
             localStorage.setItem("BCPASSWORD", this.loginForm.password);
             that.legal = res.data.data.value;
