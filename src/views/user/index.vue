@@ -367,11 +367,22 @@ export default {
         const element = this.allData["dan" + (i + 1)];
         this["checkedDans" + (i + 1)] = element;
         element.length && (this["flag" + (i + 1)] = element.length);
-        let newArr = [];
-        for (let j = 0; j < element.length; j++) {
-          newArr.push(j + 1 + "");
-        }
-        this["checkedDansShow" + (i + 1)] = newArr;
+        // let newArr = [];
+        // for (let j = 0; j < element.length; j++) {
+        //   newArr.push(j + 1 + "");
+        // }
+        // this["checkedDansShow" + (i + 1)] = newArr;
+        if (this.allData.checkedDansShow1) {
+        this.checkedDansShow1 = this.allData.checkedDansShow1;
+      } else if (this.allData.checkedDansShow2) {
+        this.checkedDansShow1 = this.allData.checkedDansShow2;
+      } else if (this.allData.checkedDansShow3) {
+        this.checkedDansShow1 = this.allData.checkedDansShow3;
+      } else if (this.allData.checkedDansShow4) {
+        this.checkedDansShow1 = this.allData.checkedDansShow4;
+      } else if (this.allData.checkedDansShow5) {
+        this.checkedDansShow1 = this.allData.checkedDansShow5;
+      }
       }
       let types = ["big", "even", "he"];
       let scores = {
@@ -564,22 +575,47 @@ export default {
     // 胆1到胆5的每个复选值出现次数
     handleCheckedCitiesShow1(value) {
       console.log(value);
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.checkedDansShow1 = value;
+      this.updateAllData({
+        data: obj
+      });
       this.checkedDansShow1 = value || [];
     },
     handleCheckedCitiesShow2(value) {
       console.log(value);
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.checkedDansShow1 = value;
+      this.updateAllData({
+        data: obj
+      });
       this.checkedDansShow2 = value || [];
     },
     handleCheckedCitiesShow3(value) {
       console.log(value);
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.checkedDansShow1 = value;
+      this.updateAllData({
+        data: obj
+      });
       this.checkedDansShow3 = value || [];
     },
     handleCheckedCitiesShow4(value) {
       console.log(value);
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.checkedDansShow1 = value;
+      this.updateAllData({
+        data: obj
+      });
       this.checkedDansShow4 = value || [];
     },
     handleCheckedCitiesShow5(value) {
       console.log(value);
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.checkedDansShow1 = value;
+      this.updateAllData({
+        data: obj
+      });
       this.checkedDansShow5 = value || [];
     },
     // 偶数
