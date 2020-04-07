@@ -39,7 +39,7 @@
       :close-on-press-escape="false"
       :show-close="false"
     >
-      <span>{{legal}}</span>
+      <span v-html="legal">{{legal}}</span>
       <span slot="footer" class="dialog-footer">
         <!-- <el-button @click="centerDialogVisible = false">取 消</el-button> -->
         <el-button type="primary" @click="surePay">支付</el-button>
