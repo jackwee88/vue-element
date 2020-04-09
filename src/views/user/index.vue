@@ -372,17 +372,20 @@ export default {
         for (let j = 0; j < element.length; j++) {
           newArr.push(j + 1 + "");
         }
-        if (this.allData["checkedDansShow" + (i + 1)].length != 0) {
+        if(this.allData['checkDansShow'+(i+1)]){
+          if (this.allData["checkedDansShow" + (i + 1)].length != 0) {
           this["checkedDansShow" + (i + 1)] = this.allData[
             "checkedDansShow" + (i + 1)
           ];
-        } else {
+        } 
+        }else {
           this["checkedDansShow" + (i + 1)] = newArr;
           this.allData["checkedDansShow" + (i + 1)] = newArr;
           this.updateAllData({
             data: this.allData
           });
         }
+        
       }
       // if (this.allData.checkedDansShow1) {
       //   this.checkedDansShow1 = this.allData.checkedDansShow1;
