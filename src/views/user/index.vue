@@ -365,7 +365,6 @@ export default {
     init() {
       for (let i = 0; i < 5; i++) {
         const element = this.allData["dan" + (i + 1)];
-        console.log(this.allData.checkedDansShow2.length);
         this["checkedDans" + (i + 1)] = element;
         element.length && (this["flag" + (i + 1)] = element.length);
         let newArr = [];
@@ -378,14 +377,18 @@ export default {
             "checkedDansShow" + (i + 1)
           ];
           console.log(this["checkedDansShow" + (i + 1)])
-        } 
-        }else {
+        } else {
           this["checkedDansShow" + (i + 1)] = newArr;
           this.allData["checkedDansShow" + (i + 1)] = newArr;
           this.updateAllData({
             data: this.allData
           });
         }
+        }else{
+          this["checkedDansShow" + (i + 1)] = newArr;
+
+        }
+        
         
       }
       // if (this.allData.checkedDansShow1) {
@@ -468,6 +471,25 @@ export default {
           //   this.oddS = "1";
           // }
           this.checkedOdd.push(oddd[i]);
+        }
+      }
+      if (this.allData.checkedHyphen) {
+        var checkedHyphen = this.allData.checkedHyphen; // 胆一
+        for (var i = 0; i < checkedHyphen.length; i++) {
+          // if (oddd[i] == "0:5") {
+          //   this.oddS = "5";
+          // } else if (oddd[i] == "1:4") {
+          //   this.oddS = "4";
+          // } else if (oddd[i] == "2:3") {
+          //   this.oddS = "3";
+          // } else if (oddd[i] == "3:2") {
+          //   this.oddS = "2";
+          // } else if (oddd[i] == "5:0") {
+          //   this.oddS = "0";
+          // } else if (oddd[i] == "4:1") {
+          //   this.oddS = "1";
+          // }
+          this.checkedHyphen.push(checkedHyphen[i]);
         }
       }
       this.sure();
@@ -667,6 +689,11 @@ export default {
     },
     // 连数
     handleHyphen(value) {
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.checkedHyphen = value;
+      this.updateAllData({
+        data: obj
+      });
       this.checkedHyphen = value || [];
     },
 
@@ -695,6 +722,7 @@ export default {
         obj.big = [];
         obj.he = [];
         obj.even = [];
+        obj.checkedHyphen = []
         this.updateAllData({
           data: obj
         });
