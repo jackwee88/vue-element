@@ -365,18 +365,19 @@ export default {
     init() {
       for (let i = 0; i < 5; i++) {
         const element = this.allData["dan" + (i + 1)];
-        console.log(this.allData.checkedDansShow2);
+        console.log(this.allData.checkedDansShow2.length);
         this["checkedDans" + (i + 1)] = element;
         element.length && (this["flag" + (i + 1)] = element.length);
         let newArr = [];
         for (let j = 0; j < element.length; j++) {
           newArr.push(j + 1 + "");
         }
-        if(this.allData['checkDansShow'+(i+1)]){
-          if (this.allData["checkedDansShow" + (i + 1)].length != 0) {
+        if(this.allData['checkedDansShow'+(i+1)]){
+         if (this.allData["checkedDansShow" + (i + 1)].length != 0) {
           this["checkedDansShow" + (i + 1)] = this.allData[
             "checkedDansShow" + (i + 1)
           ];
+          console.log(this["checkedDansShow" + (i + 1)])
         } 
         }else {
           this["checkedDansShow" + (i + 1)] = newArr;
