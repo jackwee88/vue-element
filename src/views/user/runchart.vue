@@ -756,14 +756,21 @@ export default {
         // }
         // console.log(this.dan1Arr);
         let flag = true;
-        for (let i = 0; i < 5; i++) {
-          if (obj["dan" + (i + 1)].length === 0) {
-            obj["dan" + (i + 1)] = this.selectArr;
-            flag = false;
-            break;
-          }
+        let arr =[]
+        console.log(this.selectArr+'dashab')
+        for(let i=0;i<this.selectArr.length;i++){
+          const element = this.selectArr[i]
+          arr.push(element)
         }
-        flag && alert("操作失败");
+        obj.dan1=arr
+        // for (let i = 0; i < 5; i++) {
+        //   if (obj["dan" + (i + 1)].length === 0) {
+        //     obj["dan" + (i + 1)] = this.selectArr;
+        //     flag = false;
+        //     break;
+        //   }
+        // }
+        // flag && alert("操作失败");
         // sessionStorage.setItem("no1", 1);
       }
       if (this.big) {
