@@ -19,7 +19,7 @@
           </el-select>
         </div>
         <div v-clickoutside="outsideClose" class="dropmain">
-          <el-select v-model="value1" placeholder="请选择" @change="caipiaoidChange">
+          <el-select v-model="value1" placeholder="请选择" @change="caipiaoidChangecity">
             <el-option v-for="item in options1" :key="item.id" :label="item.name" :value="item.id"></el-option>
           </el-select>
         </div>
@@ -43,7 +43,7 @@
           </el-select>
         </div>
         <div v-clickoutside="outsideClose" class="dropmain">
-          <el-select v-model="value1" placeholder="请选择" @change="caipiaoidChange">
+          <el-select v-model="value1" placeholder="请选择" @change="caipiaoidChangecity">
             <el-option v-for="item in options1" :key="item.id" :label="item.name" :value="item.id"></el-option>
           </el-select>
         </div>
@@ -577,6 +577,7 @@ export default {
         window.requestAnimationFrame(this.goUp);
         window.scrollTo(0, nowTop - nowTop / 5);
       }
+
     },
 
     // 为了计算距离顶部的高度，当高度大于60显示回顶部图标，小于60则隐藏
@@ -646,6 +647,11 @@ export default {
     caipiaoidChange(v) {
       this.caipiaoid = v;
     },
+    caipiaoidChangecity(v) {
+      this.caipiaoid = v;
+      localStorage.setItem("cityId",v);
+      this.getData();
+    },
     typeSure() {
       this.getData();
       this.getTrendCount();
@@ -660,8 +666,15 @@ export default {
         params: { token: localStorage.getItem("token") }
       }).then(res => {
         that.options1 = res.data.data;
-        that.value1 = res.data.data[0].name;
+        if(localStorage.getItem("cityId")){
+          that.caipiaoid = localStorage.getItem("cityId")
+          var index= that.caipiaoid-1
+          that.value1 = that.options1[index].name
+        }else{
+          that.value1 = res.data.data[0].name;
         that.caipiaoid = res.data.data[0].id;
+        }
+        
         that.getData();
         that.getTrendCount();
       });
