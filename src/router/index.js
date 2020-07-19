@@ -94,7 +94,17 @@ export const constantRouterMap = [
             // { path: 'qrcode', component: resolve => require(['@/views/charts/qrcode'], resolve), name: 'qrcode', meta: { title: '推广App', icon: 'cir', noCache: true } },
 
         ]
-    }
+    },
+    {
+        path: '',
+        component: Layout,
+        children: [{
+          path: 'soccer',
+          component: resolve => require(['@/views/soccer'], resolve),
+          name: 'soccer',
+          meta: { title: '商城', icon: 'soccer', noCache: true }
+        }]
+      },
     // {
     //   path: '/example',
     //   component: Layout,
