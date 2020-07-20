@@ -194,9 +194,24 @@ export default {
             });
           } else {
             this.loading = false;
+            var that=this
             localStorage.setItem("token", res.data.data.userinfo.token);
+            const h = this.$createElement;
+            that.$notify({
+                  title: "",
+                  message: h(
+                    "i",
+                    { style: "color: teal" },
+                    "将为您跳到下载页面"
+                  )
+                });
+                setTimeout(function() {
+                  that.$router.push({ path: "/download" });
+                }, 1000);
+
             // sessionStorage.setItem("pay", res.data.data.userinfo.vip);
-            this.$router.push({ path: "/editmsg" });
+            // this.$router.push({ path: "/editmsg" });
+            
           }
         });
       }

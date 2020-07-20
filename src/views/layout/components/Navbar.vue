@@ -1,7 +1,7 @@
 <template>
   <el-menu class="navbar" mode="horizontal" style="background-color:#1D6CA7">
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
-
+<span style="color:white">剩余天数:{{day}}</span>
     <div class="loginout" @click="loginout">
       <img
         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAKqADAAQAAAABAAAAKgAAAAD30ocxAAADA0lEQVRYCdWYO2gVQRSGcxONEcQHQS19xPgADQGxUgtRFBR8gZ1JKYi2NhY2QrAIaQRT2IkWFhYSLCLEB2qlop2FERGCz4QkojFI9Pqdyc7ew925m9yb3ZnrgT9z5szc8/8zOzO7k4aG/8QKLp3FYrGR+Dqw2NWeQ+xroVCYmHdeBLaBATAFfNt7CM8C5+TFg6DDVvADhLbrsSjlxOpR95T4btX2Bn9K1fN0N5F8hSLYz1J4oOqzLiKXgT9qKg8lOuUYgLcFPFb8V8rpZNOItQPrTzCaQRP19Ae+aajuKrrNyjeuFWdLCc6Ud/JU17xaj6FPBDyJqpqmnoR+UOq1b8KLVGNo9x4CLoI1oNcpht22U+24b85OgYP19OhTpyKYUJ5gVcsuiFBEHmT6Rijfgr2pUxk1BhEKtwhdC+TVeR+xxynnNjp63UzwrQavgLUZnDNzKqWTV6EiCM7lYAhou5Qqlp7ehUZim+G+rZXi9wP3kqQhiNBIbCP8V4G2O1SW6Nmt6ojQP3T5JG8iLl9i8Xeuq58jdo3YSnA6ajtJOUi+Y3xZTUYxs14WPKMkbQWfQZb2jGRm0O61EA+hKmcjveXIydK2kMxcMDN79Dyi54y+m8R7QC0TsJ7fHQDWxnGOkve3DchRseBHHyerwYG/E3wC1j7i7EikIhhMKNz7wCSwNoyzISFSAjQEEQrvKTANrL3GqbzOafQuFM5zQN98n1DXV+bkpPoWCl8X0DZAZWlSWSlSy+4s/bp2T14K1m7inGB3/7IBV5nZ8eRKnhLroW0MyD/GbiCymNK31MS0e1+jJfZZDw1N4Dy4DOSClzQa6kHoYXRY6ytXGWqNluuQepsKat+E60mo0pl0rdC/qkk+1UKY5tV6jBYr9B01u/NWsVDmdTPMajTwicgjKt+w8o1rjieOh+90fkFkV9ThEfWX+D+jet7FNgj0q3OoIiHCOoB+71INYrcqirQNyNoOHgK5vvq2UQgvAOdLyHm3oXML4uU112wHkXP5heU3kjOHn/T/ADKso/C9/qJxAAAAAElFTkSuQmCC"
@@ -38,6 +38,11 @@ import LangSelect from "@/components/LangSelect";
 import ThemePicker from "@/components/ThemePicker";
 
 export default {
+  data(){
+    return{
+      day:'29'
+    }
+  },
   components: {
     Breadcrumb,
     Hamburger,
@@ -59,7 +64,16 @@ export default {
       this.$store.dispatch("LogOut").then(() => {
         location.reload(); // In order to re-instantiate the vue-router object to avoid bugs
       });
+    },
+    getDay(){
+      var that=this
+      this.$axios({
+        method: "post",
+        url: this.url + "",
+        params: { token: localStorage.getItem("token") }
+      }).then(res => {});
     }
+    
   }
 };
 </script>

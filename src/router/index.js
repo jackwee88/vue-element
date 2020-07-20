@@ -39,6 +39,7 @@ export const constantRouterMap = [
     { path: '/reg', component: resolve => require(['@/views/reg'], resolve), hidden: true },
     { path: '/editmsg', component: resolve => require(['@/views/editmsg'], resolve), hidden: true },
     { path: '/pay', component: resolve => require(['@/views/pay'], resolve), hidden: true },
+    { path: '/download', component: resolve => require(['@/views/download'], resolve), hidden: true },
     {
         path: '',
         component: Layout,
@@ -60,18 +61,18 @@ export const constantRouterMap = [
             { path: 'intelligentdata', component: resolve => require(['@/views/user/intelligentdata'], resolve), name: 'intelligentdata', meta: { title: '智能数据', icon: 'cir', noCache: true } },
             { path: 'money', component: resolve => require(['@/views/user/money'], resolve), name: 'money', meta: { title: '资金计算器', icon: 'cir', noCache: true } },
             { path: 'new', component: resolve => require(['@/views/user/new'], resolve), name: 'new', hidden: true },
-            { path: 'video', component: resolve => require(['@/views/user/video'], resolve), name: 'video', meta: { title: '视频教学', icon: 'cir', noCache: true,image:'../utils/user.jpg' } }
+            { path: 'video', component: resolve => require(['@/views/user/video'], resolve), name: 'video', meta: { title: '视频教学', icon: 'cir', noCache: true, image: '../utils/user.jpg' } }
         ]
     },
     {
-      path: '',
-      component: Layout,
-      children: [{
-        path: 'soccer',
-        component: resolve => require(['@/views/soccer'], resolve),
-        name: 'soccer',
-        meta: { title: '竞彩', icon: 'soccer', noCache: true }
-      }]
+        path: '',
+        component: Layout,
+        children: [{
+            path: 'soccer',
+            component: resolve => require(['@/views/soccer'], resolve),
+            name: 'soccer',
+            meta: { title: '竞彩足球', icon: 'soccer', noCache: true }
+        }]
     },
     {
         path: '',
@@ -99,12 +100,13 @@ export const constantRouterMap = [
         path: '',
         component: Layout,
         children: [{
-          path: 'soccer',
-          component: resolve => require(['@/views/soccer'], resolve),
-          name: 'soccer',
-          meta: { title: '商城', icon: 'soccer', noCache: true }
+            path: 'shop',
+            component: resolve => require(['@/views/shop'], resolve),
+            name: 'shop',
+            meta: { title: '购物商城', icon: 'shop', noCache: true }
         }]
-      },
+    },
+
     // {
     //   path: '/example',
     //   component: Layout,

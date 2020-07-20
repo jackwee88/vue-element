@@ -44,7 +44,9 @@ const whiteList = [
         // '/401',
         '/video',
         '/resetpassword',
-        '/soccer'
+        '/soccer',
+        '/shop',
+        '/download',
 
     ] // no redirect whitelist
 
@@ -53,7 +55,7 @@ router.beforeEach((to, from, next) => {
     NProgress.start()
         // 在没有token的情况下跳转至登录页
     if (!localStorage.getItem('token')) {
-        if (to.path === '/login' || to.path === '/reg' || to.path === '/resetpassword') { // 这就是跳出循环的关键
+        if (to.path === '/login' || to.path === '/reg' || to.path === '/resetpassword' || to.path === '/download') { // 这就是跳出循环的关键
             next()
         } else {
             next('/login')

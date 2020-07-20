@@ -21,45 +21,45 @@ import './axios'
 import $ from 'jquery'
 import { post, get } from '@/utils/ajax.js';
 
-import Axios from 'axios'  //导入axios
-
+import Axios from 'axios'   //导入axios
+import VueCanvasPoster from ''
 
 import VideoPlayer from 'vue-video-player'
 require('video.js/dist/video-js.css')
 require('vue-video-player/src/custom-theme.css')
 Vue.use(VideoPlayer)
-//将axios挂载到原型上
+    //将axios挂载到原型上
 Vue.prototype.$axios = Axios;
 Vue.prototype.$post = post;
 Vue.prototype.$get = get;
 
-Vue.prototype.vip = function () {
-  var that = this;
-  that.$axios({
-    method: "post",
-    url: this.url + "user/userInfo",
-    params: { token: localStorage.getItem('token') }
-  })
-    .then(ress => {
+Vue.prototype.vip = function() {
+    var that = this;
+    that.$axios({
+            method: "post",
+            url: this.url + "user/userInfo",
+            params: { token: localStorage.getItem('token') }
+        })
+        .then(ress => {
 
-      if (ress.data.data.vip == 0) {
-        that.$router.push({ path: "/pay" });
-      }
-     
+            if (ress.data.data.vip == 0) {
+                that.$router.push({ path: "/pay" });
+            }
 
-    });
+
+        });
 }
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.prototype.url = 'http://www.zyyccppx.com/api/'
 Vue.prototype.maxs = 0;
 Vue.prototype.totals = 0
-/* eslint-disable no-new */
+    /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  store,
-  i18n,
-  components: { App },
-  template: '<App/>'
+    el: '#app',
+    router,
+    store,
+    i18n,
+    components: { App },
+    template: '<App/>'
 })
