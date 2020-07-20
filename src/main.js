@@ -22,7 +22,7 @@ import $ from 'jquery'
 import { post, get } from '@/utils/ajax.js';
 
 import Axios from 'axios'   //导入axios
-import VueCanvasPoster from ''
+
 
 import VideoPlayer from 'vue-video-player'
 require('video.js/dist/video-js.css')

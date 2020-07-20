@@ -1,22 +1,28 @@
  <template>
   <div style="padding:0 20px">
-    <div class="top-header">可用积分：100000</div>
+    <div class="top-header">可用积分：{{record}}</div>
     <div class="input-item">
-      <input type="text" placeholder="请输入需要划转积分" class="input" v-model="number" oninput="value=value.replace(/[^\d]/g,'')"/>
+      <input
+        type="text"
+        placeholder="请输入需要划转积分"
+        class="input"
+        v-model="number"
+        oninput="value=value.replace(/[^\d]/g,'')"
+      />
       <br />
       <input type="text" placeholder="请输入接收账号" class="input" v-model="member" />
-      <div style="color:#999;font-size:14px;padding:5px 0">当前可用积分10000，可划转积分8800</div>
+      <div style="color:#999;font-size:14px;padding:5px 0">当前可用积分{{record}}，可划转积分{{record}}</div>
       <div class="button11" @click="change()">划转</div>
     </div>
     <div>
       <p style="font-weight:bolder">划转记录</p>
       <ul>
-        <li class="li">
+        <li class="li" v-for="(item,index) in recordHistory" :key="index">
           <div class="li-top">
-            <span class="p1">划转账号:111132113</span>
-            <span class="p2" style="color: red;">-8888</span>
+            <span class="p1" style="font-size:14px">{{item.memo}}</span>
+            <span class="p2" style="color: red;">-{{item.score}}</span>
           </div>
-          <div class="time">2019-01-01：17：48</div>
+          <div class="time">{{item.createTxt}}</div>
         </li>
       </ul>
     </div>
@@ -27,62 +33,68 @@
 export default {
   data() {
     return {
-      record: [],
-      recordHistory:[],
+      record: "",
+      recordHistory: {},
       member: "",
       number: ""
     };
   },
   mounted() {
-      var timestamp1 = Date.parse(new Date())/1000;
-      console.log(timestamp1)
-      console.log(this.timestampToTime(timestamp1))
+    var timestamp1 = Date.parse(new Date()) / 1000;
+    this.getRecord();
   },
   methods: {
     getRecord() {
       var that = this;
       this.$axios({
         method: "post",
-        url: this.url + "",
+        url: this.url + "user/record",
         params: { token: localStorage.getItem("token") }
-      }).then(res => {});
+      }).then(res => {
+        that.record = res.data.data.score;
+        that.recordHistory = res.data.data.score_log;
+        for(var i=0;i<res.data.data.score_log.length;i++){
+          this.recordHistory[i]['createTxt']=this.timestampToTime(res.data.data.score_log[i].createtime)
+        }
+      });
     },
-    getRecordHistory() {
-      var that = this;
-      this.$axios({
-        method: "post",
-        url: this.url + "",
-        params: { token: localStorage.getItem("token") }
-      }).then(res => {});
-    },
+
     change() {
       var that = this;
       const h = this.$createElement;
-      if (this.member || this.number == "") {
-        this.$notify({
-          title: "",
-          message: h("i", { style: "color: teal" }, "请输入账号和要划转的积分")
-        });
-      }
-
+        var param = {
+        token: localStorage.getItem("token"),
+        username: this.member,
+        score_num: this.number
+      };
       this.$axios({
         method: "post",
-        url: this.url + "",
-        params: { token: localStorage.getItem("token") }
+        url: this.url + "user/scoreSubmit",
+        params: param
       }).then(res => {
-        that.record = res.data.data;
+
+        this.$notify({
+          title: "",
+          message: h("i", { style: "color: teal" }, res.data.msg)
+        });
+        this.member=''
+        this.number=''
       });
+      
     },
-    timestampToTime:function (timestamp) {
-    var date = new Date(timestamp * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
-    var Y = date.getFullYear() + '-';
-    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-    var D = date.getDate() + ' ';
-    var h = date.getHours() + ':';
-    var m = date.getMinutes() + ':';
-    var s = date.getSeconds();
-    return Y + M + D + h + m + s;
-  },
+    timestampToTime: function(timestamp) {
+      var date = new Date(timestamp * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      var Y = date.getFullYear() + "-";
+      var M =
+        (date.getMonth() + 1 < 10
+          ? "0" + (date.getMonth() + 1)
+          : date.getMonth() + 1) + "-";
+      var D = date.getDate() + " ";
+      var h = date.getHours() + ":";
+      var m = date.getMinutes() + ":";
+      var s = date.getSeconds();
+      return Y + M + D + h + m + s;
+    }
   }
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <el-menu class="navbar" mode="horizontal" style="background-color:#1D6CA7">
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
-<span style="color:white">剩余天数:{{day}}</span>
+<span style="color:white">剩余天数:{{day}}天:{{hour}}小时</span>
     <div class="loginout" @click="loginout">
       <img
         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAKqADAAQAAAABAAAAKgAAAAD30ocxAAADA0lEQVRYCdWYO2gVQRSGcxONEcQHQS19xPgADQGxUgtRFBR8gZ1JKYi2NhY2QrAIaQRT2IkWFhYSLCLEB2qlop2FERGCz4QkojFI9Pqdyc7ew925m9yb3ZnrgT9z5szc8/8zOzO7k4aG/8QKLp3FYrGR+Dqw2NWeQ+xroVCYmHdeBLaBATAFfNt7CM8C5+TFg6DDVvADhLbrsSjlxOpR95T4btX2Bn9K1fN0N5F8hSLYz1J4oOqzLiKXgT9qKg8lOuUYgLcFPFb8V8rpZNOItQPrTzCaQRP19Ae+aajuKrrNyjeuFWdLCc6Ud/JU17xaj6FPBDyJqpqmnoR+UOq1b8KLVGNo9x4CLoI1oNcpht22U+24b85OgYP19OhTpyKYUJ5gVcsuiFBEHmT6Rijfgr2pUxk1BhEKtwhdC+TVeR+xxynnNjp63UzwrQavgLUZnDNzKqWTV6EiCM7lYAhou5Qqlp7ehUZim+G+rZXi9wP3kqQhiNBIbCP8V4G2O1SW6Nmt6ojQP3T5JG8iLl9i8Xeuq58jdo3YSnA6ajtJOUi+Y3xZTUYxs14WPKMkbQWfQZb2jGRm0O61EA+hKmcjveXIydK2kMxcMDN79Dyi54y+m8R7QC0TsJ7fHQDWxnGOkve3DchRseBHHyerwYG/E3wC1j7i7EikIhhMKNz7wCSwNoyzISFSAjQEEQrvKTANrL3GqbzOafQuFM5zQN98n1DXV+bkpPoWCl8X0DZAZWlSWSlSy+4s/bp2T14K1m7inGB3/7IBV5nZ8eRKnhLroW0MyD/GbiCymNK31MS0e1+jJfZZDw1N4Dy4DOSClzQa6kHoYXRY6ytXGWqNluuQepsKat+E60mo0pl0rdC/qkk+1UKY5tV6jBYr9B01u/NWsVDmdTPMajTwicgjKt+w8o1rjieOh+90fkFkV9ThEfWX+D+jet7FNgj0q3OoIiHCOoB+71INYrcqirQNyNoOHgK5vvq2UQgvAOdLyHm3oXML4uU112wHkXP5heU3kjOHn/T/ADKso/C9/qJxAAAAAElFTkSuQmCC"
@@ -40,8 +40,14 @@ import ThemePicker from "@/components/ThemePicker";
 export default {
   data(){
     return{
-      day:'29'
+      day:'0',
+      hour:'0',
+      minute:'',
+      second:'',
     }
+  },
+  mounted(){
+    this.getDay()
   },
   components: {
     Breadcrumb,
@@ -69,11 +75,41 @@ export default {
       var that=this
       this.$axios({
         method: "post",
-        url: this.url + "",
+        url: this.url + "user/userinfo",
         params: { token: localStorage.getItem("token") }
-      }).then(res => {});
-    }
-    
+      }).then(res => {
+        var timestamp1 = Date.parse(new Date()) / 1000;
+        var vip_endtime=res.data.data.vip_endtime
+        var endtime=vip_endtime-timestamp1
+        console.log(this.timestampToTime(res.data.data.vip_endtime))
+        if(endtime<=0){
+
+        }else{
+          this.timeChange(endtime)
+        }
+        
+      });
+    },
+    timestampToTime: function(timestamp) {
+      var date = new Date(timestamp * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      var Y = date.getFullYear() + "-";
+      var M =
+        (date.getMonth() + 1 < 10
+          ? "0" + (date.getMonth() + 1)
+          : date.getMonth() + 1) + "-";
+      var D = date.getDate() + " ";
+      var h = date.getHours() + ":";
+      var m = date.getMinutes() + ":";
+      var s = date.getSeconds();
+      return Y + M + D + h + m + s;
+    },
+    timeChange(value) {
+      var lastTime = parseInt(value);
+      this.day=Math.floor(lastTime/60/60/24)
+      this.hour=Math.floor(lastTime/60/60%24)
+       this.minute=Math.floor(lastTime/60%64)
+       this.second=Math.floor(lastTime%60)
+    },
   }
 };
 </script>

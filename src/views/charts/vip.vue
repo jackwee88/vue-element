@@ -1,24 +1,24 @@
  <template>
   <div class="body" id="body" :style="'height:' + windowHeight + 'px'">
     <div class="avatar-item">
-      <img src class="avatar" />
+      <img src="../../utils/timg.jpg" class="avatar" />
       <div class="avatar-right">
-        <div>xxx</div>
-        <div>可用积分:11123566666</div>
+        <div>{{userinfo.username}}</div>
+        <div>可用积分:{{userinfo.score}}</div>
       </div>
     </div>
-    <div class="choose">
+    <div>
       <p style="font-size:18px;font-weight:bolder">购买套餐</p>
       <div class="choose-item">
-        <span class="top">月度VIP</span>
+        <span class="top">{{vipdata.name}}</span>
         <div style="font-size:14px">1个彩种</div>
         <div style="font-weight:bolder">
-          <span style="font-size:28px;">520.</span>0元
+          <span style="font-size:28px;">{{vipdata.vip_price}}</span>.0元
         </div>
-        <div class="line">59.9</div>
+        <div class="line">599.0</div>
         <span class="bottom">√</span>
       </div>
-      <div class="button">开通</div>
+      <div class="button" @click="openScoreVip()">开通</div>
       <div class="desc">加入VIP赠送模拟币：月度送1万</div>
     </div>
   </div>
@@ -30,25 +30,52 @@ export default {
   data() {
     return {
       windowHeight: "",
-      userinfo: []
+      userinfo: {},
+      vipdata: {}
     };
   },
   created() {
     var windowHeight = document.body.clientHeight;
     this.windowHeight = windowHeight - 50;
   },
-  mounted() {},
+  mounted() {
+    this.getVip();
+  },
   methods: {
-    getUser() {
+    openScoreVip() {
       var that = this;
 
       this.$axios({
         method: "post",
-        url: this.url + "",
-        params: { token: localStorage.getItem("token"),money:"520" }
+        url: this.url + "user/openScoreVip",
+        params: { token: localStorage.getItem("token") }
       }).then(res => {
-        that.userInfo = res.data.data.userInfo;
-        that.parent = res.data.data.parent;
+        const h = this.$createElement;
+        if (res.data.code == 1) {
+        } else {
+          this.$notify({
+            title: "",
+            message: h(
+              "i",
+              { style: "color: teal" },
+              "积分不足抵扣当月会员，将为您直接跳转到支付页面"
+            )
+          });
+          setTimeout(() => {
+        this.$router.push({ path: "/pay" });
+      }, 2000);
+        }
+      });
+      
+    },
+    getVip() {
+      this.$axios({
+        method: "post",
+        url: this.url + "user/vip",
+        params: { token: localStorage.getItem("token") }
+      }).then(res => {
+        this.userinfo = res.data.data.userdata;
+        this.vipdata = res.data.data.vipdata;
       });
     }
   }
@@ -123,7 +150,7 @@ export default {
   display: inline-block;
 }
 .top {
-  background-color: rgb(75, 64, 61);
+  background-color: #304156;
   color: white;
   position: absolute;
   top: 0;
@@ -133,7 +160,7 @@ export default {
 }
 .button {
   margin: 15px 0;
-  background-color: rgb(75, 64, 61);
+  background-color: #304156;
   height: 40px;
   color: white;
   border-radius: 20px;
