@@ -11,11 +11,11 @@
       <p style="font-size:18px;font-weight:bolder">购买套餐</p>
       <div class="choose-item">
         <span class="top">{{vipdata.name}}</span>
-        <div style="font-size:14px">1个彩种</div>
-        <div style="font-weight:bolder">
+        <!-- <div style="font-size:14px">1个彩种</div> -->
+        <div style="font-weight:bolder;height:100px;line-height:65px">
           <span style="font-size:28px;">{{vipdata.vip_price}}</span>.0元
         </div>
-        <div class="line">599.0</div>
+        <!-- <div class="line">599.0</div> -->
         <span class="bottom">√</span>
       </div>
       <div class="button" @click="openScoreVip()">开通</div>
@@ -113,6 +113,7 @@ export default {
   background-color: rgb(245, 222, 179, 0.3);
   padding-top: 30px;
   text-align: center;
+  align-items: center;
 }
 .choose-item div {
   padding: 2px 0;

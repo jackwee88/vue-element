@@ -22,6 +22,7 @@
           v-model="loginForm.account"
           autocomplete="on"
           placeholder="请输入账号"
+          class="name-reg"
         />
       </el-form-item>
 
@@ -178,7 +179,10 @@ export default {
       this.$axios({
         method: "post",
         url: this.url + "user/login",
-        params: this.loginForm
+        params: {
+          account:'zyyc'+this.loginForm.account,
+          password:this.loginForm.password
+        }
       }).then(res => {
         that.loading = false;
         if (res.data.code == 1) {
@@ -267,7 +271,20 @@ export default {
   -o-border-radius: @value;
   border-radius: @value;
 }
-
+.name-reg {
+  position: relative;
+  padding: 0 15px;
+}
+.name-reg::before {
+  content: "zyyc";
+  position: absolute;
+  top: 0px;
+  left: 0;
+  color: #fff;
+  text-align: center;
+  height: 47px;
+  line-height: 48px;
+}
 .login-container {
   .el-input {
     display: inline-block;

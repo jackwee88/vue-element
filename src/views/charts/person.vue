@@ -87,7 +87,7 @@ export default {
   data() {
     // 手机号验证
     var phone = (rule, value, callback) => {
-      let regFormat = /^[1][3578][0-9]{9}$/; //正确手机号
+      let regFormat = /^[1][3456789][0-9]{9}$/; //正确手机号
       if (!value) {
         return callback(new Error("不能为空"));
       }

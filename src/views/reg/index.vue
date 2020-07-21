@@ -157,7 +157,7 @@ export default {
     handleLogin() {
       this.loading = true;
 
-      var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+      var myreg = /^[1][3,4,5,7,8,9,6][0-9]{9}$/;
       if (!myreg.test(this.loginForm.username)) {
         this.loading = false;
         this.$notify({

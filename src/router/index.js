@@ -89,8 +89,8 @@ export const constantRouterMap = [
 
             { path: 'line', component: resolve => require(['@/views/charts/line'], resolve), name: 'lineChart', meta: { title: '我的上级', icon: 'cir', noCache: true } },
             { path: 'mixchart', component: resolve => require(['@/views/charts/mixChart'], resolve), name: 'mixChart', meta: { title: '我的下级', icon: 'cir', noCache: true } },
-            { path: 'keyboard', component: resolve => require(['@/views/charts/keyboard'], resolve), name: 'keyboard', meta: { title: '余额提现', icon: 'cir', noCache: true } },
-            { path: 'score', component: resolve => require(['@/views/charts/score'], resolve), name: 'score', meta: { title: '积分提现', icon: 'cir', noCache: true } },
+            // { path: 'keyboard', component: resolve => require(['@/views/charts/keyboard'], resolve), name: 'keyboard', meta: { title: '余额提现', icon: 'cir', noCache: true } },
+            { path: 'score', component: resolve => require(['@/views/charts/score'], resolve), name: 'score', meta: { title: '积分兑现', icon: 'cir', noCache: true } },
             { path: 'code', component: resolve => require(['@/views/charts/code'], resolve), name: 'code', meta: { title: '我的邀请链接', icon: 'cir', noCache: true } },
             { path: 'person', component: resolve => require(['@/views/charts/person'], resolve), name: 'person', meta: { title: '个人资料', icon: 'cir', noCache: true } },
             // { path: 'qrcode', component: resolve => require(['@/views/charts/qrcode'], resolve), name: 'qrcode', meta: { title: '推广App', icon: 'cir', noCache: true } },
