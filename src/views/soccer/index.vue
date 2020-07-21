@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="sorry">此功能正在开发中!!!</div>
+        <div class="sorry">即将上线，敬请期待...</div>
     </div>
 </template>
 

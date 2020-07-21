@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="sorry">商城即将推出，敬请期待！</div>
+        <div class="sorry">即将上线，敬请期待...</div>
     </div>
 </template>
 

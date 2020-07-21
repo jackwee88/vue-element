@@ -19,7 +19,7 @@
         <span class="bottom">√</span>
       </div>
       <div class="button" @click="openScoreVip()">开通</div>
-      <div class="desc">加入VIP赠送模拟币：月度送1万</div>
+      <!-- <div class="desc">加入VIP赠送模拟币：月度送1万</div> -->
     </div>
   </div>
 </template>
