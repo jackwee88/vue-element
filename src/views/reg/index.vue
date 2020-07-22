@@ -23,6 +23,7 @@
           autocomplete="on"
           class="name-reg"
           placeholder="请输入手机号"
+          style="padding-left:25px"
         />
       </el-form-item>
 
@@ -37,6 +38,7 @@
           v-model="loginForm.password"
           autocomplete="on"
           placeholder="password"
+          style="padding-left:25px"
         />
         <span class="show-pwd" @click="showPwd">
           <svg-icon icon-class="eye" />
@@ -180,7 +182,7 @@ export default {
           method: "post",
           url: this.url + "user/register",
           params: {
-            username: "zyyc" + this.loginForm.username,
+            username: "ZYYC" + this.loginForm.username,
             password: this.loginForm.password,
             code: this.loginForm.code
           }
@@ -237,7 +239,7 @@ export default {
   padding: 0 15px;
 }
 .name-reg::before {
-  content: "zyyc";
+  content: "ZYYC";
   position: absolute;
   top: 0px;
   left: 0;
