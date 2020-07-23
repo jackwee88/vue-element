@@ -1,4 +1,5 @@
 <template>
+<div :style="'height:'+winH">
   <div class="chart-container">
     <p>
       <span class="title-one">个人中心</span>
@@ -22,8 +23,28 @@
         <input type="number" placeholder="请输入您想要提现数量" v-model="num" />
       </div>
       <p>
-        <span class="btn" @click="scoreTocash()">确认提现</span>
+        <span class="btn" @click="went()">确认提现</span>
       </p>
+    </div>
+
+  </div>
+      <div class="bg" v-if="visible" @click="visibleChange()" >
+      
+    </div>
+    <div class="modal" v-if="visible">
+      <div style="width:100%;height:100%;position:relative;box-sizing:border-box;">
+        <div style="padding:10px;font-size:14px;line-height:30px;">
+          <div>请核对以下信息，确认无误后点击确认</div>
+        <div style="color:#999">银行卡号：{{bank}}</div>
+        <div style="color:#999">兑换数量：{{num}}(兑换手续费5%)</div>
+        <div style="color:#999">到账时间：7个工作日左右</div>
+        </div>
+        
+        <div class="bottom">
+          <span @click="scoreTocash()">确认</span>
+          <span @click="visibleChange">取消</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -37,6 +58,7 @@ export default {
     return {
       queryMoneys: "",
       bank: "",
+      visible:false,
       formInline: {
         money: ""
       },
@@ -50,6 +72,8 @@ export default {
     this.getBank();
     this.queryMoney();
     this.getRecord();
+     var winH=document.body.clientHeight
+    this.winH=winH
   },
   methods: {
     getBank() {
@@ -63,6 +87,21 @@ export default {
         .then(ress => {
           this.bank = ress.data.data.bank.num;
         });
+    },
+        went(){
+      const h = this.$createElement;
+      if(this.num==''){
+         this.$notify({
+          title: "",
+          message: h("i", { style: "color: teal" }, '请输入兑换数量')
+        })
+      }else{
+        this.visibleChange()
+      }
+    },
+    visibleChange(){
+      var visible=this.visible
+      this.visible=!visible
     },
     getRecord() {
       var that = this;
@@ -88,6 +127,7 @@ export default {
         });
         this.num=''
         this.getRecord()
+        this.visibleChange()
       });
     },
 
@@ -142,7 +182,23 @@ export default {
 .price {
   margin-left: 5px;
 }
-
+.bg{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.1);
+  position: absolute;
+  top:0;
+  left: 0;
+}
+.modal{
+  width: 300px;
+  height: 178px;
+  background-color: white;
+  position: absolute;
+  top:220px;
+  left:10%;
+  border-radius:10px;
+}
 .box-input {
   /* margin-top:80px; */
 }
@@ -163,7 +219,25 @@ input {
   margin-left: 144px;
   margin-top: 60px;
 }
-
+.bottom{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  border-top: 1px solid rgb(202, 198, 198);
+  box-sizing: border-box;
+}
+.bottom span{
+  display: inline-block;
+  width: 49%;
+  text-align: center;
+}
+.bottom span:nth-child(1){
+  background-color: rgb(29, 108, 167);
+  border-radius: 0 0 0 10px;
+  color: white;
+}
 @media (max-width: 320px) {
   /*0~320*/
   .cart-account,

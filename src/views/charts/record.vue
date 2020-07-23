@@ -1,18 +1,22 @@
  <template>
-  <div style="padding:0 20px">
+  <div :style="'height:'+winH">
+    <div class="change">
     <div class="top-header">可用积分：{{record}}</div>
     <div class="input-item">
-      <input
+      <div class="inputdiv"><input
         type="text"
         placeholder="请输入需要划转积分"
         class="input"
         v-model="number"
         oninput="value=value.replace(/[^\d]/g,'')"
-      />
-      <br />
-      <input type="text" placeholder="请输入接收账号" class="input" v-model="member" />
+      /></div>
+      
+      <div class="inputdiv">
+      <span>ZYYC</span>
+      <input type="text" placeholder="请输入接收账号" class="input " v-model="member"/>
+      </div>
       <div style="color:#999;font-size:14px;padding:5px 0">当前可用积分{{record}}，可划转积分{{record}}</div>
-      <div class="button11" @click="change()">划转</div>
+      <div class="button11" @click="went()">划转</div>
     </div>
     <div>
       <p style="font-weight:bolder">划转记录</p>
@@ -26,6 +30,25 @@
         </li>
       </ul>
     </div>
+    <div class="bg" v-if="visible" @click="visibleChange()" >
+      
+    </div>
+    <div class="modal" v-if="visible">
+      <div style="width:100%;height:100%;position:relative;box-sizing:border-box;">
+        <div style="padding:10px;font-size:14px;line-height:30px;">
+          <div>请核对以下信息，确认无误后点击确认</div>
+        <div style="color:#999">转入账号：{{member}}</div>
+        <div style="color:#999">转入数量：{{number}}</div>
+        <div style="color:#999">到账时间：立即到账</div>
+        </div>
+        
+        <div class="bottom">
+          <span @click="change()">确认</span>
+          <span @click="visibleChange">取消</span>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -36,12 +59,16 @@ export default {
       record: "",
       recordHistory: {},
       member: "",
-      number: ""
+      number: "",
+      visible:false,
+      winH:''
     };
   },
   mounted() {
     var timestamp1 = Date.parse(new Date()) / 1000;
     this.getRecord();
+    var winH=document.body.clientHeight
+    this.winH=winH
   },
   methods: {
     getRecord() {
@@ -58,13 +85,30 @@ export default {
         }
       });
     },
-
+    went(){
+      const h = this.$createElement;
+      console.log(this.member)
+      console.log(this.number)
+      
+      if(this.member==''||this.number==''){
+         this.$notify({
+          title: "",
+          message: h("i", { style: "color: teal" }, '请输入账号或积分')
+        })
+      }else{
+        this.visibleChange()
+      }
+    },
+    visibleChange(){
+      var visible=this.visible
+      this.visible=!visible
+    },
     change() {
       var that = this;
       const h = this.$createElement;
         var param = {
         token: localStorage.getItem("token"),
-        username: this.member,
+        username: 'ZYYC'+this.member,
         score_num: this.number
       };
       this.$axios({
@@ -79,6 +123,7 @@ export default {
         });
         this.member=''
         this.number=''
+        this.visibleChange()
       });
       
     },
@@ -100,6 +145,45 @@ export default {
 </script>
 
 <style>
+.bottom{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  border-top: 1px solid rgb(202, 198, 198);
+  box-sizing: border-box;
+}
+.bottom span{
+  display: inline-block;
+  width: 49%;
+  text-align: center;
+}
+.bottom span:nth-child(1){
+  background-color: rgb(29, 108, 167);
+  border-radius: 0 0 0 10px;
+  color: white;
+}
+.bg{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.1);
+  position: absolute;
+  top:0;
+  left: 0;
+}
+.change{
+  padding:0 20px;
+}
+.modal{
+  width: 300px;
+  height: 178px;
+  background-color: white;
+  position: absolute;
+  top:190px;
+  left:10%;
+  border-radius:10px;
+}
 .top-header {
   height: 100px;
   font-size: 18px;
@@ -108,6 +192,10 @@ export default {
 ul {
   margin: 0;
   padding: 0;
+}
+.inputdiv{
+  border-bottom:1px solid rgb(202, 198, 198);
+  width: 320px;
 }
 .li-top {
   display: flex;
@@ -128,12 +216,13 @@ li {
 }
 .input {
   border: none;
-  border-bottom: 1px solid rgb(202, 198, 198);
-  width: 320px;
+  /* width: 320px; */
   height: 40px;
   background-color: #f6fafd;
 }
-
+input:focus{
+  outline: none;
+}
 .button11 {
   margin: 15px 0;
   background-color: rgb(29, 108, 167);

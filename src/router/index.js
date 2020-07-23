@@ -127,7 +127,7 @@ export const constantRouterMap = [
 ]
 
 const $router = new Router({
-    mode: 'history', // require service support
+    // mode: 'history', // require service support
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRouterMap,
     // scrollBehavior(to,from,savePosition){
