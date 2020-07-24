@@ -33,7 +33,8 @@
     <div class="bg" v-if="visible" @click="visibleChange()" >
       
     </div>
-    <div class="modal" v-if="visible">
+    <div class="modalP" v-if="visible">
+<div class="modal" >
       <div style="width:100%;height:100%;position:relative;box-sizing:border-box;">
         <div style="padding:10px;font-size:14px;line-height:30px;">
           <div>请核对以下信息，确认无误后点击确认</div>
@@ -42,12 +43,14 @@
         <div style="color:#999">到账时间：立即到账</div>
         </div>
         
-        <div class="bottom">
+        <div class="bottom-item">
           <span @click="change()">确认</span>
           <span @click="visibleChange">取消</span>
         </div>
       </div>
     </div>
+    </div>
+    
   </div>
   </div>
 </template>
@@ -145,7 +148,7 @@ export default {
 </script>
 
 <style>
-.bottom{
+.bottom-item{
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -153,36 +156,49 @@ export default {
   line-height: 40px;
   border-top: 1px solid rgb(202, 198, 198);
   box-sizing: border-box;
+  display: flex;
 }
-.bottom span{
+.bottom-item span{
   display: inline-block;
-  width: 49%;
+  width: 50%;
   text-align: center;
 }
-.bottom span:nth-child(1){
+.bottom-item span:nth-child(1){
   background-color: rgb(29, 108, 167);
   border-radius: 0 0 0 10px;
+  color: white;
+}
+.bottom-item span:nth-child(2){
+  background-color: #e02020;
+  border-radius: 0 0 10px 0;
   color: white;
 }
 .bg{
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.1);
-  position: absolute;
+  position: fixed;
   top:0;
   left: 0;
 }
 .change{
   padding:0 20px;
+  position: relative;
+}
+.modalP{
+ width: 100%;
+ height: 200px;
+position: absolute;
+left: 0;
+bottom: -50px;
+
 }
 .modal{
   width: 300px;
   height: 178px;
   background-color: white;
-  position: absolute;
-  top:190px;
-  left:10%;
   border-radius:10px;
+  margin: 0 auto;
 }
 .top-header {
   height: 100px;

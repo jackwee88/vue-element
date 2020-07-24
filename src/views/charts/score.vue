@@ -1,51 +1,51 @@
 <template>
-<div :style="'height:'+winH">
-  <div class="chart-container">
-    <p>
-      <span class="title-one">个人中心</span>
-      <span class="sec-title">积分提现</span>
-    </p>
-    <div class="box">
-      <div class="box-1">
-        <p>
-          当前可提现积分：
-          <span class="price">{{record}}</span>
-        </p>
-      </div>
-      <div class="box-1">
-        <p>
-          到账账户：
-          <span class="price cart-account">{{bank}}</span>
-        </p>
-      </div>
-      <div class="box-input">
-        <span>提现积分</span>
-        <input type="number" placeholder="请输入您想要提现数量" v-model="num" />
-      </div>
+  <div :style="'height:'+winH">
+    <div class="chart-container" style="position:relative">
       <p>
-        <span class="btn" @click="went()">确认提现</span>
+        <span class="title-one">个人中心</span>
+        <span class="sec-title">积分提现</span>
       </p>
-    </div>
-
-  </div>
-      <div class="bg" v-if="visible" @click="visibleChange()" >
-      
-    </div>
-    <div class="modal" v-if="visible">
-      <div style="width:100%;height:100%;position:relative;box-sizing:border-box;">
-        <div style="padding:10px;font-size:14px;line-height:30px;">
-          <div>请核对以下信息，确认无误后点击确认</div>
-        <div style="color:#999">银行卡号：{{bank}}</div>
-        <div style="color:#999">兑换数量：{{num}}(兑换手续费5%)</div>
-        <div style="color:#999">到账时间：7个工作日左右</div>
+      <div class="box">
+        <div class="box-1">
+          <p>
+            当前可提现积分：
+            <span class="price">{{record}}</span>
+          </p>
         </div>
-        
-        <div class="bottom">
-          <span @click="scoreTocash()">确认</span>
-          <span @click="visibleChange">取消</span>
+        <div class="box-1">
+          <p>
+            到账账户：
+            <span class="price cart-account">{{bank}}</span>
+          </p>
+        </div>
+        <div class="box-input">
+          <span>提现积分</span>
+          <input type="number" placeholder="请输入您想要提现数量" v-model="num" />
+        </div>
+        <p>
+          <span class="btn" @click="went()">确认提现</span>
+        </p>
+      </div>
+    
+    </div>
+    <div class="bg" v-if="visible" @click="visibleChange()"></div>
+      <div class="modalP" v-if="visible">
+        <div class="modal">
+          <div style="width:100%;height:100%;position:relative;box-sizing:border-box;">
+            <div style="padding:10px;font-size:14px;line-height:30px;">
+              <div>请核对以下信息，确认无误后点击确认</div>
+              <div style="color:#999">银行卡号：{{bank}}</div>
+              <div style="color:#999">兑换数量：{{num}}(兑换手续费5%)</div>
+              <div style="color:#999">到账时间：7个工作日左右</div>
+            </div>
+
+            <div class="bottom-item">
+              <span @click="scoreTocash()">确认</span>
+              <span @click="visibleChange">取消</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -58,12 +58,12 @@ export default {
     return {
       queryMoneys: "",
       bank: "",
-      visible:false,
+      visible: false,
       formInline: {
-        money: ""
+        money: "",
       },
       record: "",
-      num: ""
+      num: "",
     };
   },
   // components: { Chart },
@@ -72,8 +72,8 @@ export default {
     this.getBank();
     this.queryMoney();
     this.getRecord();
-     var winH=document.body.clientHeight
-    this.winH=winH
+    var winH = document.body.clientHeight;
+    this.winH = winH;
   },
   methods: {
     getBank() {
@@ -82,34 +82,34 @@ export default {
         .$axios({
           method: "post",
           url: this.url + "user/userInfo",
-          params: { token: localStorage.getItem("token") }
+          params: { token: localStorage.getItem("token") },
         })
-        .then(ress => {
+        .then((ress) => {
           this.bank = ress.data.data.bank.num;
         });
     },
-        went(){
+    went() {
       const h = this.$createElement;
-      if(this.num==''){
-         this.$notify({
+      if (this.num == "") {
+        this.$notify({
           title: "",
-          message: h("i", { style: "color: teal" }, '请输入兑换数量')
-        })
-      }else{
-        this.visibleChange()
+          message: h("i", { style: "color: teal" }, "请输入兑换数量"),
+        });
+      } else {
+        this.visibleChange();
       }
     },
-    visibleChange(){
-      var visible=this.visible
-      this.visible=!visible
+    visibleChange() {
+      var visible = this.visible;
+      this.visible = !visible;
     },
     getRecord() {
       var that = this;
       this.$axios({
         method: "post",
         url: this.url + "user/record",
-        params: { token: localStorage.getItem("token") }
-      }).then(res => {
+        params: { token: localStorage.getItem("token") },
+      }).then((res) => {
         that.record = res.data.data.score;
       });
     },
@@ -117,17 +117,17 @@ export default {
       this.$axios({
         method: "post",
         url: this.url + "user/scoreTocash",
-        params: { token: localStorage.getItem("token"), score_num: this.num }
-      }).then(res => {
+        params: { token: localStorage.getItem("token"), score_num: this.num },
+      }).then((res) => {
         console.log(res.data.msg);
         const h = this.$createElement;
         this.$notify({
           title: "",
-          message: h("i", { style: "color: teal" }, res.data.msg)
+          message: h("i", { style: "color: teal" }, res.data.msg),
         });
-        this.num=''
-        this.getRecord()
-        this.visibleChange()
+        this.num = "";
+        this.getRecord();
+        this.visibleChange();
       });
     },
 
@@ -136,13 +136,13 @@ export default {
       this.$axios({
         method: "post",
         url: this.url + "money/queryMoney",
-        params: { token: localStorage.getItem("token") }
-      }).then(res => {
+        params: { token: localStorage.getItem("token") },
+      }).then((res) => {
         that.queryMoneys = res.data.data;
         console.log(res.data);
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -182,22 +182,27 @@ export default {
 .price {
   margin-left: 5px;
 }
-.bg{
+.bg {
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0, 0, 0, 0.1);
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
 }
-.modal{
+.modalP {
+  width: 100%;
+  height: 200px;
+  position: absolute;
+  left: 0;
+  top: 228px;
+}
+.modal {
   width: 300px;
   height: 178px;
   background-color: white;
-  position: absolute;
-  top:220px;
-  left:10%;
-  border-radius:10px;
+  border-radius: 10px;
+  margin: 0 auto;
 }
 .box-input {
   /* margin-top:80px; */
@@ -219,7 +224,7 @@ input {
   margin-left: 144px;
   margin-top: 60px;
 }
-.bottom{
+.bottom-item {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -227,15 +232,21 @@ input {
   line-height: 40px;
   border-top: 1px solid rgb(202, 198, 198);
   box-sizing: border-box;
+  display: flex;
 }
-.bottom span{
+.bottom-item span {
   display: inline-block;
-  width: 49%;
+  width: 50%;
   text-align: center;
 }
-.bottom span:nth-child(1){
+.bottom-item span:nth-child(1) {
   background-color: rgb(29, 108, 167);
   border-radius: 0 0 0 10px;
+  color: white;
+}
+.bottom-item span:nth-child(2) {
+  background-color: #e02020;
+  border-radius: 0 0 10px 0;
   color: white;
 }
 @media (max-width: 320px) {
