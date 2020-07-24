@@ -147,7 +147,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .bottom-item{
   position: absolute;
   bottom: 0;

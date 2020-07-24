@@ -82,7 +82,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .desc {
   color: #999;
   font-size: 14px;

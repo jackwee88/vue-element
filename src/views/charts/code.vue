@@ -10,6 +10,9 @@
         <span id="myUrl">{{myUrl}}</span>
         <span class="myUrl" @click="copy">点我地址复制</span>
       </div>
+      <div style="margin:30px 0">
+        <img :src="Qrcode" width="200px" height="200px"/>
+      </div>
     </div>
   </div>
 </template>
@@ -19,7 +22,8 @@ export default {
   name: "",
   data() {
     return {
-      myUrl: ""
+      myUrl: "",
+      Qrcode:""
     };
   },
   created() {
@@ -35,6 +39,10 @@ export default {
         params: { token: localStorage.getItem("token") }
       }).then(res => {
         that.myUrl = res.data.data;
+        var code1=that.myUrl.split('?')
+        var code2=code1[1].split('=')
+        var code=code2[1]
+        this.Qrcode='http://www.zyyccppx.com/api/index/yaoqing?code='+code
       });
     },
     copy() {

@@ -90,9 +90,7 @@ export default {
 </script>
 
 <style scoped>
-.line {
-  /* padding: 20px; */
-}
+
 .line-info {
   background-color: #fff;
   padding-top: 6vh;
