@@ -303,13 +303,17 @@ export default {
               position: "middle",
               duration: 3000
             });
+            // vm.$router.go(-2);
           }
         }
       );
     },
 
     enter() {
-      this.$router.replace("/user");
+      this.$router.push({ path: "/user" });
+      // alert('111111')
+      // vm.$router.go(-2);
+      // window.location.href='http://xy.zyyccppx.com/#/user'
     }
   }
 };
