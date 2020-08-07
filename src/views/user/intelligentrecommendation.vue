@@ -502,7 +502,7 @@ export default {
     up(v) {
       if (v == "last") {
         this.tableData.sort(function(a, b) {
-          return parseInt(a.last) - parseInt(b.last);
+          return parseInt(a.now) - parseInt(b.now);
         });
       }
       if (v == "now") {

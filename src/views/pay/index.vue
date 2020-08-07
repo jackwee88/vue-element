@@ -79,6 +79,10 @@ export default {
       centerDialogVisible: false //法律声明是否出现
     };
   },
+  // beforeCreate(){
+  //   window.location.replace("http://xy.zyyccppx.com/?#/pay")
+    
+  // },
   created() {
     this.getVipPrice();
     this.getPay();
@@ -92,6 +96,7 @@ export default {
       // this.$router.replace('/pc_index');
     }
     this.wechatpayType = this._isWeixn();
+
   },
   methods: {
     getPay() {
@@ -303,17 +308,13 @@ export default {
               position: "middle",
               duration: 3000
             });
-            // vm.$router.go(-2);
           }
         }
       );
     },
 
     enter() {
-      this.$router.push({ path: "/user" });
-      // alert('111111')
-      // vm.$router.go(-2);
-      // window.location.href='http://xy.zyyccppx.com/#/user'
+      this.$router.replace({ path: "/user" });
     }
   }
 };

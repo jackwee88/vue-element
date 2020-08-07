@@ -816,6 +816,15 @@ export default {
       document.execCommand("Copy"); // 执行浏览器复制命令
       oInput.className = "oInput";
       oInput.style.display = "none";
+       const h = this.$createElement;
+                this.$notify({
+            title: "",
+            message: h(
+              "i",
+              { style: "color: teal" },
+              "复制成功"
+            )
+          });
     },
     // 前往智能数据的按钮
     toData() {
