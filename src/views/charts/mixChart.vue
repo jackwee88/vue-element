@@ -48,7 +48,7 @@
               <div>我的学员：{{item.child.length}}</div>
             </div>
             <transition name="fade">
-              <div v-show="item.visible" class="transition" transiton="fade">
+              <div v-if="item.visible" class="transition" transiton="fade">
                 <div v-for="(members,index) in item.child" :key="index">
                   <div class="head headt">
                     <div class="photo">
@@ -85,10 +85,11 @@
             </div>
             <div class="foot">
               <div>我的学员：{{item.child.length}}</div>
+
               <div>学员名字：{{item.bank.username}}</div>
             </div>
             <transition name="fade">
-              <div v-show="item.visible" class="transition" transiton="fade">
+              <div v-if="item.visible" class="transition" transiton="fade">
                 <div v-for="(members,index) in item.child" :key="index">
                   <div class="head headt">
                     <div class="photo">
@@ -96,14 +97,10 @@
                     </div>
                     <div class="right">
                       <div class="name">{{members.nickname}}</div>
-                      <!-- <div>关注时间：{{members.createTxt}}</div> -->
+                      <div>关注时间：{{members.createTxt}}</div>
                       <div>学员名字：{{members.bank.username}}</div>
                     </div>
                   </div>
-                  <!-- <div class="foot">
-                      <div>我的学员：{{members.count}}</div>
-                      <div>学员名字：{{members.bank.username}}</div>
-                  </div>-->
                 </div>
               </div>
             </transition>
@@ -238,7 +235,7 @@ export default {
       if (id == "2") {
         this.getMyChildSec();
       } else if (id == 1) {
-        this.getMyChild();
+        this.allChild();
       } else if (id == 3) {
         this.getCityPerson();
       } else {
@@ -287,7 +284,7 @@ export default {
         this.timer = true;
         let that = this;
         setTimeout(function () {
-          console.log(that.screenWidth); // 打印screenWidth变化的值
+          // console.log(that.screenWidth); // 打印screenWidth变化的值
           that.timer = false;
         }, 400);
       }
@@ -333,11 +330,13 @@ export default {
         var membersInfo = res.data.data.child;
         for (var i = 0; i < res.data.data.child.length; i++) {
           membersInfo[i]["visible"] = false;
-          for (var j = 0; j < res.data.data.child[i].child.length; j++) {
-            membersInfo[i].child[j]["createTxt"] = that.timestampToTimes(
-              res.data.data.child[i].child[j].createtime
-            );
+          if(res.data.data.child[i].child.length>0){
+            for (var j = 0; j < res.data.data.child[i].child.length; j++) {
+            membersInfo[i].child[j]["createTxt"] = that.timestampToTimes(res.data.data.child[i].child[j].createtime);
+           
           }
+          }
+          
         }
         that.membersInfo = membersInfo;
         that.count = parseInt(res.data.data.total);
