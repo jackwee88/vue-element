@@ -47,7 +47,8 @@ const whiteList = [
         '/soccer',
         '/shop',
         '/download',
-        '/score'
+        '/score',
+        '/other'
 
     ] // no redirect whitelist
 

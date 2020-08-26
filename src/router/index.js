@@ -40,30 +40,41 @@ export const constantRouterMap = [
     { path: '/editmsg', component: resolve => require(['@/views/editmsg'], resolve), hidden: true },
     { path: '/pay', component: resolve => require(['@/views/pay'], resolve), hidden: true },
     { path: '/download', component: resolve => require(['@/views/download'], resolve), hidden: true },
+    { path: '/other', component: resolve => require(['@/views/other'], resolve), hidden: true },
     {
         path: '',
         component: Layout,
-        redirect: 'user',
-        meta: {
-            title: '11选5数据',
-            icon: 'choose'
-        },
         children: [{
-                path: 'user',
-                component: resolve => require(['@/views/user'], resolve),
-                name: 'user',
-                meta: { title: '彩票做号', icon: 'cir', noCache: true, keepAlive: true }
-
-            },
-            // {path: 'caipiaozh', component: resolve => require(['@/views/charts/caipiaozh'], resolve), name: 'caipiaozh', meta: { title: '彩票做号',  icon: 'user',noCache: true }},
-            { path: 'runchart', component: resolve => require(['@/views/user/runchart'], resolve), name: 'runchart', meta: { title: '综合走势', icon: 'cir', noCache: true } },
-            { path: 'intelligentrecommendation', component: resolve => require(['@/views/user/intelligentrecommendation'], resolve), name: 'intelligentrecommendation', meta: { title: '智能推荐', icon: 'cir', noCache: true } },
-            { path: 'intelligentdata', component: resolve => require(['@/views/user/intelligentdata'], resolve), name: 'intelligentdata', meta: { title: '智能数据', icon: 'cir', noCache: true } },
-            { path: 'money', component: resolve => require(['@/views/user/money'], resolve), name: 'money', meta: { title: '资金计算器', icon: 'cir', noCache: true } },
-            { path: 'new', component: resolve => require(['@/views/user/new'], resolve), name: 'new', hidden: true },
-            { path: 'video', component: resolve => require(['@/views/user/video'], resolve), name: 'video', meta: { title: '视频教学', icon: 'cir', noCache: true, image: '../utils/user.jpg' } }
-        ]
+            path: 'user',
+            component: resolve => require(['@/views/user'], resolve),
+            name: 'user',
+            meta: { title: '彩票数据', icon: 'choose', noCache: true }
+        }]
     },
+    // {
+    //     path: '',
+    //     component: Layout,
+    //     redirect: 'user',
+    //     meta: {
+    //         title: '彩票数据',
+    //         icon: 'choose'
+    //     },
+    //     children: [{
+    //             path: 'user',
+    //             component: resolve => require(['@/views/user'], resolve),
+    //             name: 'user',
+    //             meta: { title: '彩票做号', icon: 'cir', noCache: true, keepAlive: true }
+
+    //         },
+    //         // {path: 'caipiaozh', component: resolve => require(['@/views/charts/caipiaozh'], resolve), name: 'caipiaozh', meta: { title: '彩票做号',  icon: 'user',noCache: true }},
+    //         { path: 'runchart', component: resolve => require(['@/views/user/runchart'], resolve), name: 'runchart', meta: { title: '综合走势', icon: 'cir', noCache: true } },
+    //         { path: 'intelligentrecommendation', component: resolve => require(['@/views/user/intelligentrecommendation'], resolve), name: 'intelligentrecommendation', meta: { title: '智能推荐', icon: 'cir', noCache: true } },
+    //         { path: 'intelligentdata', component: resolve => require(['@/views/user/intelligentdata'], resolve), name: 'intelligentdata', meta: { title: '智能数据', icon: 'cir', noCache: true } },
+    //         { path: 'money', component: resolve => require(['@/views/user/money'], resolve), name: 'money', meta: { title: '资金计算器', icon: 'cir', noCache: true } },
+    //         { path: 'new', component: resolve => require(['@/views/user/new'], resolve), name: 'new', hidden: true },
+    //         { path: 'video', component: resolve => require(['@/views/user/video'], resolve), name: 'video', meta: { title: '视频教学', icon: 'cir', noCache: true, image: '../utils/user.jpg' } }
+    //     ]
+    // },
     {
         path: '',
         component: Layout,

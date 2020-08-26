@@ -6,8 +6,8 @@
     </header>
     <div class="mixChart-info">
       <div class="top">
-        <span @click="toggleTab('all')" :class=" id=='all'?'active btn':'btn'">全部会员({{num.all}}人)</span>
-        <span @click="toggleTab(1)" :class=" id==1?'active btn':'btn'">一级会员({{num.oneLevel}}人)</span>
+        <span @click="toggleTab('all')" :class=" (id=='all'?'active btn':'btn')">全部会员({{num.all}}人)</span>
+        <span @click="toggleTab(1)" :class=" (id==1?'active btn':'btn')">一级会员({{num.oneLevel}}人)</span>
         <!-- <span @click="toggleTab(2)" :class="id== 2?'active btn':'btn'">二级会员({{num.twoLevel}}人)</span> -->
         <span
           @click="toggleTab(3)"
@@ -25,8 +25,15 @@
       </div>
 
       <div class="members">
-        <div v-for="(item,index) in membersInfo">
-          <div v-if="isshow" class="membersInfo">
+        <div v-for="(item,index) in membersInfo" :key="index">
+          <div
+            v-if="isshow"
+            class="membersInfo"
+            @click="gotoDetail($event)"
+            :data-id="item.id"
+            :data-index="index"
+            :data-visible="item.visible"
+          >
             <div class="head">
               <div class="photo">
                 <img :src="item.avatar" alt />
@@ -38,9 +45,34 @@
               <div>关注时间：{{item.createtime}}</div>
               <div>成交单：{{item.count}}单</div>
               <div>成交额：￥{{item.money}}元</div>
+              <div>我的学员：{{item.child.length}}</div>
             </div>
+            <transition name="fade">
+              <div v-show="item.visible" class="transition" transiton="fade">
+                <div v-for="(members,index) in item.child" :key="index">
+                  <div class="head headt">
+                    <div class="photo">
+                      <img :src="members.avatar" alt />
+                    </div>
+                    <div class="name">{{members.nickname}}</div>
+                  </div>
+                  <div class="foot footT">
+                    <div>关注时间：{{members.createTxt}}</div>
+                    <div>成交单：{{members.count}}单</div>
+                    <div>成交额：￥{{members.money}}元</div>
+                  </div>
+                </div>
+              </div>
+            </transition>
           </div>
-          <div v-else class="phone">
+          <div
+            v-else
+            class="phone"
+            @click="gotoDetail($event)"
+            :data-id="item.id"
+            :data-index="index"
+            :data-visible="item.visible"
+          >
             <div class="head">
               <div class="photo">
                 <img :src="item.avatar" alt />
@@ -52,9 +84,29 @@
               </div>
             </div>
             <div class="foot">
-              <div>我的学员：{{item.count}}</div>
-              <div>我的教育金：￥{{item.money}}</div>
+              <div>我的学员：{{item.child.length}}</div>
+              <div>学员名字：{{item.bank.username}}</div>
             </div>
+            <transition name="fade">
+              <div v-show="item.visible" class="transition" transiton="fade">
+                <div v-for="(members,index) in item.child" :key="index">
+                  <div class="head headt">
+                    <div class="photo">
+                      <img :src="members.avatar" alt />
+                    </div>
+                    <div class="right">
+                      <div class="name">{{members.nickname}}</div>
+                      <!-- <div>关注时间：{{members.createTxt}}</div> -->
+                      <div>学员名字：{{members.bank.username}}</div>
+                    </div>
+                  </div>
+                  <!-- <div class="foot">
+                      <div>我的学员：{{members.count}}</div>
+                      <div>学员名字：{{members.bank.username}}</div>
+                  </div>-->
+                </div>
+              </div>
+            </transition>
           </div>
         </div>
       </div>
@@ -80,9 +132,7 @@ export default {
       input2: "",
       input3: "",
       input4: "",
-
       id: "all",
-
       membersInfo: [],
       isshow: true,
       screenWidth: document.body.clientWidth,
@@ -90,7 +140,10 @@ export default {
       page: 1,
       page_size: 10,
       count: 0, //分页总数
-      num: {}
+      num: {},
+      currentId: 0,
+      formLabelAlign: {},
+      NextMemberInfo: [],
     };
   },
   mounted() {
@@ -110,27 +163,73 @@ export default {
   methods: {
     getCityPerson() {
       var that = this;
-      this.id = 3;
+      // this.id = 3;
       this.$axios({
         method: "post",
         url: this.url + "user/childCity",
-        params: { token: localStorage.getItem("token") }
-      }).then(res => {
-        console.log(res.data);
-        that.membersInfo = res.data.data.child;
+        params: { token: localStorage.getItem("token") },
+      }).then((res) => {
+        var membersInfo = res.data.data.child;
+        for (var i = 0; i < res.data.data.child.length; i++) {
+          membersInfo[i]["visible"] = false;
+          for (var j = 0; j < res.data.data.child[i].child.length; j++) {
+            membersInfo[i].child[j]["createTxt"] = that.timestampToTimes(
+              res.data.data.child[i].child[j].createtime
+            );
+          }
+        }
+        that.membersInfo = membersInfo;
         that.count = parseInt(res.data.data.total);
       });
+    },
+    getUserInfo() {
+      var that = this;
+      this.$axios({
+        method: "post",
+        url: this.url + "user/userInfo",
+        params: { token: localStorage.getItem("token") },
+      }).then((res) => {
+        that.formLabelAlign = res.data.data.bank;
+      });
+    },
+    timestampToTimes: function (timestamp) {
+      var date = new Date(timestamp * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      var Y = date.getFullYear() + "-";
+      var M =
+        (date.getMonth() + 1 < 10
+          ? "0" + (date.getMonth() + 1)
+          : date.getMonth() + 1) + "-";
+      var D =
+        (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + " ";
+      var h =
+        (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) + ":";
+      var m =
+        (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) +
+        ":";
+      var s =
+        date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+      return Y + M + D + " " + h + m + s;
+    },
+    gotoDetail(e) {
+      var index = e.currentTarget.dataset.index;
+      var membersInfo = this.membersInfo;
+      var visible = e.currentTarget.dataset.visible;
+      for (var i = 0; i < this.membersInfo.length; i++) {
+        if (i == index) {
+          this.membersInfo[i].visible = !visible;
+        } else {
+          this.membersInfo[i].visible = false;
+        }
+      }
     },
     childNum() {
       var that = this;
       this.$axios({
         method: "post",
         url: this.url + "user/childNum",
-        params: { token: localStorage.getItem("token") }
-      }).then(res => {
-        console.log(res.data.data);
+        params: { token: localStorage.getItem("token") },
+      }).then((res) => {
         that.num = res.data.data;
-        console.log(that.num);
       });
     },
     // 点击1级2级时是切换
@@ -160,10 +259,19 @@ export default {
           token: localStorage.getItem("token"),
           mobile: that.mobile,
           page: this.page,
-          page_size: this.page_size
+          page_size: this.page_size,
+        },
+      }).then((res) => {
+        var membersInfo = res.data.data.child;
+        for (var i = 0; i < res.data.data.child.length; i++) {
+          membersInfo[i]["visible"] = false;
+          for (var j = 0; j < res.data.data.child[i].child.length; j++) {
+            membersInfo[i].child[j]["createTxt"] = that.timestampToTimes(
+              res.data.data.child[i].child[j].createtime
+            );
+          }
         }
-      }).then(res => {
-        that.membersInfo = res.data.data.child;
+        that.membersInfo = membersInfo;
         that.count = parseInt(res.data.data.total);
       });
     },
@@ -178,7 +286,7 @@ export default {
         }
         this.timer = true;
         let that = this;
-        setTimeout(function() {
+        setTimeout(function () {
           console.log(that.screenWidth); // 打印screenWidth变化的值
           that.timer = false;
         }, 400);
@@ -187,7 +295,6 @@ export default {
     // 获取一级
     getMyChild() {
       var that = this;
-
       this.$axios({
         method: "post",
         url: this.url + "user/child",
@@ -195,17 +302,24 @@ export default {
           token: localStorage.getItem("token"),
           mobile: that.mobile,
           page: this.page,
-          page_size: this.page_size
+          page_size: this.page_size,
+        },
+      }).then((res) => {
+        var membersInfo = res.data.data.child;
+        for (var i = 0; i < res.data.data.child.length; i++) {
+          membersInfo[i]["visible"] = false;
+          for (var j = 0; j < res.data.data.child[i].child.length; j++) {
+            membersInfo[i].child[j]["createTxt"] = that.timestampToTimes(
+              res.data.data.child[i].child[j].createtime
+            );
+          }
         }
-      }).then(res => {
-        that.membersInfo = res.data.data.child;
+        that.membersInfo = membersInfo;
         that.count = parseInt(res.data.data.total);
-        console.log(that.count, "bbbbbbbbbbbbbb");
       });
     },
     allChild() {
       var that = this;
-
       this.$axios({
         method: "post",
         url: this.url + "user/allChild",
@@ -213,12 +327,20 @@ export default {
           token: localStorage.getItem("token"),
           mobile: that.mobile,
           page: this.page,
-          page_size: this.page_size
+          page_size: this.page_size,
+        },
+      }).then((res) => {
+        var membersInfo = res.data.data.child;
+        for (var i = 0; i < res.data.data.child.length; i++) {
+          membersInfo[i]["visible"] = false;
+          for (var j = 0; j < res.data.data.child[i].child.length; j++) {
+            membersInfo[i].child[j]["createTxt"] = that.timestampToTimes(
+              res.data.data.child[i].child[j].createtime
+            );
+          }
         }
-      }).then(res => {
-        that.membersInfo = res.data.data.child;
+        that.membersInfo = membersInfo;
         that.count = parseInt(res.data.data.total);
-        console.log(that.count, "ccccccccccccc");
       });
     },
     // 搜索我的下级
@@ -232,7 +354,7 @@ export default {
       }
     },
 
-    handleCurrentChange: function(currentPage) {
+    handleCurrentChange: function (currentPage) {
       this.page = currentPage;
       if (this.id == 1) {
         this.getMyChild();
@@ -243,15 +365,46 @@ export default {
       } else {
         this.allChild();
       }
-    }
+    },
   },
   created(val) {
     this.getWidth(this.screenWidth);
-  }
+  },
 };
 </script>
 
 <style scoped>
+.person-info {
+  background-color: #fff;
+  margin-top: 2%;
+  border-top: 5px solid #4187bd;
+}
+.person header span {
+  font-size: 18px;
+  font-weight: 400;
+  color: #333333;
+  line-height: 25px;
+}
+.person header span:last-child {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 20px;
+  margin-left: 5px;
+}
+.mine {
+  padding: 10px;
+  border-bottom: 1px solid #f3f3f3;
+  font-size: 16px;
+  color: #666;
+}
+.el-form {
+  padding: 10px;
+  border-bottom: 1px solid #f3f3f3;
+}
+.el-form-item__label {
+  line-height: 0px;
+}
 .mixChart {
   padding: 20px;
 }
@@ -316,6 +469,9 @@ export default {
   display: flex;
   align-items: center;
 }
+.headt{
+  padding: 10px 0;
+}
 .photo {
   width: 40px;
   height: 40px;
@@ -343,7 +499,9 @@ export default {
   color: #333333;
   line-height: 20px;
 }
-
+.tipsTitle {
+  padding: 5px 0;
+}
 /* 移动端页面样式 */
 .phone {
   box-shadow: 0px 2px 2px 1px #e0e0e0;
@@ -466,6 +624,9 @@ export default {
   .btn {
     margin-right: 20px;
     min-width: 120px;
+  }
+  .footT{
+    margin: 0;
   }
 }
 </style>
