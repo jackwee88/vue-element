@@ -131,7 +131,7 @@ export default {
   methods: {
     submitForm () {
       this.postForm.display_time = parseInt(this.display_time / 1000)
-      console.log(this.postForm)
+      //console.log(this.postForm)
       this.$refs.postForm.validate(valid => {
         if (valid) {
           this.loading = true
@@ -144,7 +144,7 @@ export default {
           this.postForm.status = 'published'
           this.loading = false
         } else {
-          console.log('error submit!!')
+          //console.log('error submit!!')
           return false
         }
       })

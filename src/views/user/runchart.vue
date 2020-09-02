@@ -572,7 +572,7 @@ export default {
     backTop() {
       let nowTop =
         document.body.scrollTop || document.documentElement.scrollTop; // 获取当前滚动条位置
-      console.log(nowTop);
+      //console.log(nowTop);
       if (nowTop > 0) {
         window.requestAnimationFrame(this.goUp);
         window.scrollTo(0, nowTop - nowTop / 5);
@@ -767,7 +767,7 @@ export default {
         //   var id = i + 1;
         //   this.dan1Arr.push(id + "");
         // }
-        // console.log(this.dan1Arr);
+        // //console.log(this.dan1Arr);
         let flag = true;
         for (let i = 0; i < 5; i++) {
            if (obj["dan" + (i + 1)].length === 0) {
@@ -777,7 +777,7 @@ export default {
            }
         
         // let arr =[]
-        // console.log(this.selectArr+'dashab')
+        // //console.log(this.selectArr+'dashab')
         // for(let i=0;i<this.selectArr.length;i++){
         //   const element = this.selectArr[i]
         //   arr.push(element)
@@ -867,7 +867,7 @@ export default {
         // sessionStorage.setItem("even", this.even);
         // sessionStorage.setItem("even", JSON.stringify(this.even));
       }
-      console.log(obj);
+      //console.log(obj);
       this.updateAllData({
         data: obj
       });

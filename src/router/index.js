@@ -48,7 +48,7 @@ export const constantRouterMap = [
             path: 'user',
             component: resolve => require(['@/views/user'], resolve),
             name: 'user',
-            meta: { title: '彩票数据', icon: 'choose', noCache: true }
+            meta: { title: '下载彩票软件', icon: 'choose', noCache: true }
         }]
     },
     // {
@@ -75,16 +75,16 @@ export const constantRouterMap = [
     //         { path: 'video', component: resolve => require(['@/views/user/video'], resolve), name: 'video', meta: { title: '视频教学', icon: 'cir', noCache: true, image: '../utils/user.jpg' } }
     //     ]
     // },
-    {
-        path: '',
-        component: Layout,
-        children: [{
-            path: 'soccer',
-            component: resolve => require(['@/views/soccer'], resolve),
-            name: 'soccer',
-            meta: { title: '竞彩足球', icon: 'soccer', noCache: true }
-        }]
-    },
+    // {
+    //     path: '',
+    //     component: Layout,
+    //     children: [{
+    //         path: 'soccer',
+    //         component: resolve => require(['@/views/soccer'], resolve),
+    //         name: 'soccer',
+    //         meta: { title: '竞彩足球', icon: 'soccer', noCache: true }
+    //     }]
+    // },
     {
         path: '',
         component: Layout,
@@ -118,7 +118,18 @@ export const constantRouterMap = [
             meta: { title: '购物商城', icon: 'shop', noCache: true }
         }]
     },
-
+    // {
+    //     path: '/guide',
+    //     component: Layout,
+    //     children: [
+    //       {
+    //         path: 'index',
+    //         component:resolve => require('@/views/guide'),
+    //         name: 'Guide',
+    //         meta: { title: 'Guide', icon: 'guide', noCache: true }
+    //       }
+    //     ]
+    //   },
     // {
     //   path: '/example',
     //   component: Layout,

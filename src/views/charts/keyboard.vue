@@ -107,7 +107,6 @@ export default {
         params: { token: localStorage.getItem("token") }
       }).then(res => {
         that.queryMoneys = res.data.data;
-        console.log(res.data);
       });
     }
   }

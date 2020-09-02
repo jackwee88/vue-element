@@ -376,7 +376,7 @@ export default {
           this["checkedDansShow" + (i + 1)] = this.allData[
             "checkedDansShow" + (i + 1)
           ];
-          console.log(this["checkedDansShow" + (i + 1)])
+          //console.log(this["checkedDansShow" + (i + 1)])
         } else {
           this["checkedDansShow" + (i + 1)] = newArr;
           this.allData["checkedDansShow" + (i + 1)] = newArr;
@@ -600,7 +600,7 @@ export default {
     handleCheckedCitiesChange5(value) {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.dan5 = value;
-      console.log(value);
+      //console.log(value);
       this.updateAllData({
         data: obj
       });
@@ -615,7 +615,7 @@ export default {
     },
     // 胆1到胆5的每个复选值出现次数
     handleCheckedCitiesShow1(value) {
-      console.log(value);
+      //console.log(value);
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.checkedDansShow1 = value;
       this.updateAllData({
@@ -624,7 +624,7 @@ export default {
       this.checkedDansShow1 = value || [];
     },
     handleCheckedCitiesShow2(value) {
-      console.log(value);
+      //console.log(value);
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.checkedDansShow2 = value;
       this.updateAllData({
@@ -633,7 +633,7 @@ export default {
       this.checkedDansShow2 = value || [];
     },
     handleCheckedCitiesShow3(value) {
-      console.log(value);
+      //console.log(value);
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.checkedDansShow3 = value;
       this.updateAllData({
@@ -642,7 +642,7 @@ export default {
       this.checkedDansShow3 = value || [];
     },
     handleCheckedCitiesShow4(value) {
-      console.log(value);
+      //console.log(value);
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.checkedDansShow4 = value;
       this.updateAllData({
@@ -651,7 +651,7 @@ export default {
       this.checkedDansShow4 = value || [];
     },
     handleCheckedCitiesShow5(value) {
-      console.log(value);
+      //console.log(value);
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.checkedDansShow5 = value;
       this.updateAllData({
@@ -661,7 +661,7 @@ export default {
     },
     // 偶数
     handleEven(value) {
-      console.log(value);
+      //console.log(value);
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.even = value;
       this.updateAllData({
@@ -706,7 +706,7 @@ export default {
         this["checkedDansShow" + options] = [];
         obj["dan" + options] = [];
         obj["checkedDansShow" + options] = [];
-        console.log(this["checkedDansShow" + options] + "大傻逼");
+        //console.log(this["checkedDansShow" + options] + "大傻逼");
         this.updateAllData({
           data: obj
         });
@@ -796,9 +796,9 @@ export default {
           that.totalShow = true;
         }
       });
-      console.log(this.evenS);
-      console.log(this.smallS);
-      console.log(this.oddS);
+      //console.log(this.evenS);
+      //console.log(this.smallS);
+      //console.log(this.oddS);
       sessionStorage.removeItem("big");
       sessionStorage.removeItem("he");
       sessionStorage.removeItem("even");

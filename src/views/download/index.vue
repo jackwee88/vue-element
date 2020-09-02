@@ -119,7 +119,7 @@ export default {
       var img = $(".box")
         .children("img")
         .attr("src");
-      console.log(img);
+      //console.log(img);
       var alink = document.createElement("a");
       alink.href = img;
       alink.download = "新年快乐.png";

@@ -358,7 +358,7 @@ table tr:nth-child(even) td {
 <script>
 import Chart from "@/components/Charts/lineMarker";
 import $ from "jquery";
-console.log($);
+//console.log($);
 
 export default {
   data() {
@@ -420,7 +420,7 @@ export default {
     backTop() {
       let nowTop =
         document.body.scrollTop || document.documentElement.scrollTop; // 获取当前滚动条位置
-      console.log(nowTop);
+      //console.log(nowTop);
       if (nowTop > 0) {
         window.requestAnimationFrame(this.goUp);
         window.scrollTo(0, nowTop - nowTop / 5);

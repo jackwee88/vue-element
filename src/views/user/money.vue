@@ -403,7 +403,7 @@ table tr:nth-child(even) td {
 <script>
 import Chart from "@/components/Charts/lineMarker";
 import $ from "jquery";
-console.log($);
+//console.log($);
 
 export default {
   data() {
@@ -447,8 +447,8 @@ export default {
   methods: {
     //点击单选按钮
     type(v) {
-      console.log(v);
-      console.log(this.ruleForm.resource);
+      //console.log(v);
+      //console.log(this.ruleForm.resource);
     },
     //点击提交按钮
     submitForm(formName) {

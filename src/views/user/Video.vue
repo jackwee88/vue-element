@@ -57,9 +57,9 @@ export default {
       }).then(res => {
         that.video = res.data.data;
 
-        console.log(that.video);
+        //console.log(that.video);
         for (let i of that.video) {
-          console.log(999);
+          //console.log(999);
           let arrStr = {
             //         playbackRates : [ 0.5, 1.0, 1.5, 2.0 ], //可选择的播放速度
             //   autoplay : false, //如果true,浏览器准备好时开始回放。
@@ -90,7 +90,7 @@ export default {
           that.playerOptions.push(arrStr);
         }
         // that.$previewRefresh()
-        console.log(that.playerOptions);
+        //console.log(that.playerOptions);
         // that.initVideo();
         // playerOptions.sources.src=res.data.data.video
       });

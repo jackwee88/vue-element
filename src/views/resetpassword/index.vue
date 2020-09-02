@@ -110,7 +110,7 @@ export default {
       }
     };
     const validaterePassword = (rule, value, callback) => {
-      console.log(value + "++++++++" + this.loginForm.password);
+      //console.log(value + "++++++++" + this.loginForm.password);
       if (value !== this.loginForm.password) {
         callback(new Error("两次输入密码不一致"));
       } else {
@@ -149,7 +149,7 @@ export default {
   },
   methods: {
     submitYzm() {
-      console.log("1234");
+      //console.log("1234");
       var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
       if (!myreg.test(this.loginForm.account)) {
         this.loading = false;
@@ -175,7 +175,7 @@ export default {
             mobile: this.loginForm.account
           }
         }).then(res => {
-          console.log(res);
+          //console.log(res);
           // localStorage.setItem("BCUSER", this.loginForm.account);
           // localStorage.setItem("BCPASSWORD", this.loginForm.password);
           // that.legal = res.data.data.value;
@@ -197,9 +197,9 @@ export default {
 
     handlesubmit() {
       var that = this;
-      console.log(this.checked);
-      console.log(this.loginForm.password);
-      console.log(this.loginForm.repassword);
+      //console.log(this.checked);
+      //console.log(this.loginForm.password);
+      //console.log(this.loginForm.repassword);
 
       this.$refs.loginForm.validate(valid => {
         if (this.loginForm.password !== this.loginForm.repassword) {
@@ -218,7 +218,7 @@ export default {
               newPassword: this.loginForm.repassword
             }
           }).then(res => {
-            console.log(res.data.code);
+            //console.log(res.data.code);
             localStorage.setItem("BCUSER", this.loginForm.account);
             localStorage.setItem("BCPASSWORD", this.loginForm.password);
             // that.legal = res.data.data.value;

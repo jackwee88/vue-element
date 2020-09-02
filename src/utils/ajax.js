@@ -39,7 +39,7 @@ axios.interceptors.response.use(
         querry: { redirect: router.currentRoute.fullPath }// 从哪个页面跳转
       })
     }
-    console.log('data', response.data)
+    //console.log('data', response.data)
     if (response.data.code === -1 || response.data.code == 401) {
       localStorage.removeItem('token')
       router.push({
@@ -50,7 +50,7 @@ axios.interceptors.response.use(
     return response
   },
   err => {
-    console.log(err)
+    //console.log(err)
     if (err.response.status == 401) {
       localStorage.removeItem('token')
       router.push({
@@ -106,7 +106,7 @@ export function post (url, data = {}) {
       .then(response => {
         resolve(response.data)
       }, err => {
-        console.log(err)
+        //console.log(err)
         reject(err)
       })
   })

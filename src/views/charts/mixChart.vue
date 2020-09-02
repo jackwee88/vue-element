@@ -284,7 +284,7 @@ export default {
         this.timer = true;
         let that = this;
         setTimeout(function () {
-          // console.log(that.screenWidth); // 打印screenWidth变化的值
+          // //console.log(that.screenWidth); // 打印screenWidth变化的值
           that.timer = false;
         }, 400);
       }

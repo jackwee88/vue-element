@@ -27,7 +27,7 @@ export default {
     };
   },
   created() {
-    this.vip();
+    // this.vip();
     this.getCode();
   },
   methods: {

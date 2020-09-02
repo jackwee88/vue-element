@@ -133,11 +133,11 @@ export default {
         params: { token: localStorage.getItem("token") }
       }).then(res => {
         that.formLabelAlign = res.data.data.bank;
-        console.log(that.formLabelAlign);
+        // //console.log(that.formLabelAlign);
       });
     },
     onSubmit(formLabelAlign) {
-      console.log(formLabelAlign);
+      // //console.log(formLabelAlign);
 
       var that = this;
 
@@ -156,7 +156,7 @@ export default {
         url: this.url + "money/userBankEdit",
         params: obj
       }).then(res => {
-        console.log(res.data.code);
+        // //console.log(res.data.code);
 
         const h = this.$createElement;
         that.loading = false;

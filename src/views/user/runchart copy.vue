@@ -371,9 +371,9 @@ export default {
     },
     // 切换期号
     TypeChange(v) {
-      console.log(v);
+      //console.log(v);
       this.number = v;
-      console.log(this.number);
+      //console.log(this.number);
     },
     // 切换任选5等
     caipiaoidChange(v) {

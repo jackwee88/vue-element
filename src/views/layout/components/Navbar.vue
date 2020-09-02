@@ -81,7 +81,7 @@ export default {
         var timestamp1 = Date.parse(new Date()) / 1000;
         var vip_endtime=res.data.data.vip_endtime
         var endtime=vip_endtime-timestamp1
-        console.log(this.timestampToTime(res.data.data.vip_endtime))
+        //console.log(this.timestampToTime(res.data.data.vip_endtime))
         if(endtime<=0){
 
         }else{

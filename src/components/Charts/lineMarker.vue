@@ -71,7 +71,7 @@ export default {
         var avg = [];
         if (res.data.data) {
           // Object.getOwnPropertyNames(res.data.data).forEach(function(key) {
-          //   console.log(key+ '---'+res.data.data[key].number)
+          //   //console.log(key+ '---'+res.data.data[key].number)
           //   arr.push(res.data.data[key].num);
           //   arrQihao.push(res.data.data[key].number);
           // });
@@ -84,7 +84,7 @@ export default {
         that.data = arr;
         that.dataQihao = arrQihao;
         that.avg = avg;
-        console.log(that.avg);
+        //console.log(that.avg);
         this.chart = echarts.init(document.getElementById(this.id));
 
         // 当没有数据时undefined改显示为暂无数据

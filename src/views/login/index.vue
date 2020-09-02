@@ -142,7 +142,7 @@ export default {
     },
     handleLogin() {
       var that = this;
-      console.log(this.checked);
+      //console.log(this.checked);
 
       this.$refs.loginForm.validate(valid => {
         if (valid) {
@@ -151,7 +151,7 @@ export default {
             url: this.url + "user/getLegal",
             params: {}
           }).then(res => {
-            console.log(res.data.data.value)
+            //console.log(res.data.data.value)
             localStorage.setItem("BCUSER", this.loginForm.account);
             localStorage.setItem("BCPASSWORD", this.loginForm.password);
             that.legal = res.data.data.value;

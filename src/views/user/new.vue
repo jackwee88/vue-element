@@ -397,7 +397,7 @@ export default {
 // }
 //   },
   mounted() {
-    console.log('大傻逼')
+    //console.log('大傻逼')
 
     var a =sessionStorage.getItem("one")
     if (sessionStorage.getItem("selectarr")) {
@@ -410,7 +410,7 @@ export default {
       ) {
         var num = JSON.parse(sessionStorage.getItem("numArr"));
         // var num = this.new_num
-        console.log(num.length, 1111);
+        //console.log(num.length, 1111);
         if (num.length == 0) {
           this.checkedDans1 = selectArr; //从综合走势获取到的值
 
@@ -427,7 +427,7 @@ export default {
         var maxnum = Math.max(...num);
 
         if (maxnum == 1) {
-          console.log(maxnum, 111111);
+          //console.log(maxnum, 111111);
           this.checkedDans1 = JSON.parse(sessionStorage.getItem("one"));
           this.checkedDans2 = selectArr; //从综合走势获取到的值
 
@@ -454,7 +454,7 @@ export default {
           }
 
           this.checkedDans3 = selectArr; //从综合走势获取到的值
-          console.log(this.checkedDans3);
+          //console.log(this.checkedDans3);
           this.new_num = [1, 2, 3];
           num.push(3);
 
@@ -794,7 +794,7 @@ export default {
             var num = JSON.parse(sessionStorage.getItem("numArr"));
 
             // var num = this.new_num
-            console.log(num.length, 1111);
+            //console.log(num.length, 1111);
             if (num.length == 0) {
               this.checkedDans1 = selectArr; //从综合走势获取到的值
 
@@ -811,7 +811,7 @@ export default {
             var maxnum = Math.max(...num);
 
             if (maxnum == 1) {
-              console.log(maxnum, 111111);
+              //console.log(maxnum, 111111);
               this.checkedDans1 = JSON.parse(sessionStorage.getItem("one"));
               this.checkedDans2 = selectArr; //从综合走势获取到的值
 
@@ -840,7 +840,7 @@ export default {
               }
 
               this.checkedDans3 = selectArr; //从综合走势获取到的值
-              console.log(this.checkedDans3);
+              //console.log(this.checkedDans3);
               this.new_num = [1, 2, 3];
               num.push(3);
 
@@ -1163,15 +1163,15 @@ export default {
     },
     // 胆1到胆5的每个复选值
     handleCheckedCitiesChange1(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDans1 = value ? value : [];
       sessionStorage.setItem('one',JSON.stringify(this.checkedDans1))
       //  var num = JSON.parse(sessionStorage.getItem("numArr"));
-      //  console.log(num)
+      //  //console.log(num)
       //  if(value){
       //    if(num.indexOf("1")==-1||num.indexOf(1)==-1){
       //      num.push(1)
-      //      console.log('123')
+      //      //console.log('123')
       //    };
 
       //  }else{
@@ -1188,7 +1188,7 @@ export default {
       this.checkAll1 = checkedCount === this.dans1.length;
     },
     handleCheckedCitiesChange2(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDans2 = value ? value : [];
       //  var num = JSON.parse(sessionStorage.getItem("numArr"));
       //  sessionStorage.setItem('two',JSON.stringify(this.checkedDans2))
@@ -1209,7 +1209,7 @@ export default {
       this.checkAll2 = checkedCount === this.dans2.length;
     },
     handleCheckedCitiesChange3(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDans3 = value ? value : [];
       var num = JSON.parse(sessionStorage.getItem("numArr"));
       //  sessionStorage.setItem('three',JSON.stringify(this.checkedDans3))
@@ -1230,14 +1230,14 @@ export default {
       this.checkAll3 = checkedCount === this.dans3.length;
     },
     handleCheckedCitiesChange4(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDans4 = value ? value : [];
       sessionStorage.setItem("four", JSON.stringify(this.checkedDans4));
       let checkedCount = value.length;
       this.checkAll4 = checkedCount === this.dans4.length;
     },
     handleCheckedCitiesChange5(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDans5 = value ? value : [];
       sessionStorage.setItem("five", JSON.stringify(this.checkedDans5));
       let checkedCount = value.length;
@@ -1245,23 +1245,23 @@ export default {
     },
     // 胆1到胆5的每个复选值出现次数
     handleCheckedCitiesShow1(value) {
-      console.log(value, "bbbbbbbbb");
+      //console.log(value, "bbbbbbbbb");
       this.checkedDansShow1 = value ? value : [];
     },
     handleCheckedCitiesShow2(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDansShow2 = value ? value : [];
     },
     handleCheckedCitiesShow3(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDansShow3 = value ? value : [];
     },
     handleCheckedCitiesShow4(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDansShow4 = value ? value : [];
     },
     handleCheckedCitiesShow5(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDansShow5 = value ? value : [];
     },
     //偶数
@@ -1290,16 +1290,16 @@ export default {
         this.checkedDansShow1 = [];
         sessionStorage.removeItem("one");
         sessionStorage.removeItem("oneA");
-        console.log(JSON.parse(sessionStorage.getItem("numArr")));
+        //console.log(JSON.parse(sessionStorage.getItem("numArr")));
         var num = this.new_num; //JSON.parse(sessionStorage.getItem("numArr"));
         for (var i = 0; i < num.length; i++) {
-          console.log(num[i]);
+          //console.log(num[i]);
           if (num[i] == 1) {
-            console.log(num[i]);
+            //console.log(num[i]);
             num.splice(i, 1);
           }
         }
-        console.log(num);
+        //console.log(num);
         sessionStorage.setItem("numArr", JSON.stringify(num));
       }
       if (options == "two") {
@@ -1404,7 +1404,7 @@ export default {
       }
 
       if (this.checkedSmall.length > 0) {
-        console.log(this.checkedSmall, "bbbb");
+        //console.log(this.checkedSmall, "bbbb");
         pramp.decimal = this.checkedSmall;
       }
       if (this.checkedEven.length > 0) {
@@ -1434,9 +1434,9 @@ export default {
           that.totalShow = true;
         }
       });
-      console.log(this.evenS);
-      console.log(this.smallS);
-      console.log(this.oddS);
+      //console.log(this.evenS);
+      //console.log(this.smallS);
+      //console.log(this.oddS);
       sessionStorage.removeItem("big");
       sessionStorage.removeItem("he");
       sessionStorage.removeItem("even");

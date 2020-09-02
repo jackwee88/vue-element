@@ -1,7 +1,7 @@
  <template>
   <div :style="'height:'+winH">
     <div class="change">
-    <div class="top-header">可用积分：{{record}}</div>
+    <div class="top-header">可用积分：{{record}}<span style="display:inline-block;padding-left:10px">冻结积分：</span></div>
     <div class="input-item">
       <div class="inputdiv"><input
         type="text"
@@ -90,8 +90,6 @@ export default {
     },
     went(){
       const h = this.$createElement;
-      console.log(this.member)
-      console.log(this.number)
       
       if(this.member==''||this.number==''){
          this.$notify({

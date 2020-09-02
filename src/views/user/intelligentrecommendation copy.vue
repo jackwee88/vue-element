@@ -274,7 +274,7 @@ header {
 <script>
 import Chart from "@/components/Charts/lineMarker";
 import $ from "jquery";
-console.log($);
+//console.log($);
 export default {
   data() {
     return {
@@ -352,14 +352,14 @@ export default {
       var aBox = document.getElementsByClassName("chart-container");
 
       sessionStorage.setItem("missed", row.show_number);
-      console.log(sessionStorage.getItem("missed"));
+      //console.log(sessionStorage.getItem("missed"));
       // 点击图表小图标后重新加载图表模板
 
       if (expandedRows.length > 1) {
         expandedRows.shift();
       }
       this.timer = new Date().getTime();
-      console.log(this.timer);
+      //console.log(this.timer);
     },
     // 切换任选5等
     caipiaoidChange(v) {

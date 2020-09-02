@@ -558,7 +558,7 @@ export default {
     backTop() {
       let nowTop =
         document.body.scrollTop || document.documentElement.scrollTop; // 获取当前滚动条位置
-      console.log(nowTop);
+      //console.log(nowTop);
       if (nowTop > 0) {
         window.requestAnimationFrame(this.goUp);
         window.scrollTo(0, nowTop - nowTop / 5);
@@ -722,7 +722,7 @@ export default {
     sub() {
       if (this.selectArr.length > 0) {
         sessionStorage.setItem("selectarr", JSON.stringify(this.selectArr));
-        console.log(this.selectArr.length, "mmmm");
+        //console.log(this.selectArr.length, "mmmm");
         for (var i = 0; i < this.selectArr.length; i++) {
           var id = i + 1;
           this.dan1Arr.push(id + "");

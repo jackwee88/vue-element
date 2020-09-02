@@ -119,7 +119,7 @@ export default {
         url: this.url + "user/scoreTocash",
         params: { token: localStorage.getItem("token"), score_num: this.num },
       }).then((res) => {
-        console.log(res.data.msg);
+        // //console.log(res.data.msg);
         const h = this.$createElement;
         this.$notify({
           title: "",
@@ -139,7 +139,7 @@ export default {
         params: { token: localStorage.getItem("token") },
       }).then((res) => {
         that.queryMoneys = res.data.data;
-        console.log(res.data);
+        // //console.log(res.data);
       });
     },
   },

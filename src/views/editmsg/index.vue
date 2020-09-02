@@ -151,7 +151,7 @@ export default {
   methods: {
     onSubmit(formLabelAlign) {
       var that = this;
-      console.log(formLabelAlign);
+      // //console.log(formLabelAlign);
 
       var obj = that.formLabelAlign;
 
@@ -160,7 +160,7 @@ export default {
         url: this.url + "money/userBankEdit",
         params: obj
       }).then(res => {
-        console.log(res.data.code);
+        // //console.log(res.data.code);
         if (res.data.code == 1) {
           that.$router.push({ path: "/user" });
         } else {

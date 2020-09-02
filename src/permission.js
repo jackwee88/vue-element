@@ -53,7 +53,7 @@ const whiteList = [
     ] // no redirect whitelist
 
 router.beforeEach((to, from, next) => {
-    console.log(to.path, 'hhhhhhhhhhhhhhhhhhhhhh', localStorage.getItem('token'))
+    //console.log(to.path, 'hhhhhhhhhhhhhhhhhhhhhh', localStorage.getItem('token'))
     NProgress.start()
         // 在没有token的情况下跳转至登录页
     if (!localStorage.getItem('token')) {

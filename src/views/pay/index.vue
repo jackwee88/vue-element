@@ -106,7 +106,7 @@ export default {
         url: this.url + "user/getPay",
         params: { token: localStorage.getItem("token") }
       }).then(res => {
-        console.log(res.data.data);
+        //console.log(res.data.data);
         that.legal = res.data.data.value;
         that.title = res.data.data.desc;
         that.centerDialogVisible = true;
@@ -124,7 +124,7 @@ export default {
         url: this.url + "money/getVipPrice",
         params: { token: localStorage.getItem("token") }
       }).then(res => {
-        console.log(res.data.data);
+        //console.log(res.data.data);
         that.money = res.data.data;
       });
     },
@@ -138,7 +138,7 @@ export default {
     //判断是否微信
     _isWeixn() {
       var ua = navigator.userAgent.toLowerCase();
-      console.log(ua);
+      //console.log(ua);
       if (ua.match(/MicroMessenger/i) == "micromessenger") {
         return "wxpay";
       } else {
@@ -177,7 +177,7 @@ export default {
           }
         })
         .catch(err => {
-          console.log(err);
+          //console.log(err);
         });
     },
     //  onBridgeReady(params) {
@@ -209,7 +209,7 @@ export default {
     //判断是否微信
     // is_weixn(){
     //   var ua = window.navigator.userAgent.toLowerCase();
-    //   console.log(ua)
+    //   //console.log(ua)
     //   if (ua.match(/MicroMessenger/i) == 'micromessenger'){
     //     return 'wxpay';
     //   } else {
@@ -218,16 +218,16 @@ export default {
     // },
 
     handelPay() {
-      console.log(this.wechatpayType);
+      //console.log(this.wechatpayType);
       if (this.wechatpayType == "wxpay") {
-        // console.log("微信内支付")
+        // //console.log("微信内支付")
         let data = {
           amount: this.number
         };
         this.$http.insideWeChatPay(data).then(res => {
           if (res.data.code === 200) {
             this.weChatParameter = res.data.data;
-            // console.log(this.weChatParameter,"微信内支付需要参数")
+            // //console.log(this.weChatParameter,"微信内支付需要参数")
             this.weixinPay();
           } else {
             Toast({
@@ -238,7 +238,7 @@ export default {
           }
         });
       } else if (this.wechatpayType == "wxpay_php") {
-        // console.log("微信外支付")
+        // //console.log("微信外支付")
         let data = {
           amount: this.number
         };

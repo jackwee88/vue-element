@@ -391,16 +391,16 @@ export default {
       if (sessionStorage.getItem("selectarr")) {
         var selectArr = JSON.parse(sessionStorage.getItem("selectarr")); //胆一
         this.checkedDans1 = selectArr; //从综合走势获取到的值
-        console.log(this.checkedDans1);
+        //console.log(this.checkedDans1);
 
         if (selectArr.length > 0) {
           this.checkedDansShow1.push[selectArr.length];
           this.flag1 = selectArr.length;
         }
       }
-      console.log(sessionStorage.getItem("big"));
+      //console.log(sessionStorage.getItem("big"));
       if (sessionStorage.getItem("big")) {
-        console.log("big");
+        //console.log("big");
         var big = sessionStorage.getItem("big"); //胆一
         if (big == "0:5") {
           this.smallS = 5;
@@ -416,11 +416,11 @@ export default {
           this.smallS = 1;
         }
         this.checkedSmall.push(this.smallS);
-        console.log(this.checkedSmall, "vvv");
+        //console.log(this.checkedSmall, "vvv");
       }
       if (sessionStorage.getItem("even")) {
         // alert("even");
-        console.log("even", sessionStorage.getItem("even"));
+        //console.log("even", sessionStorage.getItem("even"));
         var evenSelect = sessionStorage.getItem("even"); //胆一
         if (evenSelect == "0:5") {
           this.evenS = 5;
@@ -433,15 +433,15 @@ export default {
         } else if (evenSelect == "3:2") {
           this.evenS = 2;
         } else if (evenSelect == "5:0") {
-          console.log("5:0");
+          //console.log("5:0");
           this.evenS = 0;
         }
         this.checkedEven.push(this.evenS);
-        console.log(this.evens, "kkkkk");
+        //console.log(this.evens, "kkkkk");
       }
 
       if (sessionStorage.getItem("he")) {
-        console.log("he");
+        //console.log("he");
         var he = sessionStorage.getItem("he"); //胆一
         if (he == "0:5") {
           this.oddS = 5;
@@ -462,14 +462,14 @@ export default {
         sessionStorage.removeItem("he");
         sessionStorage.removeItem("even");
         sessionStorage.removeItem("selectarr");
-        console.log(this.checkedOdd, "jjjj");
+        //console.log(this.checkedOdd, "jjjj");
       }
     }
   },
 
   methods: {
     clickMe(v, t) {
-      console.log("0123456");
+      //console.log("0123456");
       v = parseInt(v);
       if (t == "big") {
         // this.checkedSmall
@@ -501,10 +501,10 @@ export default {
       }
       if (t == "even") {
         // this.checkedSmall
-        console.log(this.checkedEven);
-        console.log(this.checkedEven.length);
-        console.log("vvvvvvvvvvvvvvvvvvvv" + v);
-        console.log(this.checkedEven.indexOf(v));
+        //console.log(this.checkedEven);
+        //console.log(this.checkedEven.length);
+        //console.log("vvvvvvvvvvvvvvvvvvvv" + v);
+        //console.log(this.checkedEven.indexOf(v));
         if (this.checkedEven.length > 0) {
           if (this.checkedEven.indexOf(v) >= 0) {
             this.evenS = -1;
@@ -530,7 +530,7 @@ export default {
           this.checkedDansShow1.push(v);
         }
       }
-      // console.log(this.checkedDansShow1, "nnn");
+      // //console.log(this.checkedDansShow1, "nnn");
     },
     // 胆1-胆5全选
     handleCheckAllChange1(val) {
@@ -550,54 +550,54 @@ export default {
     },
     // 胆1到胆5的每个复选值
     handleCheckedCitiesChange1(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDans1 = value ? value : [];
       let checkedCount = value.length;
       this.checkAll1 = checkedCount === this.dans1.length;
     },
     handleCheckedCitiesChange2(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDans2 = value ? value : [];
       let checkedCount = value.length;
       this.checkAll2 = checkedCount === this.dans2.length;
     },
     handleCheckedCitiesChange3(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDans3 = value ? value : [];
       let checkedCount = value.length;
       this.checkAll3 = checkedCount === this.dans3.length;
     },
     handleCheckedCitiesChange4(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDans4 = value ? value : [];
       let checkedCount = value.length;
       this.checkAll4 = checkedCount === this.dans4.length;
     },
     handleCheckedCitiesChange5(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDans5 = value ? value : [];
       let checkedCount = value.length;
       this.checkAll5 = checkedCount === this.dans5.length;
     },
     // 胆1到胆5的每个复选值出现次数
     handleCheckedCitiesShow1(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDansShow1 = value ? value : [];
     },
     handleCheckedCitiesShow2(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDansShow2 = value ? value : [];
     },
     handleCheckedCitiesShow3(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDansShow3 = value ? value : [];
     },
     handleCheckedCitiesShow4(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDansShow4 = value ? value : [];
     },
     handleCheckedCitiesShow5(value) {
-      console.log(value);
+      //console.log(value);
       this.checkedDansShow5 = value ? value : [];
     },
     //偶数
@@ -689,7 +689,7 @@ export default {
       }
 
       if (this.checkedSmall.length > 0) {
-        console.log(this.checkedSmall, "bbbb");
+        //console.log(this.checkedSmall, "bbbb");
         pramp.decimal = this.checkedSmall;
       }
       if (this.checkedEven.length > 0) {
@@ -719,9 +719,9 @@ export default {
           that.totalShow = true;
         }
       });
-      console.log(this.evenS);
-      console.log(this.smallS);
-      console.log(this.oddS);
+      //console.log(this.evenS);
+      //console.log(this.smallS);
+      //console.log(this.oddS);
       // sessionStorage.removeItem('big');
       // sessionStorage.removeItem('he');
       // sessionStorage.removeItem('even');

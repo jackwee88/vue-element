@@ -89,7 +89,7 @@ function getQueryVariable(variable) {
   if (urls.length > 1) {
     var query = urls[1];
 
-    console.log(query);
+    //console.log(query);
     var vars = query.split("&");
     for (var i = 0; i < vars.length; i++) {
       var pair = vars[i].split("=");
@@ -204,11 +204,11 @@ export default {
                   message: h(
                     "i",
                     { style: "color: teal" },
-                    "将为您跳到下载页面"
+                    "注册成功，将为您跳转到邀请页面"
                   )
                 });
                 setTimeout(function() {
-                  that.$router.push({ path: "/download" });
+                  that.$router.push({ path: "/code" });
                 }, 1000);
 
             // sessionStorage.setItem("pay", res.data.data.userinfo.vip);
