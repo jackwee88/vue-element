@@ -1,20 +1,21 @@
 <template>
   <div class="chart-container" :style="'height:' + windowHeight + 'px'">
     <p style="padding-left:10px">
-      <span class="title-one">下载app</span>
+      <span class="title-one" style="font-size:20px">下载app</span>
     </p>
     <div class="box-big">
       <div class="url-box">
         <div style="padding-left:10px" class="qrcode">
           <div style="padding:10px">
-          <a href="http://d.7short.com/zb4y">http://d.7short.com/zb4y</a>
-            <div>如二维码实效，请点击链接下载app</div>
+          <!-- <a href="http://d.7short.com/zb4y">http://d.7short.com/zb4y</a> -->
+            <div style="font-size:20px">请使用浏览器扫描二维码下载App</div>
           </div>
           <img
-            src="../../utils/code.png"
-            width="150px"
-            height="150px"
-            style="margin-left:10px"
+            src="../../utils/appDown.png"
+            width="200px"
+            height="200px"
+            style="margin-left:10px;"
+
           />
           
         </div>

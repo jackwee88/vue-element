@@ -208,7 +208,7 @@ export default {
                   )
                 });
                 setTimeout(function() {
-                  that.$router.push({ path: "/code" });
+                  that.$router.push({ path: "/download" });
                 }, 1000);
 
             // sessionStorage.setItem("pay", res.data.data.userinfo.vip);

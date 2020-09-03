@@ -241,10 +241,6 @@ export default {
       } else {
         this.allChild();
       }
-
-      // this.$http.getData('/categories').then(val => {
-      //   this.tabs = val.data;
-      // })
     },
     // 获取2级
     getMyChildSec() {
