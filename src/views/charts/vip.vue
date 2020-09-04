@@ -58,7 +58,7 @@ export default {
             message: h(
               "i",
               { style: "color: teal" },
-              "积分不足抵扣当月会员，将为您直接跳转到支付页面"
+              res.data.msg
             )
           });
           setTimeout(() => {
