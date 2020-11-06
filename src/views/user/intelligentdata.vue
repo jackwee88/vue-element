@@ -117,7 +117,7 @@ export default {
     };
   },
   created() {
-    this.vip();
+    // this.vip();
     if (typeof this.$store.state.moreArr === "string") {
       this.textareaVal = this.$store.state.moreArr;
     } else {

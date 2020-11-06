@@ -85,10 +85,8 @@
           </tr>
         </thead>
         <tbody style>
-          <template v-for="(item,key) in tableData">
-            <tr
-              class="sec-body"
-              :style="item.id==curId?'height:32vh position:relative':'position:relative'"
+          <template v-for="(item,index) in tableData" >
+            <tr class="sec-body" :style="item.id==curId?'height:32vh position:relative':'position:relative'"
             >
               <td>{{item.id}}</td>
               <td>{{item.multiple}}</td>

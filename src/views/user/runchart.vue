@@ -510,7 +510,7 @@ export default {
   },
 
   created() {
-    this.vip();
+    // this.vip();
     var h = document.documentElement.clientHeight || document.body.clientHeight;
 
     this.curHeight = h - 150; // 减去页面上固定高度height

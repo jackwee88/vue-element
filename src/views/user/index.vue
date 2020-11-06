@@ -42,7 +42,7 @@
         </div>
         <div class="show-wrap">
           <span class="type-title">出现</span>
-          <!-- <el-checkbox-group
+          <el-checkbox-group
             v-model="checkedDansShow1"
             @change="handleCheckedCitiesShow1"
             class="show-num"
@@ -51,16 +51,10 @@
               v-for="city in dansShow1"
               :label="city"
               :key="city"
-              :checked="city==flag1"
+              :checked="checkedDansShow1.indexOf(city)>=0"
             >{{city}}</el-checkbox>
-          </el-checkbox-group>-->
-          <div class="block">
-            <label for="label" @click.stop="clickMe(city,'dan1')" v-for="(city,index) in dansShow1">
-              <input type="checkbox" id="label" v-bind:checked="index>0&&index<=flag1" />
-              {{city}}
-            </label>
-          </div>
-          <span class="clears" @click="clearAll('one')">清</span>
+          </el-checkbox-group>
+          <span class="clears" @click="clearAll(1)">清</span>
         </div>
       </div>
 
@@ -81,7 +75,7 @@
           >
             <el-checkbox v-for="city in dansShow2" :label="city" :key="city">{{city}}</el-checkbox>
           </el-checkbox-group>
-          <span class="clears" @click="clearAll('two')">清</span>
+          <span class="clears" @click="clearAll(2)">清</span>
         </div>
       </div>
 
@@ -102,7 +96,7 @@
           >
             <el-checkbox v-for="city in dansShow3" :label="city" :key="city">{{city}}</el-checkbox>
           </el-checkbox-group>
-          <span class="clears" @click="clearAll('three')">清</span>
+          <span class="clears" @click="clearAll(3)">清</span>
         </div>
       </div>
 
@@ -123,7 +117,7 @@
           >
             <el-checkbox v-for="city in dansShow4" :label="city" :key="city">{{city}}</el-checkbox>
           </el-checkbox-group>
-          <span class="clears" @click="clearAll('four')">清</span>
+          <span class="clears" @click="clearAll(4)">清</span>
         </div>
       </div>
 
@@ -144,57 +138,43 @@
           >
             <el-checkbox v-for="city in dansShow3" :label="city" :key="city">{{city}}</el-checkbox>
           </el-checkbox-group>
-          <span class="clears" @click="clearAll('five')">清</span>
+          <span class="clears" @click="clearAll(5)">清</span>
         </div>
       </div>
 
       <div class="bottom-type-box" style="position:relative">
         <div class="type show-num">
           <span class="type-title" style="margin-bottom:8px;">偶数个数</span>
-          <!-- <el-checkbox-group v-model="checkedEven" @change="handleEven" class="bottom-wrap">
+          <el-checkbox-group v-model="checkedEven" @change="handleEven" class="bottom-wrap">
             <el-checkbox
               v-for="city in evens"
               :label="city"
               :key="city"
-              :disabled="evenS==city"
+              :checked="checkedEven.indexOf(city)>=0"
             >{{city}}</el-checkbox>
-          </el-checkbox-group>-->
-          <div class="block">
-            <label for="label" @click.stop="clickMe(city,'even')" v-for="(city,index) in evens">
-              <input type="checkbox" id="label" v-bind:checked="index==evenS" />
-              {{city}}
-            </label>
-          </div>
+          </el-checkbox-group>
         </div>
         <div class="type show-num">
           <span class="type-title" style="margin-bottom:8px;">合数个数</span>
-          <!-- <el-checkbox-group v-model="checkedOdd" @change="handleOdd" class="bottom-wrap">
+          <el-checkbox-group v-model="checkedOdd" @change="handleOdd" class="bottom-wrap">
             <el-checkbox
               v-for="city in odds"
               :label="city"
               :key="city"
-              :disabled="city==oddS"
+              :checked="checkedOdd.indexOf(city)>=0"
             >{{city}}</el-checkbox>
-          </el-checkbox-group>-->
-          <div class="block">
-            <label for="label" @click.stop="clickMe(city,'odd')" v-for="(city,index) in odds">
-              <input type="checkbox" id="label" v-bind:checked="index==oddS" />
-              {{city}}
-            </label>
-          </div>
+          </el-checkbox-group>
         </div>
         <div class="type show-num">
           <span class="type-title" style="margin-bottom:8px;">小数个数</span>
-          <!-- <el-checkbox-group v-model="checkedSmall" @change="handleSmall" class="bottom-wrap">
-            <el-checkbox v-for="city in smalls" :label="city" :key="city" v-bind:checked="smallS==city">{{city}}</el-checkbox>
-           
-          </el-checkbox-group>-->
-          <div class="block">
-            <label for="label" @click.stop="clickMe(city,'big')" v-for="(city,index) in smalls">
-              <input type="checkbox" id="label" v-bind:checked="index==smallS" />
-              {{city}}
-            </label>
-          </div>
+          <el-checkbox-group v-model="checkedSmall" @change="handleSmall" class="bottom-wrap">
+            <el-checkbox
+              v-for="city in smalls"
+              :label="city"
+              :key="city"
+              :checked="checkedSmall.indexOf(city)>=0"
+            >{{city}}</el-checkbox>
+          </el-checkbox-group>
         </div>
         <div class="type show-num" style="margin-bottom:0px;">
           <span class="type-title">连数个数</span>
@@ -214,7 +194,7 @@
             号码
             <span v-if="totalShow" style="color:red;margin-left:12px;">共 {{total}} 注</span>
           </span>
-          <span @click="copy" class="copy-todata">复制到智能数据</span>
+          <span @click="copy" class="copy-todata">复制</span>
         </p>
         <div style="text-align:center;display:flex;">
           <textarea name id="textValue" rows="10" v-model="returnArr"></textarea>
@@ -236,6 +216,7 @@
 import MDinput from "@/components/MDinput";
 import Sticky from "@/components/Sticky"; // 粘性header组件
 import userSave from "./save.vue";
+import { mapState, mapGetters, mapActions } from "vuex";
 const dan1S = [
   { name: "01", tivk: false },
   { name: "02", tivk: false },
@@ -255,15 +236,16 @@ const dan2 = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11"];
 const dan3 = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11"];
 const dan4 = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11"];
 const dan5 = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11"];
-const danshow1 = ["0", "1", "2", "3", "4", "5"]; //胆一出现的次数
+const danshow1 = ["0", "1", "2", "3", "4", "5"]; // 胆一出现的次数
 const danshow2 = ["0", "1", "2", "3", "4", "5"];
 const danshow3 = ["0", "1", "2", "3", "4", "5"]; //
 const danshow4 = ["0", "1", "2", "3", "4", "5"]; //
 const danshow5 = ["0", "1", "2", "3", "4", "5"]; //
-const even = ["0", "1", "2", "3", "4", "5"]; //偶数
+const even = ["0", "1", "2", "3", "4", "5"]; // 偶数
+
 const odd = ["0", "1", "2", "3", "4", "5"];
-const small = ["0", "1", "2", "3", "4", "5"]; //小数
-const hyphen = ["0", "1", "2", "3", "4"]; //连数
+const small = ["0", "1", "2", "3", "4", "5"]; // 小数
+const hyphen = ["0", "1", "2", "3", "4", "5"]; // 连数
 
 export default {
   name: "userIndex",
@@ -275,14 +257,14 @@ export default {
       oddS: -2,
       dan1S: dan1S,
       loading: false,
-      checkAll1: false, //胆1全选
+      checkAll1: false, // 胆1全选
       checkAll2: false,
       checkAll3: false,
       checkAll4: false,
       ckeckVal: 1,
       checkAll5: false,
-      checkedDans1: [], //胆一全选的数值
-      dans1: dan1, //胆一
+      checkedDans1: [], // 胆一全选的数值
+      dans1: dan1, // 胆一
       checkedDans2: [],
       dans2: dan2,
       checkedDans3: [],
@@ -300,19 +282,19 @@ export default {
       checkedHyphen: [],
       hyphens: hyphen,
 
-      checkedDansShow1: [], //胆一出现的次数
-      dansShow1: danshow1, //胆一
-      checkedDansShow2: [], //胆一出现的次数
-      dansShow2: danshow2, //胆一
-      checkedDansShow3: [], //胆一出现的次数
-      dansShow3: danshow3, //胆一
-      checkedDansShow4: [], //胆一出现的次数
-      dansShow4: danshow4, //胆一
-      checkedDansShow5: [], //胆一出现的次数
-      dansShow5: danshow5, //胆一
+      checkedDansShow1: [], // 胆一出现的次数
+      dansShow1: danshow1, // 胆一
+      checkedDansShow2: [], // 胆一出现的次数
+      dansShow2: danshow2, // 胆一
+      checkedDansShow3: [], // 胆一出现的次数
+      dansShow3: danshow3, // 胆一
+      checkedDansShow4: [], // 胆一出现的次数
+      dansShow4: danshow4, // 胆一
+      checkedDansShow5: [], // 胆一出现的次数
+      dansShow5: danshow5, // 胆一
 
-      returnArr: "", //做号的结果
-      returnArrO: "", //做号的结果,用于由逗号切换为空格
+      returnArr: "", // 做号的结果
+      returnArrO: "", // 做号的结果,用于由逗号切换为空格
       totalShow: false,
       total: 0,
       c: "f",
@@ -323,23 +305,10 @@ export default {
     };
   },
   mounted() {
-    this.dan1S = [
-      { name: "01", tivk: true },
-      { name: "02", tivk: false },
-      { name: "03", tivk: false },
-      { name: "04", tivk: false },
-      { name: "05", tivk: false },
-      { name: "06", tivk: false },
-      { name: "07", tivk: false },
-      { name: "08", tivk: false },
-      { name: "09", tivk: false },
-      { name: "10", tivk: "false" },
-      { name: "01", tivk: false },
-      { name: "11", tivk: false }
-    ];
+    this.init();
   },
   created() {
-    this.vip();
+    // this.vip();
   },
 
   watch: {
@@ -348,13 +317,13 @@ export default {
       // 拿到目标参数 to.query.id 去再次请求数据接口
       // 　　　　this.loadPageData(to.query.id)
 
-      (this.checkAll1 = false), //胆1全选
+      (this.checkAll1 = false), // 胆1全选
         (this.checkAll2 = false),
         (this.checkAll3 = false),
         (this.checkAll4 = false),
         (this.checkAll5 = false),
-        (this.checkedDans1 = []), //胆一全选的数值
-        (this.dans1 = dan1), //胆一
+        (this.checkedDans1 = []), // 胆一全选的数值
+        (this.dans1 = dan1), // 胆一
         (this.checkedDans2 = []),
         (this.dans2 = dan2),
         (this.checkedDans3 = []),
@@ -371,284 +340,379 @@ export default {
         (this.smalls = small),
         (this.checkedHyphen = []),
         (this.hyphens = hyphen),
-        (this.checkedDansShow1 = []), //胆一出现的次数
-        (this.dansShow1 = danshow1), //胆一
-        (this.checkedDansShow2 = []), //胆一出现的次数
-        (this.dansShow2 = danshow2), //胆一
-        (this.checkedDansShow3 = []), //胆一出现的次数
-        (this.dansShow3 = danshow3), //胆一
-        (this.checkedDansShow4 = []), //胆一出现的次数
-        (this.dansShow4 = danshow4), //胆一
-        (this.checkedDansShow5 = []), //胆一出现的次数
-        (this.dansShow5 = danshow5), //胆一
-        (this.returnArr = ""), //做号的结果
-        (this.returnArrO = ""), //做号的结果,用于由逗号切换为空格
+        (this.checkedDansShow1 = []), // 胆一出现的次数
+        (this.dansShow1 = danshow1), // 胆一
+        (this.checkedDansShow2 = []), // 胆一出现的次数
+        (this.dansShow2 = danshow2), // 胆一
+        (this.checkedDansShow3 = []), // 胆一出现的次数
+        (this.dansShow3 = danshow3), // 胆一
+        (this.checkedDansShow4 = []), // 胆一出现的次数
+        (this.dansShow4 = danshow4), // 胆一
+        (this.checkedDansShow5 = []), // 胆一出现的次数
+        (this.dansShow5 = danshow5), // 胆一
+        (this.returnArr = ""), // 做号的结果
+        (this.returnArrO = ""), // 做号的结果,用于由逗号切换为空格
         (this.totalShow = false),
         (this.total = 0);
-      if (selectArr == undefined) {
-        this.flag1 = 0;
-      }
-      if (sessionStorage.getItem("selectarr")) {
-        var selectArr = JSON.parse(sessionStorage.getItem("selectarr")); //胆一
-        this.checkedDans1 = selectArr; //从综合走势获取到的值
-        //console.log(this.checkedDans1);
-
-        if (selectArr.length > 0) {
-          this.checkedDansShow1.push[selectArr.length];
-          this.flag1 = selectArr.length;
-        }
-      }
-      //console.log(sessionStorage.getItem("big"));
-      if (sessionStorage.getItem("big")) {
-        //console.log("big");
-        var big = sessionStorage.getItem("big"); //胆一
-        if (big == "0:5") {
-          this.smallS = 5;
-        } else if (big == "1:4") {
-          this.smallS = 4;
-        } else if (big == "2:3") {
-          this.smallS = 3;
-        } else if (big == "3:2") {
-          this.smallS = 2;
-        } else if (big == "5:0") {
-          this.smallS = 0;
-        } else if (big == "4:1") {
-          this.smallS = 1;
-        }
-        this.checkedSmall.push(this.smallS);
-        //console.log(this.checkedSmall, "vvv");
-      }
-      if (sessionStorage.getItem("even")) {
-        // alert("even");
-        //console.log("even", sessionStorage.getItem("even"));
-        var evenSelect = sessionStorage.getItem("even"); //胆一
-        if (evenSelect == "0:5") {
-          this.evenS = 5;
-        } else if (evenSelect == "1:4") {
-          this.evenS = 4;
-        } else if (evenSelect == "2:3") {
-          this.evenS = 3;
-        } else if (evenSelect == "4:1") {
-          this.evenS = 1;
-        } else if (evenSelect == "3:2") {
-          this.evenS = 2;
-        } else if (evenSelect == "5:0") {
-          //console.log("5:0");
-          this.evenS = 0;
-        }
-        this.checkedEven.push(this.evenS);
-        //console.log(this.evens, "kkkkk");
-      }
-
-      if (sessionStorage.getItem("he")) {
-        //console.log("he");
-        var he = sessionStorage.getItem("he"); //胆一
-        if (he == "0:5") {
-          this.oddS = 5;
-        } else if (he == "1:4") {
-          this.oddS = 4;
-        } else if (he == "2:3") {
-          this.oddS = 3;
-        } else if (he == "3:2") {
-          this.oddS = 2;
-        } else if (he == "5:0") {
-          this.oddS = 0;
-        } else if (he == "4:1") {
-          this.oddS = 1;
-        }
-
-        this.checkedOdd.push(this.oddS);
-        sessionStorage.removeItem("big");
-        sessionStorage.removeItem("he");
-        sessionStorage.removeItem("even");
-        sessionStorage.removeItem("selectarr");
-        //console.log(this.checkedOdd, "jjjj");
-      }
+      this.init();
     }
   },
-
+  computed: {
+    ...mapGetters(["allData"])
+  },
   methods: {
-    clickMe(v, t) {
-      //console.log("0123456");
-      v = parseInt(v);
-      if (t == "big") {
-        // this.checkedSmall
-        if (this.checkedSmall.length > 0) {
-          if (this.checkedSmall.indexOf(v) >= 0) {
-            this.smallS = -1;
-            var i = this.checkedSmall.indexOf(v);
-            this.checkedSmall.splice(i, 1);
-          } else {
-            this.checkedSmall.push(v);
-          }
+    ...mapActions("user", ["updateAllData"]),
+    init() {
+      for (let i = 0; i < 5; i++) {
+        const element = this.allData["dan" + (i + 1)];
+        this["checkedDans" + (i + 1)] = element;
+        element.length && (this["flag" + (i + 1)] = element.length);
+        let newArr = [];
+        for (let j = 0; j < element.length; j++) {
+          newArr.push(j + 1 + "");
+        }
+        if(this.allData['checkedDansShow'+(i+1)]){
+         if (this.allData["checkedDansShow" + (i + 1)].length != 0) {
+          this["checkedDansShow" + (i + 1)] = this.allData[
+            "checkedDansShow" + (i + 1)
+          ];
+          //console.log(this["checkedDansShow" + (i + 1)])
         } else {
-          this.checkedSmall.push(v);
+          this["checkedDansShow" + (i + 1)] = newArr;
+          this.allData["checkedDansShow" + (i + 1)] = newArr;
+          this.updateAllData({
+            data: this.allData
+          });
+        }
+        }else{
+          this["checkedDansShow" + (i + 1)] = newArr;
+
+        }
+        
+        
+      }
+
+      let types = ["big", "even", "he"];
+      let scores = {
+        "0:5": 5,
+        "1:4": 4,
+        "2:3": 3,
+        "3:2": 2,
+        "4:1": 1,
+        "5:0": 0
+      };
+
+      if (this.allData.big) {
+        var big = this.allData.big; // 胆一
+        for (var i = 0; i < big.length; i++) {
+          // if (big[i] == "0:5") {
+          //   this.smallS = "5";
+          // } else if (big[i] == "1:4") {
+          //   this.smallS = "4";
+          // } else if (big[i] == "2:3") {
+          //   this.smallS = "3";
+          // } else if (big[i] == "3:2") {
+          //   this.smallS = "2";
+          // } else if (big[i] == "5:0") {
+          //   this.smallS = "0";
+          // } else if (big[i] == "4:1") {
+          //   this.smallS = "1";
+          // }
+          this.checkedSmall.push(big[i]);
         }
       }
-      if (t == "odd") {
-        // this.checkedSmall
-        if (this.checkedOdd.length > 0) {
-          if (this.checkedOdd.indexOf(v) >= 0) {
-            this.oddS = -1;
-            var i = this.checkedOdd.indexOf(v);
-            this.checkedOdd.splice(i, 1);
-          } else {
-            this.checkedOdd.push(v);
-          }
-        } else {
-          this.checkedOdd.push(v);
+      if (this.allData.even) {
+        var even = this.allData.even; // 胆一
+        for (var i = 0; i < even.length; i++) {
+          // if (evenn[i] == "0:5") {
+          //   this.evenS = "5";
+          // } else if (evenn[i] == "1:4") {
+          //   this.evenS = "4";
+          // } else if (evenn[i] == "2:3") {
+          //   this.evenS = "3";
+          // } else if (evenn[i] == "3:2") {
+          //   this.evenS = "2";
+          // } else if (evenn[i] == "5:0") {
+          //   this.evenS = "0";
+          // } else if (evenn[i] == "4:1") {
+          //   this.evenS = "1";
+          // }
+          this.checkedEven.push(even[i]);
         }
       }
-      if (t == "even") {
-        // this.checkedSmall
-        //console.log(this.checkedEven);
-        //console.log(this.checkedEven.length);
-        //console.log("vvvvvvvvvvvvvvvvvvvv" + v);
-        //console.log(this.checkedEven.indexOf(v));
-        if (this.checkedEven.length > 0) {
-          if (this.checkedEven.indexOf(v) >= 0) {
-            this.evenS = -1;
-            var i = this.checkedEven.indexOf(v);
-            this.checkedEven.splice(i, 1);
-          } else {
-            this.checkedEven.push(v);
-          }
-        } else {
-          this.checkedEven.push(v);
+      if (this.allData.he) {
+        var oddd = this.allData.he; // 胆一
+        for (var i = 0; i < oddd.length; i++) {
+          // if (oddd[i] == "0:5") {
+          //   this.oddS = "5";
+          // } else if (oddd[i] == "1:4") {
+          //   this.oddS = "4";
+          // } else if (oddd[i] == "2:3") {
+          //   this.oddS = "3";
+          // } else if (oddd[i] == "3:2") {
+          //   this.oddS = "2";
+          // } else if (oddd[i] == "5:0") {
+          //   this.oddS = "0";
+          // } else if (oddd[i] == "4:1") {
+          //   this.oddS = "1";
+          // }
+          this.checkedOdd.push(oddd[i]);
         }
       }
-      if (t == "dan1") {
-        // this.checkedSmall
-        if (this.checkedDansShow1.length > 0) {
-          if (this.checkedDansShow1.indexOf(v) >= 0) {
-            var i = this.checkedEven.indexOf(v);
-            this.checkedDansShow1.splice(i, 1);
-          } else {
-            this.checkedDansShow1.push(v);
-          }
-        } else {
-          this.checkedDansShow1.push(v);
+      if (this.allData.checkedHyphen) {
+        var checkedHyphen = this.allData.checkedHyphen; // 胆一
+        for (var i = 0; i < checkedHyphen.length; i++) {
+          // if (oddd[i] == "0:5") {
+          //   this.oddS = "5";
+          // } else if (oddd[i] == "1:4") {
+          //   this.oddS = "4";
+          // } else if (oddd[i] == "2:3") {
+          //   this.oddS = "3";
+          // } else if (oddd[i] == "3:2") {
+          //   this.oddS = "2";
+          // } else if (oddd[i] == "5:0") {
+          //   this.oddS = "0";
+          // } else if (oddd[i] == "4:1") {
+          //   this.oddS = "1";
+          // }
+          this.checkedHyphen.push(checkedHyphen[i]);
         }
       }
-      // //console.log(this.checkedDansShow1, "nnn");
+      this.sure();
     },
+
     // 胆1-胆5全选
     handleCheckAllChange1(val) {
       this.checkedDans1 = val ? dan1 : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan1 = this.checkedDans1;
+      this.updateAllData({
+        data: obj
+      });
     },
     handleCheckAllChange2(val) {
       this.checkedDans2 = val ? dan2 : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan2 = this.checkedDans2;
+      this.updateAllData({
+        data: obj
+      });
     },
     handleCheckAllChange3(val) {
       this.checkedDans3 = val ? dan3 : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan3 = this.checkedDans3;
+      this.updateAllData({
+        data: obj
+      });
     },
     handleCheckAllChange4(val) {
       this.checkedDans4 = val ? dan4 : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan4 = this.checkedDans4;
+      this.updateAllData({
+        data: obj
+      });
     },
     handleCheckAllChange5(val) {
       this.checkedDans5 = val ? dan5 : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan5 = this.checkedDans5;
+      this.updateAllData({
+        data: obj
+      });
     },
     // 胆1到胆5的每个复选值
     handleCheckedCitiesChange1(value) {
-      //console.log(value);
-      this.checkedDans1 = value ? value : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan1 = value;
+      this.updateAllData({
+        data: obj
+      });
+      // let newArr = [];
+      // for (let j = 0; j < value.length; j++) {
+      //   newArr.push(j + 1 + "");
+      // }
+      // this.checkedDansShow1 = newArr;
+      this.checkedDans1 = value || [];
       let checkedCount = value.length;
       this.checkAll1 = checkedCount === this.dans1.length;
     },
     handleCheckedCitiesChange2(value) {
-      //console.log(value);
-      this.checkedDans2 = value ? value : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan2 = value;
+      this.updateAllData({
+        data: obj
+      });
+      // let newArr = [];
+      // for (let j = 0; j < value.length; j++) {
+      //   newArr.push(j + 1 + "");
+      // }
+      // this.checkedDansShow2 = newArr;
+      this.checkedDans2 = value || [];
       let checkedCount = value.length;
       this.checkAll2 = checkedCount === this.dans2.length;
     },
     handleCheckedCitiesChange3(value) {
-      //console.log(value);
-      this.checkedDans3 = value ? value : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan3 = value;
+      this.updateAllData({
+        data: obj
+      });
+      // let newArr = [];
+      // for (let j = 0; j < value.length; j++) {
+      //   newArr.push(j + 1 + "");
+      // }
+      // this.checkedDansShow3 = newArr;
+      this.checkedDans3 = value || [];
       let checkedCount = value.length;
       this.checkAll3 = checkedCount === this.dans3.length;
     },
     handleCheckedCitiesChange4(value) {
-      //console.log(value);
-      this.checkedDans4 = value ? value : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan4 = value;
+      this.updateAllData({
+        data: obj
+      });
+      // let newArr = [];
+      // for (let j = 0; j < value.length; j++) {
+      //   newArr.push(j + 1 + "");
+      // }
+      // this.checkedDansShow4 = newArr;
+      this.checkedDans4 = value || [];
       let checkedCount = value.length;
       this.checkAll4 = checkedCount === this.dans4.length;
     },
     handleCheckedCitiesChange5(value) {
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.dan5 = value;
       //console.log(value);
-      this.checkedDans5 = value ? value : [];
+      this.updateAllData({
+        data: obj
+      });
+      // let newArr = [];
+      // for (let j = 0; j < value.length; j++) {
+      //   newArr.push(j + 1 + "");
+      // }
+      // this.checkedDansShow5 = newArr;
+      this.checkedDans5 = value || [];
       let checkedCount = value.length;
       this.checkAll5 = checkedCount === this.dans5.length;
     },
     // 胆1到胆5的每个复选值出现次数
     handleCheckedCitiesShow1(value) {
       //console.log(value);
-      this.checkedDansShow1 = value ? value : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.checkedDansShow1 = value;
+      this.updateAllData({
+        data: obj
+      });
+      this.checkedDansShow1 = value || [];
     },
     handleCheckedCitiesShow2(value) {
       //console.log(value);
-      this.checkedDansShow2 = value ? value : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.checkedDansShow2 = value;
+      this.updateAllData({
+        data: obj
+      });
+      this.checkedDansShow2 = value || [];
     },
     handleCheckedCitiesShow3(value) {
       //console.log(value);
-      this.checkedDansShow3 = value ? value : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.checkedDansShow3 = value;
+      this.updateAllData({
+        data: obj
+      });
+      this.checkedDansShow3 = value || [];
     },
     handleCheckedCitiesShow4(value) {
       //console.log(value);
-      this.checkedDansShow4 = value ? value : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.checkedDansShow4 = value;
+      this.updateAllData({
+        data: obj
+      });
+      this.checkedDansShow4 = value || [];
     },
     handleCheckedCitiesShow5(value) {
       //console.log(value);
-      this.checkedDansShow5 = value ? value : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.checkedDansShow5 = value;
+      this.updateAllData({
+        data: obj
+      });
+      this.checkedDansShow5 = value || [];
     },
-    //偶数
+    // 偶数
     handleEven(value) {
-      this.checkedEven = value ? value : [];
+      //console.log(value);
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.even = value;
+      this.updateAllData({
+        data: obj
+      });
+      this.checkedEven = value || [];
     },
-    //合数
+    // 合数
     handleOdd(value) {
-      this.checkedOdd = value ? value : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.he = value;
+      this.updateAllData({
+        data: obj
+      });
+      this.checkedOdd = value || [];
     },
-    //小数
+    // 小数
     handleSmall(value) {
-      this.checkedSmall = value ? value : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.big = value;
+      this.updateAllData({
+        data: obj
+      });
+      this.checkedSmall = value || [];
     },
-    //连数
+    // 连数
     handleHyphen(value) {
-      this.checkedHyphen = value ? value : [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      obj.checkedHyphen = value;
+      this.updateAllData({
+        data: obj
+      });
+      this.checkedHyphen = value || [];
     },
 
-    //清
+    // 清
     clearAll(options) {
-      if (options == "one") {
-        this.checkAll1 = false;
-        this.checkedDans1 = [];
-        this.checkedDansShow1 = [];
-      }
-      if (options == "two") {
-        this.checkAll2 = false;
-        this.checkedDans2 = [];
-        this.checkedDansShow2 = [];
-      }
-      if (options == "three") {
-        this.checkAll3 = false;
-        this.checkedDans3 = [];
-        this.checkedDansShow3 = [];
-      }
-      if (options == "four") {
-        this.checkAll4 = false;
-        this.checkedDans4 = [];
-        this.checkedDansShow4 = [];
-      }
-      if (options == "five") {
-        this.checkAll5 = false;
-        this.checkedDans5 = [];
-        this.checkedDansShow5 = [];
+      let obj = JSON.parse(JSON.stringify(this.allData));
+      if (options != "other") {
+        this["checkAll" + options] = false;
+        this["checkedDans" + options] = [];
+        this["checkedDansShow" + options] = [];
+        obj["dan" + options] = [];
+        obj["checkedDansShow" + options] = [];
+        //console.log(this["checkedDansShow" + options] + "大傻逼");
+        this.updateAllData({
+          data: obj
+        });
+
+        this.init();
       }
       if (options == "other") {
         this.checkedEven = [];
         this.checkedOdd = [];
         this.checkedSmall = [];
         this.checkedHyphen = [];
+        let obj = JSON.parse(JSON.stringify(this.allData));
+        obj.big = [];
+        obj.he = [];
+        obj.even = [];
+        obj.checkedHyphen = []
+        this.updateAllData({
+          data: obj
+        });
+        this.init();
       }
     },
     // 生成号码
@@ -689,7 +753,6 @@ export default {
       }
 
       if (this.checkedSmall.length > 0) {
-        //console.log(this.checkedSmall, "bbbb");
         pramp.decimal = this.checkedSmall;
       }
       if (this.checkedEven.length > 0) {
@@ -722,12 +785,13 @@ export default {
       //console.log(this.evenS);
       //console.log(this.smallS);
       //console.log(this.oddS);
-      // sessionStorage.removeItem('big');
-      // sessionStorage.removeItem('he');
-      // sessionStorage.removeItem('even');
-      // sessionStorage.removeItem('selectarr')
+      sessionStorage.removeItem("big");
+      sessionStorage.removeItem("he");
+      sessionStorage.removeItem("even");
+      sessionStorage.removeItem("selectarr");
+      sessionStorage.removeItem("dan1arr");
     },
-    //复制到智能数据
+    // 复制到智能数据
     copy() {
       // var Url2 = document.getElementById("textValue").value;
       var Url2 = this.returnArr;
@@ -738,6 +802,15 @@ export default {
       document.execCommand("Copy"); // 执行浏览器复制命令
       oInput.className = "oInput";
       oInput.style.display = "none";
+       const h = this.$createElement;
+                this.$notify({
+            title: "",
+            message: h(
+              "i",
+              { style: "color: teal" },
+              "复制成功"
+            )
+          });
     },
     // 前往智能数据的按钮
     toData() {
@@ -769,31 +842,37 @@ export default {
 <style lang="less" scoped>
 //label复选框
 .block label {
-  font-weight: 700;
+  font-weight: 400;
   font-size: 14px;
   color: #606266;
   width: 40px;
   margin-bottom: 4px;
   display: inline-block;
+  position: relative;
+  text-align: center;
 }
 .block {
   display: inline-block !important;
 }
 input[type="checkbox"] {
-  width: 10px;
-  height: 10px;
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 18px;
-  position: relative;
-  margin: 0 5px 0 0;
+  // width: 10px;
+  // height: 10px;
+  // display: inline-block;
+  // text-align: center;
+  // vertical-align: middle;
+  // line-height: 18px;
+  // position: relative;
+  // margin: 0 5px 0 0;
+  background-color: #fff;
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
 }
 input[type="checkbox"]::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0px;
+  left: 0px;
   background: #fff;
   width: 14px;
   height: 14px;
@@ -804,13 +883,15 @@ input[type="checkbox"]:checked::before {
   content: "\2713";
   background-color: #409eff;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0px;
+  left: 0px;
   width: 14px;
   border-color: #409eff;
   color: #fff;
   font-size: 14px;
   margin: auto;
+  display: flex;
+  align-items: center;
 }
 
 .table-container {
@@ -881,14 +962,17 @@ input[type="checkbox"]:checked::before {
 }
 .clears,
 .clears-two {
-  width: 20px;
-  height: 14px;
+  width: 30px;
+  height: 20px;
   border-radius: 2px;
-  background-color: lightskyblue;
+  // background-color: lightskyblue;
+  background-color: #4187bd;
   color: #fff;
-  font-size: 6px;
+  font-size: 14px;
+  // font-size: 6px;
   // padding: 1px;
   position: absolute;
+  cursor: pointer;
   right: 10px;
   justify-content: center;
   // bottom: 7px;

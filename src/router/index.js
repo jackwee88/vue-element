@@ -34,6 +34,8 @@ export const constantRouterMap = [
         }],
         hidden: true
     },
+    { path: '/home', component: resolve => require(['@/views/home'], resolve), hidden: true },
+    { path: '/zuohao', component: resolve => require(['@/views/user/zuohao'],resolve),name:'zuohao', hidden: true },
     { path: '/login', component: resolve => require(['@/views/login'], resolve), name: 'login', hidden: true },
     { path: '/resetpassword', component: resolve => require(['@/views/resetpassword'], resolve), hidden: true },
     { path: '/reg', component: resolve => require(['@/views/reg'], resolve), hidden: true },
@@ -67,12 +69,14 @@ export const constantRouterMap = [
 
             },
             // {path: 'caipiaozh', component: resolve => require(['@/views/charts/caipiaozh'], resolve), name: 'caipiaozh', meta: { title: '彩票做号',  icon: 'user',noCache: true }},
+            { path: 'program', component: resolve => require(['@/views/user/program'], resolve), name: 'program', meta: { title: '参考方案', icon: 'cir', noCache: true } },
             { path: 'runchart', component: resolve => require(['@/views/user/runchart'], resolve), name: 'runchart', meta: { title: '综合走势', icon: 'cir', noCache: true } },
             { path: 'intelligentrecommendation', component: resolve => require(['@/views/user/intelligentrecommendation'], resolve), name: 'intelligentrecommendation', meta: { title: '智能推荐', icon: 'cir', noCache: true } },
             { path: 'intelligentdata', component: resolve => require(['@/views/user/intelligentdata'], resolve), name: 'intelligentdata', meta: { title: '智能数据', icon: 'cir', noCache: true } },
             { path: 'money', component: resolve => require(['@/views/user/money'], resolve), name: 'money', meta: { title: '资金计算器', icon: 'cir', noCache: true } },
             { path: 'new', component: resolve => require(['@/views/user/new'], resolve), name: 'new', hidden: true },
-            { path: 'video', component: resolve => require(['@/views/user/video'], resolve), name: 'video', meta: { title: '视频教学', icon: 'cir', noCache: true, image: '../utils/user.jpg' } }
+            { path: 'video', component: resolve => require(['@/views/user/video'], resolve), name: 'video', meta: { title: '视频教学', icon: 'cir', noCache: true, image: '../utils/user.jpg' } },
+        
         ]
     },
     {

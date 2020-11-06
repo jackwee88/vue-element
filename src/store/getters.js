@@ -14,6 +14,8 @@ const getters = {
   addRouters: state => state.permission.addRouters,
   errorLogs: state => state.errorLog.logs,
   allData: state => state.user.allData,
+  zuohaoData: state => state.user.zuohaoData,
+
   max: state => 0,
   total: state => 0,
   moreArr: state => '',

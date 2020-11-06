@@ -1,7 +1,18 @@
 import { loginByUsername, logout, getUserInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 var alldataLocal = JSON.parse(localStorage.getItem('ALLDATA'))
+var zuohaoLocal = JSON.parse(localStorage.getItem('ZUOHAO'))
 var alldata = alldataLocal || {
+  dan1: [],
+  dan2: [],
+  dan3: [],
+  dan4: [],
+  dan5: [],
+  big: [],
+  he: [],
+  even: []
+}
+var zuohaoData =alldataLocal || {
   dan1: [],
   dan2: [],
   dan3: [],
@@ -25,7 +36,9 @@ const user = {
     setting: {
       articlePlatform: []
     },
-    allData: alldata
+    allData: alldata,
+    zuohaoData:zuohaoData
+    
   },
 
   mutations: {
@@ -56,12 +69,19 @@ const user = {
     SET_ALLDATA (state, playload) {
       state.allData = playload.data
       localStorage.setItem('ALLDATA', JSON.stringify(state.allData))
+    },
+    SET_ZUOHAO (state, playload) {
+      state.zuohaoData = playload.data
+      localStorage.setItem('ZUOHAO', JSON.stringify(state.zuohaoData))
     }
   },
 
   actions: {
     updateAllData ({commit}, playload) {
       commit('SET_ALLDATA', playload)
+    },
+    updateData ({commit}, playload) {
+      commit('SET_ZUOHAO', playload)
     },
     // 用户名登录
     LoginByUsername ({ commit }, userInfo) {

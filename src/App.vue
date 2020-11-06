@@ -113,7 +113,9 @@ height:500px;
 .show-num .el-checkbox{
   width:40px;
 }
-
+.el-table .cell{
+  line-height:40px;
+}
 .content .el-table .cell{
   line-height:40px;
 }

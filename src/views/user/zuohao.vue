@@ -1,11 +1,11 @@
 <template>
   <div class="table-container index">
-    <p style="padding-left:10px">
+    <p style="padding-left: 10px">
       <span class="title-one">学员中心</span>
       <span class="title-sec">彩票做号</span>
     </p>
     <div class="box-big">
-      <p style="color:#666666FF">彩票做号</p>
+      <p style="color: #666666ff">彩票做号</p>
       <p class="base-num">
         <span class="type-title base-num-text">基础号码</span>
         <span style>
@@ -23,7 +23,7 @@
         </span>
       </p>
 
-      <div class="type" style="position:relative">
+      <div class="type" style="position: relative">
         <div>
           <span class="type-title dan1">一号胆</span>
           <el-checkbox-group
@@ -32,13 +32,16 @@
             class="box"
           >
             <el-checkbox
-              v-for="(city,i) in dans1"
+              v-for="(city, i) in dans1"
               :label="city"
-              :key="city"
-              :checked="checkedDans1.indexOf(city)>=0"
-            >{{city}}</el-checkbox>
+              :key="i"
+              :checked="checkedDans1.indexOf(city) >= 0"
+              >{{ city }}</el-checkbox
+            >
           </el-checkbox-group>
-          <el-checkbox v-model="checkAll1" @change="handleCheckAllChange1">全选</el-checkbox>
+          <el-checkbox v-model="checkAll1" @change="handleCheckAllChange1"
+            >全选</el-checkbox
+          >
         </div>
         <div class="show-wrap">
           <span class="type-title">出现</span>
@@ -51,20 +54,28 @@
               v-for="city in dansShow1"
               :label="city"
               :key="city"
-              :checked="checkedDansShow1.indexOf(city)>=0"
-            >{{city}}</el-checkbox>
+              :checked="checkedDansShow1.indexOf(city) >= 0"
+              >{{ city }}</el-checkbox
+            >
           </el-checkbox-group>
           <span class="clears" @click="clearAll(1)">清</span>
         </div>
       </div>
 
-      <div class="type" style="position:relative">
+      <div class="type" style="position: relative">
         <div>
-          <span class="type-title" style="margin-bottom:8px;">二号胆</span>
-          <el-checkbox-group v-model="checkedDans2" @change="handleCheckedCitiesChange2">
-            <el-checkbox v-for="city in dans2" :label="city" :key="city">{{city}}</el-checkbox>
+          <span class="type-title" style="margin-bottom: 8px">二号胆</span>
+          <el-checkbox-group
+            v-model="checkedDans2"
+            @change="handleCheckedCitiesChange2"
+          >
+            <el-checkbox v-for="city in dans2" :label="city" :key="city">{{
+              city
+            }}</el-checkbox>
           </el-checkbox-group>
-          <el-checkbox v-model="checkAll2" @change="handleCheckAllChange2">全选</el-checkbox>
+          <el-checkbox v-model="checkAll2" @change="handleCheckAllChange2"
+            >全选</el-checkbox
+          >
         </div>
         <div class="show-wrap">
           <span class="type-title">出现</span>
@@ -73,19 +84,28 @@
             @change="handleCheckedCitiesShow2"
             class="show-num"
           >
-            <el-checkbox v-for="city in dansShow2" :label="city" :key="city">{{city}}</el-checkbox>
+            <el-checkbox v-for="city in dansShow2" :label="city" :key="city">{{
+              city
+            }}</el-checkbox>
           </el-checkbox-group>
           <span class="clears" @click="clearAll(2)">清</span>
         </div>
       </div>
 
-      <div class="type" style="position:relative">
+      <div class="type" style="position: relative">
         <div>
-          <span class="type-title" style="margin-bottom:8px;">三号胆</span>
-          <el-checkbox-group v-model="checkedDans3" @change="handleCheckedCitiesChange3">
-            <el-checkbox v-for="city in dans3" :label="city" :key="city">{{city}}</el-checkbox>
+          <span class="type-title" style="margin-bottom: 8px">三号胆</span>
+          <el-checkbox-group
+            v-model="checkedDans3"
+            @change="handleCheckedCitiesChange3"
+          >
+            <el-checkbox v-for="city in dans3" :label="city" :key="city">{{
+              city
+            }}</el-checkbox>
           </el-checkbox-group>
-          <el-checkbox v-model="checkAll3" @change="handleCheckAllChange3">全选</el-checkbox>
+          <el-checkbox v-model="checkAll3" @change="handleCheckAllChange3"
+            >全选</el-checkbox
+          >
         </div>
         <div class="show-wrap">
           <span class="type-title">出现</span>
@@ -94,19 +114,28 @@
             @change="handleCheckedCitiesShow3"
             class="show-num"
           >
-            <el-checkbox v-for="city in dansShow3" :label="city" :key="city">{{city}}</el-checkbox>
+            <el-checkbox v-for="city in dansShow3" :label="city" :key="city">{{
+              city
+            }}</el-checkbox>
           </el-checkbox-group>
           <span class="clears" @click="clearAll(3)">清</span>
         </div>
       </div>
 
-      <div class="type" style="position:relative">
+      <div class="type" style="position: relative">
         <div>
-          <span class="type-title" style="margin-bottom:8px;">四号胆</span>
-          <el-checkbox-group v-model="checkedDans4" @change="handleCheckedCitiesChange4">
-            <el-checkbox v-for="city in dans4" :label="city" :key="city">{{city}}</el-checkbox>
+          <span class="type-title" style="margin-bottom: 8px">四号胆</span>
+          <el-checkbox-group
+            v-model="checkedDans4"
+            @change="handleCheckedCitiesChange4"
+          >
+            <el-checkbox v-for="city in dans4" :label="city" :key="city">{{
+              city
+            }}</el-checkbox>
           </el-checkbox-group>
-          <el-checkbox v-model="checkAll4" @change="handleCheckAllChange4">全选</el-checkbox>
+          <el-checkbox v-model="checkAll4" @change="handleCheckAllChange4"
+            >全选</el-checkbox
+          >
         </div>
         <div class="show-wrap">
           <span class="type-title">出现</span>
@@ -115,19 +144,28 @@
             @change="handleCheckedCitiesShow4"
             class="show-num"
           >
-            <el-checkbox v-for="city in dansShow4" :label="city" :key="city">{{city}}</el-checkbox>
+            <el-checkbox v-for="city in dansShow4" :label="city" :key="city">{{
+              city
+            }}</el-checkbox>
           </el-checkbox-group>
           <span class="clears" @click="clearAll(4)">清</span>
         </div>
       </div>
 
-      <div class="type" style="position:relative">
+      <div class="type" style="position: relative">
         <div>
-          <span class="type-title" style="margin-bottom:8px;">五号胆</span>
-          <el-checkbox-group v-model="checkedDans5" @change="handleCheckedCitiesChange5">
-            <el-checkbox v-for="city in dans5" :label="city" :key="city">{{city}}</el-checkbox>
+          <span class="type-title" style="margin-bottom: 8px">五号胆</span>
+          <el-checkbox-group
+            v-model="checkedDans5"
+            @change="handleCheckedCitiesChange5"
+          >
+            <el-checkbox v-for="city in dans5" :label="city" :key="city">{{
+              city
+            }}</el-checkbox>
           </el-checkbox-group>
-          <el-checkbox v-model="checkAll5" @change="handleCheckAllChange5">全选</el-checkbox>
+          <el-checkbox v-model="checkAll5" @change="handleCheckAllChange5"
+            >全选</el-checkbox
+          >
         </div>
         <div class="show-wrap">
           <span class="type-title">出现</span>
@@ -136,50 +174,73 @@
             @change="handleCheckedCitiesShow5"
             class="show-num"
           >
-            <el-checkbox v-for="city in dansShow3" :label="city" :key="city">{{city}}</el-checkbox>
+            <el-checkbox v-for="city in dansShow3" :label="city" :key="city">{{
+              city
+            }}</el-checkbox>
           </el-checkbox-group>
           <span class="clears" @click="clearAll(5)">清</span>
         </div>
       </div>
 
-      <div class="bottom-type-box" style="position:relative">
+      <div class="bottom-type-box" style="position: relative">
         <div class="type show-num">
-          <span class="type-title" style="margin-bottom:8px;">偶数个数</span>
-          <el-checkbox-group v-model="checkedEven" @change="handleEven" class="bottom-wrap">
+          <span class="type-title" style="margin-bottom: 8px">偶数个数</span>
+          <el-checkbox-group
+            v-model="checkedEven"
+            @change="handleEven"
+            class="bottom-wrap"
+          >
             <el-checkbox
               v-for="city in evens"
               :label="city"
               :key="city"
-              :checked="checkedEven.indexOf(city)>=0"
-            >{{city}}</el-checkbox>
+              :checked="checkedEven.indexOf(city) >= 0"
+              >{{ city }}</el-checkbox
+            >
           </el-checkbox-group>
         </div>
         <div class="type show-num">
-          <span class="type-title" style="margin-bottom:8px;">合数个数</span>
-          <el-checkbox-group v-model="checkedOdd" @change="handleOdd" class="bottom-wrap">
+          <span class="type-title" style="margin-bottom: 8px">合数个数</span>
+          <el-checkbox-group
+            v-model="checkedOdd"
+            @change="handleOdd"
+            class="bottom-wrap"
+          >
             <el-checkbox
               v-for="city in odds"
               :label="city"
               :key="city"
-              :checked="checkedOdd.indexOf(city)>=0"
-            >{{city}}</el-checkbox>
+              :checked="checkedOdd.indexOf(city) >= 0"
+              >{{ city }}</el-checkbox
+            >
           </el-checkbox-group>
         </div>
         <div class="type show-num">
-          <span class="type-title" style="margin-bottom:8px;">小数个数</span>
-          <el-checkbox-group v-model="checkedSmall" @change="handleSmall" class="bottom-wrap">
+          <span class="type-title" style="margin-bottom: 8px">小数个数</span>
+          <el-checkbox-group
+            v-model="checkedSmall"
+            @change="handleSmall"
+            class="bottom-wrap"
+          >
             <el-checkbox
               v-for="city in smalls"
               :label="city"
               :key="city"
-              :checked="checkedSmall.indexOf(city)>=0"
-            >{{city}}</el-checkbox>
+              :checked="checkedSmall.indexOf(city) >= 0"
+              >{{ city }}</el-checkbox
+            >
           </el-checkbox-group>
         </div>
-        <div class="type show-num" style="margin-bottom:0px;">
+        <div class="type show-num" style="margin-bottom: 0px">
           <span class="type-title">连数个数</span>
-          <el-checkbox-group v-model="checkedHyphen" @change="handleHyphen" class="bottom-wrap">
-            <el-checkbox v-for="city in hyphens" :label="city" :key="city">{{city}}</el-checkbox>
+          <el-checkbox-group
+            v-model="checkedHyphen"
+            @change="handleHyphen"
+            class="bottom-wrap"
+          >
+            <el-checkbox v-for="city in hyphens" :label="city" :key="city">{{
+              city
+            }}</el-checkbox>
           </el-checkbox-group>
         </div>
         <span class="clears-two" @click="clearAll('other')">清</span>
@@ -187,17 +248,59 @@
 
       <hr />
 
-      <div>
-        <span @click="sure" class="p2">生成号码</span>
+      <div style="display:flex;flex-direction:row;justify-content:space-between">
+        <div v-clickoutside="outsideClose" class="dropmain">
+          <el-select
+            v-model="value1"
+            placeholder="请选择"
+            @change="caipiaoidChangecity"
+          >
+            <el-option
+              v-for="item in options1"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
+            ></el-option>
+          </el-select>
+        </div>
+        <div class="dropmain">
+          <el-input
+            type="text"
+            autocomplete="on"
+            placeholder="请输入期数"
+            v-model="qishu"
+          ></el-input>
+        </div>
+        <div class="dropmain">
+          <el-input
+            type="text"
+            autocomplete="on"
+            placeholder="请输入价格"
+            v-model="price"
+          ></el-input>
+        </div>
+        <div>
+         <span @click="sure" class="p2">生成号码</span>
+         <span @click="zuohao" class="p2">提交</span></div>
+        
+      </div>
+
         <p class="generating-number-box">
           <span>
             号码
-            <span v-if="totalShow" style="color:red;margin-left:12px;">共 {{total}} 注</span>
+            <span v-if="totalShow" style="color: red; margin-left: 12px"
+              >共 {{ total }} 注</span
+            >
           </span>
           <span @click="copy" class="copy-todata">复制</span>
         </p>
-        <div style="text-align:center;display:flex;">
-          <textarea name id="textValue" rows="10" v-model="returnArr"></textarea>
+        <div style="text-align: center; display: flex">
+          <textarea
+            name
+            id="textValue"
+            rows="10"
+            v-model="returnArr"
+          ></textarea>
 
           <div class="change-type">
             <p @click="replaceKongGe">以空格分隔</p>
@@ -205,9 +308,8 @@
           </div>
         </div>
         <div class="sure-box">
-          <p class="p1" @click="toData">前往智能数据</p>
+          <!-- <p class="p1" @click="toData">前往智能数据</p> -->
         </div>
-      </div>
     </div>
   </div>
 </template>
@@ -229,7 +331,7 @@ const dan1S = [
   { name: "09", tivk: false },
   { name: "10", tivk: false },
   { name: "01", tivk: false },
-  { name: "11", tivk: false }
+  { name: "11", tivk: false },
 ];
 const dan1 = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11"];
 const dan2 = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11"];
@@ -252,9 +354,13 @@ export default {
   components: { MDinput, Sticky, userSave },
   data() {
     return {
+      value1: "",
+      qishu:'',
+      options1: [],
       smallS: -2,
       evenS: -2,
       oddS: -2,
+      price:'',
       dan1S: dan1S,
       loading: false,
       checkAll1: false, // 胆1全选
@@ -301,11 +407,14 @@ export default {
       flagS: false,
       flagB: false,
       flagE: false,
-      flag1: false
+      flag1: false,
+      caipiaoid:''
     };
   },
   mounted() {
     this.init();
+    this.cate();
+this.value1=localStorage.getItem('cityValue')
   },
   created() {
     // this.vip();
@@ -313,7 +422,7 @@ export default {
 
   watch: {
     // 利用watch方法检测路由变化：
-    $route: function(to, from) {
+    $route: function (to, from) {
       // 拿到目标参数 to.query.id 去再次请求数据接口
       // 　　　　this.loadPageData(to.query.id)
 
@@ -355,13 +464,73 @@ export default {
         (this.totalShow = false),
         (this.total = 0);
       this.init();
-    }
+    },
   },
   computed: {
-    ...mapGetters(["allData"])
+    ...mapGetters(["allData"]),
+  },
+  directives: {
+    clickoutside: {
+      bind(el, binding, vnode) {
+        function documentHandler(e) {
+          if (el.contains(e.target)) {
+            return false;
+          }
+          if (binding.expression) {
+            binding.value(e);
+          }
+        }
+
+        function KeyUp(e) {
+          if (e.keyCode == 27) {
+            if (binding.expression) {
+              binding.value(e);
+            }
+          }
+        }
+        el.__vueClickOutSize__ = documentHandler;
+        el.__vueKeyup__ = KeyUp;
+
+        document.addEventListener("keyup", KeyUp);
+        document.addEventListener("click", documentHandler);
+      },
+      unbind(el, binding) {
+        document.removeEventListener("click", el.__vueClickOutSize__);
+        delete el.__vueClickOutSize__;
+
+        document.removeEventListener("keyup", el.__vueKeyup__);
+        delete el.__vueKeyup__;
+      },
+    },
   },
   methods: {
     ...mapActions("user", ["updateAllData"]),
+    outsideClose() {
+      this.show = false;
+    },
+    cate() {
+      var that = this;
+
+      this.$axios({
+        method: "post",
+        url: "http://www.zyyccppx.com/QuO32C8y7f.php/programme/expert/cate",
+        params: { token: localStorage.getItem("token") }
+      }).then(res => {
+        that.options1 = res.data.data;
+        if(localStorage.getItem("cityId")){
+          that.caipiaoid = localStorage.getItem("cityId")
+          var index= that.caipiaoid-1
+          that.value1 = that.options1[index].name
+        }else{
+        that.value1 = res.data.data[0].name;
+        that.caipiaoid = res.data.data[0].id;
+        }
+      });
+    },
+    caipiaoidChangecity(v) {
+      this.caipiaoid = v;
+      localStorage.setItem("cityId",v);
+    },
     init() {
       for (let i = 0; i < 5; i++) {
         const element = this.allData["dan" + (i + 1)];
@@ -371,25 +540,22 @@ export default {
         for (let j = 0; j < element.length; j++) {
           newArr.push(j + 1 + "");
         }
-        if(this.allData['checkedDansShow'+(i+1)]){
-         if (this.allData["checkedDansShow" + (i + 1)].length != 0) {
-          this["checkedDansShow" + (i + 1)] = this.allData[
-            "checkedDansShow" + (i + 1)
-          ];
-          //console.log(this["checkedDansShow" + (i + 1)])
+        if (this.allData["checkedDansShow" + (i + 1)]) {
+          if (this.allData["checkedDansShow" + (i + 1)].length != 0) {
+            this["checkedDansShow" + (i + 1)] = this.allData[
+              "checkedDansShow" + (i + 1)
+            ];
+            //console.log(this["checkedDansShow" + (i + 1)])
+          } else {
+            this["checkedDansShow" + (i + 1)] = newArr;
+            this.allData["checkedDansShow" + (i + 1)] = newArr;
+            this.updateAllData({
+              data: this.allData,
+            });
+          }
         } else {
           this["checkedDansShow" + (i + 1)] = newArr;
-          this.allData["checkedDansShow" + (i + 1)] = newArr;
-          this.updateAllData({
-            data: this.allData
-          });
         }
-        }else{
-          this["checkedDansShow" + (i + 1)] = newArr;
-
-        }
-        
-        
       }
       // if (this.allData.checkedDansShow1) {
       //   this.checkedDansShow1 = this.allData.checkedDansShow1;
@@ -413,7 +579,7 @@ export default {
         "2:3": 3,
         "3:2": 2,
         "4:1": 1,
-        "5:0": 0
+        "5:0": 0,
       };
 
       if (this.allData.big) {
@@ -501,7 +667,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.dan1 = this.checkedDans1;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
     },
     handleCheckAllChange2(val) {
@@ -509,7 +675,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.dan2 = this.checkedDans2;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
     },
     handleCheckAllChange3(val) {
@@ -517,7 +683,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.dan3 = this.checkedDans3;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
     },
     handleCheckAllChange4(val) {
@@ -525,7 +691,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.dan4 = this.checkedDans4;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
     },
     handleCheckAllChange5(val) {
@@ -533,7 +699,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.dan5 = this.checkedDans5;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
     },
     // 胆1到胆5的每个复选值
@@ -541,7 +707,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.dan1 = value;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
       // let newArr = [];
       // for (let j = 0; j < value.length; j++) {
@@ -556,7 +722,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.dan2 = value;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
       // let newArr = [];
       // for (let j = 0; j < value.length; j++) {
@@ -571,7 +737,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.dan3 = value;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
       // let newArr = [];
       // for (let j = 0; j < value.length; j++) {
@@ -586,7 +752,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.dan4 = value;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
       // let newArr = [];
       // for (let j = 0; j < value.length; j++) {
@@ -602,7 +768,7 @@ export default {
       obj.dan5 = value;
       //console.log(value);
       this.updateAllData({
-        data: obj
+        data: obj,
       });
       // let newArr = [];
       // for (let j = 0; j < value.length; j++) {
@@ -619,7 +785,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.checkedDansShow1 = value;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
       this.checkedDansShow1 = value || [];
     },
@@ -628,7 +794,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.checkedDansShow2 = value;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
       this.checkedDansShow2 = value || [];
     },
@@ -637,7 +803,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.checkedDansShow3 = value;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
       this.checkedDansShow3 = value || [];
     },
@@ -646,7 +812,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.checkedDansShow4 = value;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
       this.checkedDansShow4 = value || [];
     },
@@ -655,7 +821,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.checkedDansShow5 = value;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
       this.checkedDansShow5 = value || [];
     },
@@ -665,7 +831,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.even = value;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
       this.checkedEven = value || [];
     },
@@ -674,7 +840,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.he = value;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
       this.checkedOdd = value || [];
     },
@@ -683,7 +849,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.big = value;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
       this.checkedSmall = value || [];
     },
@@ -692,7 +858,7 @@ export default {
       let obj = JSON.parse(JSON.stringify(this.allData));
       obj.checkedHyphen = value;
       this.updateAllData({
-        data: obj
+        data: obj,
       });
       this.checkedHyphen = value || [];
     },
@@ -708,7 +874,7 @@ export default {
         obj["checkedDansShow" + options] = [];
         //console.log(this["checkedDansShow" + options] + "大傻逼");
         this.updateAllData({
-          data: obj
+          data: obj,
         });
 
         this.init();
@@ -722,17 +888,35 @@ export default {
         obj.big = [];
         obj.he = [];
         obj.even = [];
-        obj.checkedHyphen = []
+        obj.checkedHyphen = [];
         this.updateAllData({
-          data: obj
+          data: obj,
         });
         this.init();
       }
     },
+    zuohao(){
+      var data={}
+      data.caipiaoid = this.caipiaoid;
+      data.programme=this.returnArr
+      data.issueno=this.qishu;
+      data.price=this.price;
+      this.$axios({
+        method: "post",
+        url: "http://www.zyyccppx.com/QuO32C8y7f.php/programme/expert/addProgramme",
+        params: data,
+      }).then((res) => {
+        const h = this.$createElement;
+        this.$notify({
+        title: "",
+        message: h("i", { style: "color: teal" }, res.data.msg),
+      });
+      });
+    },
     // 生成号码
     sure() {
       this.loading = true;
-      let pramp = { token: localStorage.getItem("token") };
+      let pramp = {};
       if (this.checkedDansShow1.length > 0) {
         pramp.dan1cx = this.checkedDansShow1;
       }
@@ -783,9 +967,9 @@ export default {
 
       this.$axios({
         method: "post",
-        url: this.url + "Caipiao/zuohao",
-        params: pramp
-      }).then(res => {
+        url: "http://www.zyyccppx.com/QuO32C8y7f.php/programme/expert/zuohao",
+        params: pramp,
+      }).then((res) => {
         if (res.data.data.data.length > 0) {
           that.returnArr = res.data.data.data;
           that.returnArrO = res.data.data.data;
@@ -796,9 +980,7 @@ export default {
           that.totalShow = true;
         }
       });
-      //console.log(this.evenS);
-      //console.log(this.smallS);
-      //console.log(this.oddS);
+
       sessionStorage.removeItem("big");
       sessionStorage.removeItem("he");
       sessionStorage.removeItem("even");
@@ -816,24 +998,20 @@ export default {
       document.execCommand("Copy"); // 执行浏览器复制命令
       oInput.className = "oInput";
       oInput.style.display = "none";
-       const h = this.$createElement;
-                this.$notify({
-            title: "",
-            message: h(
-              "i",
-              { style: "color: teal" },
-              "复制成功"
-            )
-          });
+      const h = this.$createElement;
+      this.$notify({
+        title: "",
+        message: h("i", { style: "color: teal" }, "复制成功"),
+      });
     },
     // 前往智能数据的按钮
-    toData() {
-      this.$store.state.moreArr = this.returnArr;
-      // sessionStorage.setItem('zuohao',this.returnArr)
-      this.copy();
+    // toData() {
+    //   this.$store.state.moreArr = this.returnArr;
+    //   // sessionStorage.setItem('zuohao',this.returnArr)
+    //   this.copy();
 
-      this.$router.push({ path: "/intelligentdata" });
-    },
+    //   this.$router.push({ path: "/intelligentdata" });
+    // },
     // 以逗号分隔
     replaceDouHao() {
       if (!this.returnArr) {
@@ -848,8 +1026,8 @@ export default {
         return;
       }
       this.returnArr = this.returnArrO;
-    }
-  }
+    },
+  },
 };
 </script>
 
